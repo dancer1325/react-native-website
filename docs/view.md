@@ -3,36 +3,47 @@ id: view
 title: View
 ---
 
-The most fundamental component for building a UI, `View` is a container that supports layout with [flexbox](flexbox.md), [style](style.md), [some touch handling](handling-touches.md), and [accessibility](accessibility.md) controls. `View` maps directly to the native view equivalent on whatever platform React Native is running on, whether that is a `UIView`, `<div>`, `android.view`, etc.
+* `View`
+  * == container / supports
+    * layout -- via -- 
+      * [flexbox](flexbox.md),
+      * [style](style.md),
+      * [some touch handling](handling-touches.md)
+    * [accessibility controls](accessibility.md)
+  * 👀== MOST fundamental component for building a UI 👀  
+  * | whatever platform React Native is running on
+    * -- maps directly to the -- native view equivalent 
+      * _Example:_ `UIView`, `<div>`, `android.view`, etc.
+  * design
+    * can be nested | other `View` / >= 0 children of ANY type
+    * -- to be used with -- [`StyleSheet`](style.md)
+      * Reason: 🧠 clarity and performance 🧠
+      * ALTHOUGH,  ALSO support inline styles
+  * _Example:_ `View` / wraps 2 boxes + text component | row
 
-`View` is designed to be nested inside other views and can have 0 to many children of any type.
-
-This example creates a `View` that wraps two boxes with color and a text component in a row with padding.
-
-```SnackPlayer name=View%20Example
-import React from 'react';
-import {View, Text} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
-
-const ViewBoxesWithColorAndText = () => {
-  return (
-    <SafeAreaProvider>
-      <SafeAreaView style={{height: 100, flexDirection: 'row'}}>
-        <View style={{backgroundColor: 'blue', flex: 0.2}} />
-        <View style={{backgroundColor: 'red', flex: 0.4}} />
-        <Text>Hello World!</Text>
-      </SafeAreaView>
-    </SafeAreaProvider>
-  );
-};
-
-export default ViewBoxesWithColorAndText;
-```
-
-> `View`s are designed to be used with [`StyleSheet`](style.md) for clarity and performance, although inline styles are also supported.
+    ```SnackPlayer name=View%20Example
+    import React from 'react';
+    import {View, Text} from 'react-native';
+    import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
+    
+    const ViewBoxesWithColorAndText = () => {
+      return (
+        <SafeAreaProvider>
+          <SafeAreaView style={{height: 100, flexDirection: 'row'}}>
+            <View style={{backgroundColor: 'blue', flex: 0.2}} />
+            <View style={{backgroundColor: 'red', flex: 0.4}} />
+            <Text>Hello World!</Text>
+          </SafeAreaView>
+        </SafeAreaProvider>
+      );
+    };
+    
+    export default ViewBoxesWithColorAndText;
+    ```
 
 ### Synthetic Touch Events
 
+* TODO:
 For `View` responder props (e.g., `onResponderMove`), the synthetic touch event passed to them are in form of [PressEvent](pressevent).
 
 ---
@@ -544,9 +555,12 @@ When `accessible` is true, the system will try to invoke this function when the 
 
 ### `onLayout`
 
-Invoked on mount and on layout changes.
-
-This event is fired immediately once the layout has been calculated, but the new layout may not yet be reflected on the screen at the time the event is received, especially if a layout animation is in progress.
+* invoked | changes
+  * on mount
+  * on layout
+* once the layout has been calculated -> event is fired immediately
+  * NEW layout may NOT YET be reflected | screen | time the event is received
+    * Possible reason: 🧠 layout animation is in progress 🧠
 
 | Type                                                     |
 | -------------------------------------------------------- |
