@@ -14,4 +14,4 @@
   - [Threading Model](threading-model)
 - Build Tools
   - [Bundled Hermes](bundled-hermes)
-- [Glossary](glossary)
+- [Glossary](architecture-glossary.md)
