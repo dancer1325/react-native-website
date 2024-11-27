@@ -6,58 +6,136 @@ slug: /glossary
 
 ## Dev Menu
 
-The in-app developer menu (available in development builds) that offers access to various development and debugging actions. [Learn more about the Dev Menu in the docs](/docs/debugging).
+* available | development builds
+* -- offers access to -- VARIOUS
+  * development actions
+  * debugging actions
+* see [documentation](/docs/debugging.md)
 
 ## Fabric Renderer
 
-React Native executes the same React framework code as React for the web. However, React Native renders to general platform views (host views) instead of DOM nodes (which can be considered web’s host views). Rendering to host views is made possible by the Fabric Renderer. Fabric lets React talk to each platform and manage its host view instances. The Fabric Renderer exists in JavaScript and targets interfaces made available by C++ code. [Read more about React renderers in this blog post.](https://overreacted.io/react-as-a-ui-runtime/#renderers)
+* React Native vs React framework
+  * 👀SAME code executed 👀
+  * rendering
+    * React Native -- renders to -- general platform views (host views)
+      * 👀-- done via -- Fabric Renderer 👀
+    * React framework -- renders to -- DOM nodes (== web’s host views)
+ 
+* Fabric Renderer
+  * enables that
+    * React
+      * talks -- to -- each platform
+      * manage its host view instances 
+  * exists |
+    * JavaScript
+    * targets interfaces / -- made available by -- C++ code
+  * see [this blog](https://overreacted.io/react-as-a-ui-runtime/#renderers)
 
 ## Host platform
 
-The platform embedding React Native (e.g., Android, iOS, macOS, Windows).
+* == platform / embed React Native (_Example:_ Android, iOS, macOS, Windows)
 
 ## Host View Tree (and Host View)
 
-Tree representation of views in the host platform (e.g. Android, iOS). On Android, the host views are instances of `android.view.ViewGroup`, `android.widget.TextView`, etc. which are the building blocks of the host view tree. The size and location of each host view are based on `LayoutMetrics` calculated with Yoga, and the style and content of each host view are based on information from the React Shadow Tree.
+* == Tree representation of views | host platform (e.g. Android, iOS)
+  * | Android
+    * host views == instances of `android.view.ViewGroup`, `android.widget.TextView`, etc
+      * == building blocks of the host view tree 
+* 's size and location -- are based on -- `LayoutMetrics` calculated with Yoga
+* 's style and content -- are based on -- React Shadow Tree's information
 
 ## JavaScript Interfaces (JSI)
 
-A lightweight API to embed a JavaScript engine in a C++ application. Fabric uses it to communicate between Fabric’s C++ core and React.
+* == lightweight API -- to embed a -- JavaScript engine | C++ application 
+* uses
+  * 👀by Fabric, to communicate Fabric’s C++ core -- & -- React👀
 
 ## Java Native Interface (JNI)
 
-An [API to write Java native methods](https://docs.oracle.com/javase/8/docs/technotes/guides/jni/) used to communicate between Fabric’s C++ core and Android, written in Java.
+* == [API to write Java native methods](https://docs.oracle.com/javase/8/docs/technotes/guides/jni/)
+* uses
+  * 👀by Fabric, to communicate Fabric’s C++ core -- & -- Android👀
 
 ## React Component
 
-A JavaScript function or class that instructs how to create a React Element. [Read more about React components, elements in this blog post.](https://reactjs.org/blog/2015/12/18/react-components-elements-and-instances.html)
+* 👀== JavaScript function or class / instructs -- how to create a -- React Element 👀 
+* see [this blog](https://reactjs.org/blog/2015/12/18/react-components-elements-and-instances.html)
 
 ## React Composite Components
 
-React Components with `render` implementations that reduce to other React Composite Components or React Host Components.
+* React Components / `render` implementations
 
 ## React Host Components or Host Components
 
-React Components whose view implementation is provided by a host view (e.g., `<View>, <Text>` ). On the Web, ReactDOM's Host components would be components like `<p>` and `<div>`.
+* React Host Components
+  * := React Components / their view implementation -- is provided by a -- host view (_Example:_ `<View>, <Text>` )
+    * | Web, 
+      * ReactDOM's Host components == components -- _Example:_ `<p>` & `<div>` --
 
 ## React Element Tree (and React Element)
 
-A _React Element Tree_ is created by React in JavaScript and consists of React Elements. A _React Element_ is a plain JavaScript object that describes what should appear on the screen. It includes props, styles, and children. React Elements only exist in JavaScript and can represent instantiations of either React Composite Components or React Host Components. [Read more about React components and elements in this blog post.](https://reactjs.org/blog/2015/12/18/react-components-elements-and-instances.html)
+* _React Element Tree_
+  * --- created by -- React | JavaScript
+  * == React Elements
+
+* _React Element_
+  * == plain JavaScript object / 
+    * describes -- what should -- appear | screen 
+    * contains
+      * props,
+      * styles,
+      * children
+  * ONLY exist | JavaScript
+  * -- can represent -- instantiations 
+    * React Composite Components or
+    * React Host Components
+* see [this blog](https://reactjs.org/blog/2015/12/18/react-components-elements-and-instances.html)
 
 ## React Native Framework
 
-React Native allows developers to use the [React programming paradigm](https://react.dev/learn/thinking-in-react) to ship applications to native targets. The React Native team is focused on creating **core APIs** and **functionalities** that fit the most general use case when developing native apps.
+* React Native
+  * allows
+    * developers can -- via [React programming paradigm](https://react.dev/learn/thinking-in-react) -- ship applications | native targets
+  * 's team
+    * is focused on creating (/ fit the MOST general use case | developing native apps)
+      * **core APIs**
+      * **functionalities** 
 
-Shipping native apps to production usually requires a set of tools and libraries that are not provided by default as part of React Native, but are still crucial to ship an app to production. Examples of such tools are: support for publishing applications to a dedicated store or support for routing and navigation mechanisms.
+* 👀requirements to ship native apps | production👀
+  * tools & libraries / NOT provided by default -- as part of -- React Native
+    * uses
+      * publish applications | dedicated store
+      * routing & navigation mechanisms
 
-When those tools and libraries are collected to form a cohesive framework built on top of React Native, we define it as a **React Native Framework**.
+* **React Native Framework**
+  * previous tools & libraries /
+    * form a cohesive framework
+    * built | React Native
+  * _Example:_
+    * [Expo](https://expo.dev/)
+      * == Open Source React Native Framework 
 
-An example of Open Source React Native Framework is [Expo](https://expo.dev/).
+## React Shadow Tree & React Shadow Node
 
-## React Shadow Tree (and React Shadow Node)
-
-A _React Shadow Tree_ is created by the Fabric Renderer and consists of React Shadow Nodes. A React Shadow Node is an object that represents a React Host Component to be mounted, and contains props that originate from JavaScript. They also contain layout information (x, y, width, height). In Fabric, React Shadow Node objects exist in C++. Before Fabric, these existed in the mobile runtime heap (e.g. Android JVM).
+* _React Shadow Tree_
+  * -- created by the -- Fabric Renderer
+  * 👀== React Shadow Nodes👀
+* React Shadow Node 
+  * := object / 
+    * -- represents a -- React Host Component -- to be -- mounted
+    * their props -- come from -- JavaScript
+    * contain
+      * layout information (x, y, width, height)
+    * exist
+      * if you use Fabric -> | C++
+      * BEFORE Fabric -> | mobile runtime heap (e.g. Android JVM)
 
 ## Yoga Tree (and Yoga Node)
 
-The _Yoga Tree_ is used by [Yoga](https://www.yogalayout.dev/) to calculate layout information for a React Shadow Tree. Each React Shadow Node typically creates a _Yoga Node_ because React Native employs Yoga to calculate layout. However, this is not a hard requirement. Fabric can also create React Shadow Nodes that do not use Yoga; the implementation of each React Shadow Node determines how to calculate layout.
+* _Yoga Tree_
+  * uses
+    * by [Yoga](https://www.yogalayout.dev/) -- to calculate -- React Shadow Tree's layout information 
+* _Yoga Node_
+  * created (typically) / EACH React Shadow Node
+    * Reason: 🧠 React Native -- via Yoga, calculate -- layout
+    * typically == NOT ALWAYS
