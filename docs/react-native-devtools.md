@@ -3,14 +3,26 @@ id: react-native-devtools
 title: React Native DevTools
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
+* React Native DevTools
+  * 👀== built-in debugger 👀
+  * allows you to
+    * inspect
+    * understand, how your JavaScript code is running
+      * == web browser
+  * vs previous debugging methods | React Native
+    * MORE deeply integrated
+    * more reliable 
+  * design
+    * debugging React app concerns / NOT replace native tools 
 
-React Native DevTools is our new debugging experience featuring an end-to-end rewrite of our debugger stack. It aims to be more deeply integrated and fundamentally more reliable than previous debugging methods in React Native.
+  ![React Native DevTools opened to the "Welcome" pane](/website/static/docs/assets/debugging-rndt-welcome.jpg)
 
-![React Native DevTools opened to the "Welcome" pane](/docs/assets/debugging-rndt-welcome.jpg)
+  * if you want to inspect React Native’s underlying platform layers (_Example:_ developing a Native Module) -> use debugging tools / available |
+    * Android Studio
+    * Xcode
+    * see [Debugging Native Code]()
 
-React Native DevTools is designed for debugging React app concerns, and not to replace native tools. If you want to inspect React Native’s underlying platform layers (for example, while developing a Native Module), please use the debugging tools available in Android Studio and Xcode (see [Debugging Native Code](/docs/debugging-native-code)).
-
+* TODO:
 <details>
 <summary>**💡 Compatibility** — released in 0.76</summary>
 
