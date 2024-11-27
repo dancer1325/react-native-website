@@ -3,130 +3,151 @@ id: landing-page
 title: About the New Architecture
 ---
 
-Since 2018, the React Native team has been redesigning the core internals of React Native to enable developers to create higher-quality experiences. As of 2024, this version of React Native has been proven at scale and powers production apps by Meta.
-
-The term _New Architecture_ refers to both the new framework architecture and the work to bring it to open source.
-
-The New Architecture has been available for experimental opt-in as of [React Native 0.68](/blog/2022/03/30/version-068#opting-in-to-the-new-architecture) with continued improvements in every subsequent release. The team is now working to make this the default experience for the React Native open source ecosystem.
+* | Since 2018
+  * core internals of React Native -- have been redesigned by -- React Native team
+    * Reason: 🧠 enable developers -- to create -- higher-quality experiences 🧠
+* | 2024
+  * React Native uses
+    * Meta's production apps
+* _New Architecture_ term
+  * 👀== NEW framework architecture + open source 👀
+    * experimental from [React Native 0.68](/blog/2022/03/30/version-068#opting-in-to-the-new-architecture) 
 
 ## Why a New Architecture?
 
-After many years of building with React Native, the team identified a set of limitations that prevented developers from crafting certain experiences with a high polish. These limitations were fundamental to the existing design of the framework, so the New Architecture started as an investment in the future of React Native.
-
-The New Architecture unlocks capabilities and improvements that were impossible in the legacy architecture.
+* React Native previous architecture
+  * limitations / prevented developers -- from -- crafting experiences / high polish
+    * Reason: 🧠due to the existing design of the framework 🧠
 
 ### Synchronous Layout and Effects
 
-Building adaptive UI experiences often requires measuring the size and position of your views and adjusting layout.
+* if you want to build adaptive UI experiences -> requires 
+  * measuring your views' 
+    * size
+    * position
+  * adjusting layout
+    * _Example:_ via [`onLayout` event](/docs/view.md#onlayout) 
+* state updates | `onLayout` callback
+  * EVEN AFTER painting the previous render 
+    * 👀== users may see between rendering the initial layout -- & -- responding to layout measurements 👀 
+      * intermediate states or
+      * visual jumps
+    * 👀way to avoid previous behavior | New Architecture 👀
+      * synchronous access to layout information
+      * properly scheduled updates / NO intermediate state -- is visible to -- users
+      * _Example1:_ rendering a Tooltip
+        * Measuring and placing a tooltip | view -> showcase what synchronous rendering unlocks
+        * tooltip -- requires -- its target view position
+          * Reason: 🧠 determine where it should render 🧠
+        * | current architecture
+          * `onLayout` get the view's measurements & 
+          * update the positioning of the tooltip -- based on -- location of the view
 
-Today, you would use the [`onLayout`](/docs/view#onlayout) event to get the layout information of a view and make any adjustments. However, state updates within the `onLayout` callback may apply after painting the previous render. This means that users may see intermediate states or visual jumps between rendering the initial layout and responding to layout measurements.
+        ```jsx
+        function ViewWithTooltip() {
+          // ...
+        
+          // We get the layout information and pass to ToolTip to position itself
+          const onLayout = React.useCallback(event => {
+            targetRef.current?.measureInWindow((x, y, width, height) => {
+              // This state update is not guaranteed to run in the same commit
+              // This results in a visual "jump" as the ToolTip repositions itself
+              setTargetRect({x, y, width, height});
+            });
+          }, []);
+        
+          return (
+            <>
+              <View ref={targetRef} onLayout={onLayout}>
+                <Text>Some content that renders a tooltip above</Text>
+              </View>
+              <Tooltip targetRect={targetRect} />
+            </>
+          );
+        }
+        ```
 
-With the New Architecture, we can avoid this issue entirely with synchronous access to layout information and properly scheduled updates such that no intermediate state is visible to users.
+        * | New Architecture
+          * [`useLayoutEffect`](https://react.dev/reference/react/useLayoutEffect) synchronously measure and apply layout updates | 1! commit / avoid the visual "jump" 
 
-<details>
-<summary>Example: Rendering a Tooltip</summary>
-
-Measuring and placing a tooltip above a view allows us to showcase what synchronous rendering unlocks. The tooltip needs to know the position of its target view to determine where it should render.
-
-In the current architecture, we use `onLayout` to get the measurements of the view and then update the positioning of the tooltip based on where the view is.
-
-```jsx
-function ViewWithTooltip() {
-  // ...
-
-  // We get the layout information and pass to ToolTip to position itself
-  const onLayout = React.useCallback(event => {
-    targetRef.current?.measureInWindow((x, y, width, height) => {
-      // This state update is not guaranteed to run in the same commit
-      // This results in a visual "jump" as the ToolTip repositions itself
-      setTargetRect({x, y, width, height});
-    });
-  }, []);
-
-  return (
-    <>
-      <View ref={targetRef} onLayout={onLayout}>
-        <Text>Some content that renders a tooltip above</Text>
-      </View>
-      <Tooltip targetRect={targetRect} />
-    </>
-  );
-}
-```
-
-With the New Architecture, we can use [`useLayoutEffect`](https://react.dev/reference/react/useLayoutEffect) to synchronously measure and apply layout updates in a single commit, avoiding the visual "jump".
-
-```jsx
-function ViewWithTooltip() {
-  // ...
-
-  useLayoutEffect(() => {
-    // The measurement and state update for `targetRect` happens in a single commit
-    // allowing ToolTip to position itself without intermediate paints
-    targetRef.current?.measureInWindow((x, y, width, height) => {
-      setTargetRect({x, y, width, height});
-    });
-  }, [setTargetRect]);
-
-  return (
-    <>
-      <View ref={targetRef}>
-        <Text>Some content that renders a tooltip above</Text>
-      </View>
-      <Tooltip targetRect={targetRect} />
-    </>
-  );
-}
-```
-
-<div className="TwoColumns TwoFigures">
- <figure>
-  <img src="/img/new-architecture/async-on-layout.gif" alt="A view that is moving to the corners of the viewport and center with a tooltip rendered either above or below it. The tooltip is rendered after a short delay after the view moves" />
-  <figcaption>Asynchronous measurement and render of the ToolTip. [See code](https://gist.github.com/lunaleaps/eabd653d9864082ac1d3772dac217ab9).</figcaption>
-</figure>
-<figure>
-  <img src="/img/new-architecture/sync-use-layout-effect.gif" alt="A view that is moving to the corners of the viewport and center with a tooltip rendered either above or below it. The view and tooltip move in unison." />
-  <figcaption>Synchronous measurement and render of the ToolTip. [See code](https://gist.github.com/lunaleaps/148756563999c83220887757f2e549a3).</figcaption>
-</figure>
-</div>
-
-</details>
+        ```jsx
+        function ViewWithTooltip() {
+          // ...
+        
+          useLayoutEffect(() => {
+            // The measurement and state update for `targetRect` happens in a single commit
+            // allowing ToolTip to position itself without intermediate paints
+            targetRef.current?.measureInWindow((x, y, width, height) => {
+              setTargetRect({x, y, width, height});
+            });
+          }, [setTargetRect]);
+        
+          return (
+            <>
+              <View ref={targetRef}>
+                <Text>Some content that renders a tooltip above</Text>
+              </View>
+              <Tooltip targetRect={targetRect} />
+            </>
+          );
+        }
+        ```
+      * _Example2:_ Asynchronous measurement and render of the ToolTip  
+        * view /
+          * -- is moving to the -- 
+            * corners of the viewport &
+            * center
+          * has a tooltip rendered | 
+            * above or below it
+            * AFTER a short delay -- of the -- view movement
+          ![](/website/static/img/new-architecture/async-on-layout.gif)
+        * [see code](https://gist.github.com/lunaleaps/eabd653d9864082ac1d3772dac217ab9)
+      * _Example3:_ Synchronous measurement and render of the ToolTip
+        * == previous one / BUT view & tooltip move in unison
+          ![](/website/static/img/new-architecture/sync-use-layout-effect.gif)
+        * [see code](https://gist.github.com/lunaleaps/148756563999c83220887757f2e549a3)
 
 ### Support for Concurrent Renderer and Features
 
-The New Architecture supports concurrent rendering and features that have shipped in [React 18](https://react.dev/blog/2022/03/29/react-v18) and beyond. You can now use features like Suspense for data-fetching, Transitions, and other new React APIs in your React Native code, further conforming codebases and concepts between web and native React development.
+* New Architecture 
+  * supports
+    * concurrent rendering
+      * -> inherited improvements
+        * automatic batching
+    * features / shipped | [React 18+](https://react.dev/blog/2022/03/29/react-v18) 
+      * _Example:_ Suspense for data-fetching, Transitions
 
-The concurrent renderer also brings out-of-the-box improvements like automatic batching, which reduces re-renders in React.
+* _Example:_ Automatic Batching
+  * slider -- specifies -- how many tiles to render
+  * if you drag the slider from 0 to 1000 -> will fire off a quick succession of state updates and re-renders
+  * [same code](https://gist.github.com/lunaleaps/79bb6f263404b12ba57db78e5f6f28b2) / rendering frequent state updates
+    * -- via -- legacy renderer
+      * -> if the slider value is adjusted [0, 1000] -> UI slowly renders 1000 views 
 
-<details>
-<summary>Example: Automatic Batching</summary>
+    ![](/website/static/img/new-architecture/legacy-renderer.gif)
 
-With the New Architecture, you'll get automatic batching with the React 18 renderer.
+    * -- via -- React 18 renderer
+      * -> UI resolves views faster / WITHOUT MANY intermediate states -> smoother UI  
 
-In this example, a slider specifies how many tiles to render. Dragging the slider from 0 to 1000 will fire off a quick succession of state updates and re-renders.
+    ![](/website/static/img/new-architecture/react18-renderer.gif)
 
-In comparing the renderers for the [same code](https://gist.github.com/lunaleaps/79bb6f263404b12ba57db78e5f6f28b2), you can visually notice the renderer provides a smoother UI, with less intermediate UI updates. State updates from native event handlers, like this native Slider component, are now batched.
+    * are NOW batched
 
-<div className="TwoColumns TwoFigures">
- <figure>
-  <img src="/img/new-architecture/legacy-renderer.gif" alt="A video demonstrating an app rendering many views according to a slider input. The slider value is adjusted from 0 to 1000 and the UI slowly catches up to rendering 1000 views." />
-  <figcaption>Rendering frequent state updates with legacy renderer.</figcaption>
-</figure>
-<figure>
-  <img src="/img/new-architecture/react18-renderer.gif" alt="A video demonstrating an app rendering many views according to a slider input. The slider value is adjusted from 0 to 1000 and the UI resolves to 1000 views faster than the previous example, without as many intermediate states." />
-  <figcaption>Rendering frequent state updates with React 18 renderer.</figcaption>
-</figure>
-</div>
-</details>
+* [Transitions](https://react.dev/reference/react/useTransition)
+  * NEW concurrent features
+  * allows
+    * expressing the priority of UI updates / ensure a responsive UX 
+      * uses
+        * if you mark an update -- as -- lower priority -> React can "interrupt" rendering the update -- to handle -- higher priority updates
 
-New concurrent features, like [Transitions](https://react.dev/reference/react/useTransition), give you the power to express the priority of UI updates. Marking an update as lower priority tells React it can "interrupt" rendering the update to handle higher priority updates to ensure a responsive user experience where it matters.
+* _Example:_ Using `startTransition`
+  * goal
+    * interrupt in-progress rendering -- to handle a -- newer state update
+  * == previous example + transitions 
 
-<details>
-<summary>Example: Using `startTransition`</summary>
-
-We can build on the previous example to showcase how transitions can interrupt in-progress rendering to handle a newer state update.
-
-We wrap the tile number state update with `startTransition` to indicate that rendering the tiles can be interrupted. `startTransition` also provides a `isPending` flag to tell us when the transition is complete.
+* TODO:
+We wrap the tile number state update with `startTransition` to indicate that rendering the tiles can be interrupted.
+`startTransition` also provides a `isPending` flag to tell us when the transition is complete.
 
 ```jsx
 function TileSlider({value, onValueChange}) {
@@ -167,19 +188,25 @@ function ManyTiles() {
 }
 ```
 
-You'll notice that with the frequent updates in a transition, React renders fewer intermediate states because it bails out of rendering the state as soon as it becomes stale. In comparison, without transitions, more intermediate states are rendered. Both examples still use automatic batching. Still, transitions give even more power to developers to batch in-progress renders.
+You'll notice that with the frequent updates in a transition, React renders fewer intermediate states because it bails out of rendering the state as soon as it becomes stale.
+In comparison, without transitions, more intermediate states are rendered.
+Both examples still use automatic batching. 
+Still, transitions give even more power to developers to batch in-progress renders.
 
-<div className="TwoColumns TwoFigures">
-<figure>
-  <img src="/img/new-architecture/with-transitions.gif" alt="A video demonstrating an app rendering many views (tiles) according to a slider input. The views are rendered in batches as the slider is quickly adjusted from 0 to 1000. There are less batch renders in comparison to the next video." />
-  <figcaption>Rendering tiles with transitions to interrupt in-progress renders of stale state. [See code](https://gist.github.com/lunaleaps/eac391bf3fe4c85953cefeb74031bab0/revisions).</figcaption>
-</figure>
-<figure>
-  <img src="/img/new-architecture/without-transitions.gif" alt="A video demonstrating an app rendering many views (tiles) according to a slider input. The views are rendered in batches as the slider is quickly adjusted from 0 to 1000." />
-  <figcaption>Rendering tiles without marking it as a transition. [See code](https://gist.github.com/lunaleaps/eac391bf3fe4c85953cefeb74031bab0/revisions).</figcaption>
-</figure>
-</div>
-</details>
+A video demonstrating an app rendering many views (tiles) according to a slider input. 
+The views are rendered in batches as the slider is quickly adjusted from 0 to 1000. 
+There are less batch renders in comparison to the next video.
+![](/website/static/img/new-architecture/with-transitions.gif)
+Rendering tiles with transitions to interrupt in-progress renders of stale state
+[See code](https://gist.github.com/lunaleaps/eac391bf3fe4c85953cefeb74031bab0/revisions)
+
+
+A video demonstrating an app rendering many views (tiles) according to a slider input. 
+The views are rendered in batches as the slider is quickly adjusted from 0 to 1000.
+![](/website/static/img/new-architecture/without-transitions.gif)
+Rendering tiles without marking it as a transition
+[See code](https://gist.github.com/lunaleaps/eac391bf3fe4c85953cefeb74031bab0/revisions)
+
 
 ### Fast JavaScript/Native Interfacing
 
@@ -207,11 +234,9 @@ You can follow along and contribute in our dedicated [discussions & proposals](h
 
 ## Should I use the New Architecture today?
 
-With 0.76, The New Architecture is enabled by default in all the React Native projects.
-
-If you find anything that is not working well, please open an issue using [this template](https://github.com/facebook/react-native/issues/new?assignees=&labels=Needs%3A+Triage+%3Amag%3A%2CType%3A+New+Architecture&projects=&template=new_architecture_bug_report.yml).
-
-If, for any reasons, you can't use the New Architecture, you can still opt-out from it:
+* React Native v0.76
+  * 👀NEW Architecture is enabled by default | ALL React Native projects 👀
+* ways to disable New Architecture
 
 ### Android
 
