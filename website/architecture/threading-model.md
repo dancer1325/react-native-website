@@ -3,73 +3,67 @@ id: threading-model
 title: Threading Model
 ---
 
-import FabricWarning from './\_fabric-warning.mdx';
+* goal
+  * define the threading model
+  * examples about thread usage of the render pipeline
 
-<FabricWarning />
+* React Native renderer
+  * -- designed to be -- thread safe
+    * -- via using -- immutable data structures | framework's internals / enforced by C++ “const correctness” feature
+      * == EVERY update | React -> creates or clones NEW objects | renderer (NOT update data structures) 
+    * -> React's APIs are exposed
+      * thread safe
+      * synchronous 
 
-#### The React Native renderer distributes the work of the [render pipeline](render-pipeline) across multiple threads.
+* types of threads / used by renderer
+  - **UI thread** / main
+    - 👀ONLY thread / -- can manipulate -- host views 👀
+    - if there is a HIGH priority event | UI Thread -> renderer can execute ALL the render pipeline synchronously | UI thread
 
-Here we define the threading model and provide some examples to illustrate thread usage of the render pipeline.
+      ![](/website/static/docs/assets/Architecture/threading-model/case-2.jpg)
 
-React Native renderer is designed to be thread safe. At a high level thread safety is guaranteed by using immutable data structures in the internals of the framework (enforced by C++ “const correctness” feature). This means that every update in React creates or clones new objects in the renderer instead of updating data structures. This allows the framework to expose thread safe and synchronous APIs to React.
+  - **JS thread**
+    - uses
+      - React’s
+        - render phase,
+        - layout
+    - MOST common scenario
+      ![JS thread vs UI thread use](/website/static/docs/assets/Architecture/threading-model/case-1.jpg)
 
-The renderer uses two different threads:
+* Threading model symbols
 
-- **UI thread** (often called main): The only thread that can manipulate host views.
-- **JavaScript thread**: This is where React’s render phase, as well as layout, are executed.
+  ![Threading model symbols](/website/static/docs/assets/Architecture/threading-model/symbols.png)
 
-Let’s review the supported scenarios of execution for each phase:
-
-<figure>
-  <img src="/docs/assets/Architecture/threading-model/symbols.png" alt="Threading model symbols" />
-</figure>
 
 ## Render Scenarios
 
-### Render in a JS Thread
-
-This is the most common scenario where most of the render pipeline happens on JavaScript thread.
-
-<figure>
-	<img src="/docs/assets/Architecture/threading-model/case-1.jpg" alt="Threading model use case one" />
-</figure>
-
----
-
-### Render in the UI Thread
-
-When there is a high priority event on the UI Thread, the renderer is able to execute all the render pipeline synchronously on the UI thread.
-
-<figure>
-	<img src="/docs/assets/Architecture/threading-model/case-2.jpg" alt="Threading model use case two" />
-</figure>
-
----
-
 ### Default or continuous event interruption
 
-This scenario shows the interruption of the render phase by a low priority event in the UI thread. React and the React Native renderer are able to interrupt the render phase and merge its state with a low priority event that is executed on the UI thread. In this case the render process continues executing in the JS thread.
+* render phase -- due to low priority event | UI thread -- is interrupted + merged the state
+  * available this scenario |
+    * React
+    * React Native
+  * render process -- continues -- executing | JS thread
 
-<figure>
-	<img src="/docs/assets/Architecture/threading-model/case-3.jpg" alt="Threading model use case three" />
-</figure>
+  ![](/website/static/docs/assets/Architecture/threading-model/case-3.jpg)
+
 
 ---
 
 ### Discrete event interruption
 
-The render phase is interruptible. This scenario shows the interruption of the render phase by a high priority event in the UI thread. React and the renderer are able to interrupt the render phase and merge its state with a high priority event that was executed on the UI thread. The render phase executes synchronously on the UI thread.
+* render phase -- due to high priority event | UI thread -- is interrupted + merged the state 
+  * render phase -- executes -- synchronously | UI thread
 
-<figure>
-	<img src="/docs/assets/Architecture/threading-model/case-4.jpg" alt="Threading model use case four" />
-</figure>
+![](/website/static/docs/assets/Architecture/threading-model/case-4.jpg)
 
 ---
 
 ### C++ State update
 
-Update originating on UI thread and skips rendering phase. See [React Native Renderer State Updates](render-pipeline#react-native-renderer-state-updates) for more details.
+* [Update](render-pipeline#react-native-renderer-state-updates) 
+  * originates | UI thread
+  * skips rendering phase
 
-<figure>
-	<img src="/docs/assets/Architecture/threading-model/case-6.jpg" alt="Threading model use case six" />
-</figure>
+![](/website/static/docs/assets/Architecture/threading-model/case-6.jpg)
+
