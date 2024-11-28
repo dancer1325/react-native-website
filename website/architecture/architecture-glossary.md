@@ -86,7 +86,7 @@ slug: /glossary
       * styles,
       * children
   * ONLY exist | JavaScript
-  * -- can represent -- instantiations 
+  * -- can represent -- instantiations of
     * React Composite Components or
     * React Host Components
 * see [this blog](https://reactjs.org/blog/2015/12/18/react-components-elements-and-instances.html)
