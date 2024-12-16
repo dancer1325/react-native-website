@@ -4,138 +4,120 @@ title: React Fundamentals
 description: To understand React Native fully, you need a solid foundation in React. This short introduction to React can help you get started or get refreshed.
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
+* goal
+  * React
+    * components
+    * JSX
+    * props
+    * state
 
-React Native runs on [React](https://react.dev/), a popular open source library for building user interfaces with JavaScript. To make the most of React Native, it helps to understand React itself. This section can get you started or can serve as a refresher course.
+* React Native
+  * 👀runs | [React](https://react.dev/) 👀
 
-We’re going to cover the core concepts behind React:
-
-- components
-- JSX
-- props
-- state
-
-If you want to dig deeper, we encourage you to check out [React’s official documentation](https://react.dev/learn).
+* React
+  * == popular open source library /
+    * allows
+      * building UIs -- via -- JavaScript
 
 ## Your first component
 
-The rest of this introduction to React uses cats in its examples: friendly, approachable creatures that need names and a cafe to work in. Here is your very first Cat component:
+* _Example:_ Cat React component
 
-```SnackPlayer name=Your%20Cat
-import React from 'react';
-import {Text} from 'react-native';
+    ```SnackPlayer name=Your%20Cat
+    import React from 'react';
+    import {Text} from 'react-native';          // import React Native's Text component
+    
+    // React component -- will render a -- React `<Text>` element
+    const Cat = () => {
+      return <Text>Hello, I am your cat!</Text>;
+    };
+    
+    // export the React component -- to use -- | your app
+    export default Cat;
+    ```
 
-const Cat = () => {
-  return <Text>Hello, I am your cat!</Text>;
-};
+* React components
+  * == blueprints
+  * 👀== function / -- is rendered as a -- **React element** 👀 
 
-export default Cat;
-```
+* React elements
+  * describe WHAT you want to see | screen
+  * written -- via -- JSX
 
-Here is how you do it: To define your `Cat` component, first use JavaScript’s [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) to import React and React Native’s [`Text`](/docs/next/text) Core Component:
-
-```tsx
-import React from 'react';
-import {Text} from 'react-native';
-```
-
-Your component starts as a function:
-
-```tsx
-const Cat = () => {};
-```
-
-You can think of components as blueprints. Whatever a function component returns is rendered as a **React element.** React elements let you describe what you want to see on the screen.
-
-Here the `Cat` component will render a `<Text>` element:
-
-```tsx
-const Cat = () => {
-  return <Text>Hello, I am your cat!</Text>;
-};
-```
-
-You can export your function component with JavaScript’s [`export default`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) for use throughout your app like so:
-
-```tsx
-const Cat = () => {
-  return <Text>Hello, I am your cat!</Text>;
-};
-
-export default Cat;
-```
-
-> This is one of many ways to export your component. This kind of export works well with the Snack Player. However, depending on your app’s file structure, you might need to use a different convention. This [handy cheatsheet on JavaScript imports and exports](https://medium.com/dailyjs/javascript-module-cheatsheet-7bd474f1d829) can help.
-
-Now take a closer look at that `return` statement. `<Text>Hello, I am your cat!</Text>` is using a kind of JavaScript syntax that makes writing elements convenient: JSX.
+* ways to export your component
+  * ⚠️-- depend on your -- app’s file structure ⚠️
+    * see [handy cheatsheet | JavaScript](https://medium.com/dailyjs/javascript-module-cheatsheet-7bd474f1d829)
 
 ## JSX
 
-React and React Native use **JSX,** a syntax that lets you write elements inside JavaScript like so: `<Text>Hello, I am your cat!</Text>`. The React docs have [a comprehensive guide to JSX](https://react.dev/learn/writing-markup-with-jsx) you can refer to learn even more. Because JSX is JavaScript, you can use variables inside it. Here you are declaring a name for the cat, `name`, and embedding it with curly braces inside `<Text>`.
+* == syntax | ".js"
+  * enables to write React elements
+    * _Example:_ `<Text>Hello, I am your cat!</Text>`
+  * allowed ALL JS enable
+    * declare variables
+    * ...
+* requirements
+  * `import React from 'react'`
+    * Reason: 🧠JSX is | React library 🧠
+* used by
+  * React
+  * React Native
+* see
+  * [React docs](https://react.dev/learn/writing-markup-with-jsx)
+* _Example:_
 
-```SnackPlayer name=Curly%20Braces
-import React from 'react';
-import {Text} from 'react-native';
-
-const Cat = () => {
-  const name = 'Maru';
-  return <Text>Hello, I am {name}!</Text>;
-};
-
-export default Cat;
-```
-
-Any JavaScript expression will work between curly braces, including function calls like `{getFullName("Rum", "Tum", "Tugger")}`:
-
-<Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
-<TabItem value="javascript">
-
-```SnackPlayer name=Curly%20Braces&ext=js
-import React from 'react';
-import {Text} from 'react-native';
-
-const getFullName = (firstName, secondName, thirdName) => {
-  return firstName + ' ' + secondName + ' ' + thirdName;
-};
-
-const Cat = () => {
-  return <Text>Hello, I am {getFullName('Rum', 'Tum', 'Tugger')}!</Text>;
-};
-
-export default Cat;
-```
-
-</TabItem>
-<TabItem value="typescript">
-
-```SnackPlayer name=Curly%20Braces&ext=tsx
-import React from 'react';
-import {Text} from 'react-native';
-
-const getFullName = (
-  firstName: string,
-  secondName: string,
-  thirdName: string,
-) => {
-  return firstName + ' ' + secondName + ' ' + thirdName;
-};
-
-const Cat = () => {
-  return <Text>Hello, I am {getFullName('Rum', 'Tum', 'Tugger')}!</Text>;
-};
-
-export default Cat;
-```
-
-</TabItem>
-</Tabs>
-
-You can think of curly braces as creating a portal into JS functionality in your JSX!
-
-> Because JSX is included in the React library, it won’t work if you don’t have `import React from 'react'` at the top of your file!
+    ```SnackPlayer name=Curly%20Braces
+    import React from 'react';
+    import {Text} from 'react-native';
+    
+    const Cat = () => {
+      const name = 'Maru';  // declare a variable
+      return <Text>Hello, I am {name}!</Text>;
+    };
+    
+    export default Cat;
+    ```
+* 👀ANY JS expression (ALSO function calls) will work between curly braces -- `{JSExpression}` -- 👀
+  * == `{}` enable using JS functionality | JSX
+  * _Example:_ `{getFullName("Rum", "Tum", "Tugger")}` |
+    * JS
+        ```SnackPlayer name=Curly%20Braces&ext=js
+        import React from 'react';
+        import {Text} from 'react-native';
+        
+        const getFullName = (firstName, secondName, thirdName) => {
+          return firstName + ' ' + secondName + ' ' + thirdName;
+        };
+        
+        const Cat = () => {
+          return <Text>Hello, I am {getFullName('Rum', 'Tum', 'Tugger')}!</Text>;       // {JSExpression}
+        };
+        
+        export default Cat;
+        ```
+    * TS
+        ```SnackPlayer name=Curly%20Braces&ext=tsx
+        import React from 'react';
+        import {Text} from 'react-native';
+        
+        const getFullName = (
+          firstName: string,
+          secondName: string,
+          thirdName: string,
+        ) => {
+          return firstName + ' ' + secondName + ' ' + thirdName;
+        };
+        
+        const Cat = () => {
+          return <Text>Hello, I am {getFullName('Rum', 'Tum', 'Tugger')}!</Text>; // {JSExpression}
+        };
+        
+        export default Cat;
+        ```
 
 ## Custom Components
 
+* TODO:
 You’ve already met [React Native’s Core Components](intro-react-native-components). React lets you nest these components inside each other to create new components. These nestable, reusable components are at the heart of the React paradigm.
 
 For example, you can nest [`Text`](text) and [`TextInput`](textinput) inside a [`View`](view) below, and React Native will render them together:

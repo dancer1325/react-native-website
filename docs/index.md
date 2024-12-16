@@ -1,7 +1,7 @@
 * The Basics
   * [getting-started](introduction.md)
   * [intro-react-native-components](intro-react-native-components.md)
-        "intro-react",
+  * [intro-react](intro-react.md)
         "handling-text-input",
         "using-a-scrollview",
         "using-a-listview",
