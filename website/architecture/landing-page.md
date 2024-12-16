@@ -240,8 +240,7 @@ You can follow along and contribute in our dedicated [discussions & proposals](h
 
 ### Android
 
-1. Open the `android/gradle.properties` file
-2. Toggle the `newArchEnabled` flag from `true` to `false`
+1. `newArchEnabled=false` | `android/gradle.properties`
 
 ```diff title="gradle.properties"
 # Use this property to enable support to the new architecture.
@@ -255,18 +254,16 @@ You can follow along and contribute in our dedicated [discussions & proposals](h
 
 ### iOS
 
-1. Open the `ios/Podfile` file
-2. Add `ENV['RCT_NEW_ARCH_ENABLED'] = '0'` in the main scope of the Podfile ([reference Podfile](https://github.com/react-native-community/template/blob/0.76-stable/template/ios/Podfile) in the template)
+1. add `ENV['RCT_NEW_ARCH_ENABLED'] = '0'` | `ios/Podfile` 's main [scope of the Podfile](https://github.com/react-native-community/template/blob/0.76-stable/template/ios/Podfile)
+  ```diff
+  + ENV['RCT_NEW_ARCH_ENABLED'] = '0'
+  # Resolve react_native_pods.rb with node to allow for hoisting
+  require Pod::Executable.execute_command('node', ['-p',
+    'require.resolve(
+  ```
 
-```diff
-+ ENV['RCT_NEW_ARCH_ENABLED'] = '0'
-# Resolve react_native_pods.rb with node to allow for hoisting
-require Pod::Executable.execute_command('node', ['-p',
-  'require.resolve(
-```
+2. Install your CocoaPods dependencies with the command:
 
-3. Install your CocoaPods dependencies with the command:
-
-```shell
-bundle exec pod install
-```
+  ```shell
+  bundle exec pod install
+  ```
