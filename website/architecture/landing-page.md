@@ -210,27 +210,36 @@ Rendering tiles without marking it as a transition
 
 ### Fast JavaScript/Native Interfacing
 
-The New Architecture removes the [asynchronous bridge](https://reactnative.dev/blog/2018/06/14/state-of-react-native-2018#architecture) between JavaScript and native and replaces it with JavaScript Interface (JSI). JSI is an interface that allows JavaScript to hold a reference to a C++ object and vice-versa. With a memory reference, you can directly invoke methods without serialization costs.
-
-JSI enables [VisionCamera](https://github.com/mrousavy/react-native-vision-camera), a popular camera library for React Native, to process frames in real time. Typical frame buffers are 10 MB, which amounts to roughly 1 GB of data per second, depending on the frame rate. In comparison with the serialization costs of the bridge, JSI handles that amount of interfacing data with ease. JSI can expose other complex instance-based types such as databases, images, audio samples, etc.
-
-JSI adoption in the New Architecture removes this class of serialization work from all native-JavaScript interop. This includes initializing and re-rendering native core components like `View` and `Text`. You can read more about our [investigation in rendering performance](https://github.com/reactwg/react-native-new-architecture/discussions/123) in the New Architecture and the improved benchmarks we measured.
+* New Architecture
+  * [asynchronous bridge](https://reactnative.dev/blog/2018/06/14/state-of-react-native-2018#architecture) between JavaScript and native -- is replaced it with -- JavaScript Interface (JSI)
+ 
+* JSI
+  * := interface /
+    * allows
+      * JS hold -- a reference to -- a C++ object
+      * C++ hold -- a reference to -- a JS object
+      * | memory reference, invoke methods / NO serialization costs
+        * INCLUDING initializing & re-rendering native core components -- _Example:_ `View` & `Text` --
+      * exposing OTHER complex instance-based types -- _Example:_ databases, images, audio samples, etc. -- 
+  * enables [VisionCamera](https://github.com/mrousavy/react-native-vision-camera)
+    * == popular camera library for React Native /
+      * frames ([10MB, 1GB]) are processed | real time
 
 ## What can I expect from enabling the New Architecture?
 
-While the New Architecture enables these features and improvements, enabling the New Architecture for your app or library may not immediately improve the performance or user experience.
+* New Architecture
+  * enables previous mentioned features and improvements
+    * SOME -- may need -- refactoring 
+      * _Example:_ synchronous layout effects or concurrent features 
+  * -- may NOT immediately improve -> performance or user experience
+  * see [investigation in rendering performance](https://github.com/reactwg/react-native-new-architecture/discussions/123)
 
-For example, your code may need refactoring to leverage new capabilities like synchronous layout effects or concurrent features. Although JSI will minimize the overhead between JavaScript and native memory, data serialization may not have been a bottleneck for your app's performance.
-
-Enabling the New Architecture in your app or library is opting into the future of React Native.
-
-The team is actively researching and developing new capabilities the New Architecture unlocks. For example, web alignment is an active area of exploration at Meta that will ship to the React Native open source ecosystem.
-
-- [Updates to the event loop model](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0744-well-defined-event-loop.md)
-- [Node and layout APIs](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0607-dom-traversal-and-layout-apis.md)
-- [Styling and layout conformance](https://github.com/facebook/yoga/releases/tag/v2.0.0)
-
-You can follow along and contribute in our dedicated [discussions & proposals](https://github.com/react-native-community/discussions-and-proposals/discussions/651) repository.
+* [current areas of exploration](https://github.com/react-native-community/discussions-and-proposals/discussions/651)
+  * web alignment
+  * [Updates to the event loop model](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0744-well-defined-event-loop.md)
+  * [Node and layout APIs](https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0607-dom-traversal-and-layout-apis.md)
+  * [Styling and layout conformance](https://github.com/facebook/yoga/releases/tag/v2.0.0)
+  * ...
 
 ## Should I use the New Architecture today?
 
