@@ -12,6 +12,7 @@ description: This helpful guide lays out the prerequisites for learning React Na
 
 * JavaScript fundamentals 
   * see [Mozilla Developer's JS introduction](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript) 
+* React components
 
 ## Interactive examples
 
