@@ -26,28 +26,27 @@ hide_table_of_contents: true
       * _Example:_ [Expo](https://expo.dev)
 
 * Expo
+  * := production-grade React Native Framework /
+    * free
+    * open source
+  * [Discord community](https://chat.expo.dev)
   * provided features
     * file-based routing,
     * high-quality universal libraries,
     * enable to write plugins / modify native code WITHOUT having to manage native files
+  * Expo team works -- in close collaboration with the -- React Native team
+  * Expo Application Services (EAS)
+    * == optional set of services / complements Expo
 
 ## Start a new React Native project with Expo
 
-* TODO:
-<PlatformSupport platforms={['android', 'ios', 'tv', 'web']} />
+* supported platforms
+  * 'android',
+  * 'ios', 
+  * 'tv',
+  * 'web'
 
-Expo is a production-grade React Native Framework. Expo provides developer tooling that makes developing apps easier, such as file-based routing, a standard library of native modules, and much more.
+* `npx create-expo-app@latest`
+  * create a NEW Expo project
 
-Expo's Framework is free and open source, with an active community on [GitHub](https://github.com/expo) and [Discord](https://chat.expo.dev). The Expo team works in close collaboration with the React Native team at Meta to bring the latest React Native features to the Expo SDK.
-
-The team at Expo also provides Expo Application Services (EAS), an optional set of services that complements Expo, the Framework, in each step of the development process.
-
-To create a new Expo project, run the following in your terminal:
-
-```shell
-npx create-expo-app@latest
-```
-
-Once you’ve created your app, check out the rest of Expo’s getting started guide to start developing your app.
-
-<BoxLink href="https://docs.expo.dev/get-started/set-up-your-environment">Continue with Expo</BoxLink>
+* see [Expo’s getting started](https://docs.expo.dev/get-started/set-up-your-environment)
