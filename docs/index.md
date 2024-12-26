@@ -4,23 +4,22 @@
     * [intro-react-native-components](intro-react-native-components.md)
     * [intro-react](intro-react.md)
     * [handling-text-input](handling-text-input.md)
-          "using-a-scrollview",
+    * [using-a-scrollview](using-a-scrollview.md)
           "using-a-listview",
           "troubleshooting",
           "platform-specific-code",
           "more-resources"
   * Environment setup
-    * environment-setup",
-            "set-up-your-environment",
-            "integration-with-existing-apps",
-            "integration-with-android-fragment",
-            "building-for-tv",
-            "out-of-tree-platforms"
-          ],
+    * environment-setup
+    * set-up-your-environment
+    * integration-with-existing-apps
+    * integration-with-android-fragment
+    * building-for-tv
+    * out-of-tree-platforms
   * Workflow
-    * running-on-device",
-            "fast-refresh",
-            "metro",
+    * running-on-device
+    * fast-refresh
+    * [metro](metro.md)
             "libraries",
             "typescript",
             "upgrading"
