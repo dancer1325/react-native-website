@@ -10,7 +10,7 @@
           "platform-specific-code",
           "more-resources"
   * Environment setup
-    * environment-setup
+    * [environment-setup](getting-started.md)
     * [set-up-your-environment](set-up-your-environment.md)
     * integration-with-existing-apps
     * integration-with-android-fragment
