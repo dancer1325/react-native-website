@@ -55,7 +55,9 @@
                     "optimizing-javascript-loading",
                     "profiling"
   * JavaScript Runtime
-    * javascript-environment", "timers", "hermes"],
+    * [javascript-environment](javascript-environment.md)
+    * timers
+    * [hermes](hermes.md)
   * Codegen
     * "the-new-architecture/what-is-codegen",
                         "the-new-architecture/using-codegen",

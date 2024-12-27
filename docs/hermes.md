@@ -3,114 +3,85 @@ id: hermes
 title: Using Hermes
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
-
-<a href="https://hermesengine.dev">
-  <img width={300} height={300} className="hermes-logo" src="/docs/assets/HermesLogo.svg" style={{height: "auto"}}/>
-</a>
-
-[Hermes](https://hermesengine.dev) is an open-source JavaScript engine optimized for React Native. For many apps, using Hermes will result in improved start-up time, decreased memory usage, and smaller app size when compared to JavaScriptCore.
-Hermes is used by default by React Native and no additional configuration is required to enable it.
+* [Hermes](https://hermesengine.dev)
+  * := JavaScript engine
+    * open-source 
+    * optimized for React Native
+      * == improved start-up time + decreased memory usage + smaller app size  
+    * used by default by React Native
 
 ## Bundled Hermes
 
-React Native comes with a **bundled version** of Hermes.
-We building a version of Hermes for you whenever we release a new version of React Native. This will make sure you're consuming a version of Hermes which is fully compatible with the version of React Native you're using.
-
-This change is fully transparent to users of React Native. You can still disable Hermes using the command described in this page.
-You can [read more about the technical implementation on this page](/architecture/bundled-hermes).
+* 👀React Native -- comes with a -- **bundled version** of Hermes 👀
+  * build / EACH React Native's release  
+    * -> Hermes version -- FULLY compatible with the -- React Native
+  * see [Hermes technical implementation](../website/architecture/bundled-hermes)
 
 ## Confirming Hermes is in use
 
-If you've recently created a new app from scratch, you should see if Hermes is enabled in the welcome view:
+* ways to confirm Hermes is used
+  * if you've created a NEW app from scratch & Hermes is enabled -> | welcome view, you would see it 
 
-![Where to find JS engine status in AwesomeProject](/docs/assets/HermesApp.jpg)
+    ![Where to find JS engine status in AwesomeProject](/website/static/docs/assets/HermesApp.jpg)
 
-A `HermesInternal` global variable will be available in JavaScript that can be used to verify that Hermes is in use:
+  * check `HermesInternal` global variable
 
-```jsx
-const isHermes = () => !!global.HermesInternal;
-```
+    ```jsx
+    const isHermes = () => !!global.HermesInternal;
+    ```
+    * if you are using a NON-standard way of loading the JS bundle 
+      * standard way of loading JS bundle | React Native & hermes -- is via -- pre-compiled bytecode (`.hbc` files)
+      * _Example of NON-standard way of loading the JS bundle:_ load raw JavaScript files directly or use a different bundling method
+      * -> possible that 
+        * `HermesInternal` variable is available
+        * BUT you are NOT using the highly optimised pre-compiled bytecode
+          * -> confirm that you are using the `.hbc` files 
 
-:::caution
-If you are using a non-standard way of loading the JS bundle, it is possible that the `HermesInternal` variable is available but you aren't using the highly optimised pre-compiled bytecode.
-Confirm that you are using the `.hbc` file and also benchmark the before/after as detailed below.
-:::
+* way to check the benefits of Hermes
+  * 👀make a release build/deployment of your app to compare 👀
+    * == | build time,
+      * JS code -- is compiled to -- Hermes Bytecode
+    * _Example:_ | root of your project
+      * | Android
 
-To see the benefits of Hermes, try making a release build/deployment of your app to compare. For example; from the root of your project:
+        ```shell
+        npm run android -- --mode="release"
+        
+        # or
+        yarn android --mode release
+        ```
+      * | ios
 
-<Tabs groupId="platform" queryString defaultValue={constants.defaultPlatform} values={constants.platforms} className="pill-tabs">
-<TabItem value="android">
-
-[//]: # 'Android'
-
-<Tabs groupId="package-manager" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>
-<TabItem value="npm">
-
-```shell
-npm run android -- --mode="release"
-```
-
-</TabItem>
-<TabItem value="yarn">
-
-```shell
-yarn android --mode release
-```
-
-</TabItem>
-</Tabs>
-
-</TabItem>
-<TabItem value="ios">
-
-[//]: # 'iOS'
-
-<Tabs groupId="package-manager" queryString defaultValue={constants.defaultPackageManager} values={constants.packageManagers}>
-<TabItem value="npm">
-
-```shell
-npm run ios -- --mode="Release"
-```
-
-</TabItem>
-<TabItem value="yarn">
-
-```shell
-yarn ios --mode Release
-```
-
-</TabItem>
-</Tabs>
-
-</TabItem>
-</Tabs>
-
-This will compile JavaScript to Hermes Bytecode during build time which will improve your app's startup speed on device.
+        ```shell
+        npm run ios -- --mode="Release"
+        
+        # or
+        yarn ios --mode Release
+        ```
 
 ## Switching back to JavaScriptCore
 
-React Native also supports using JavaScriptCore as the [JavaScript engine](javascript-environment). Follow these instructions to opt-out of Hermes.
+* see allowed [JavaScript engine](javascript-environment)
 
 ### Android
 
-Edit your `android/gradle.properties` file and flip `hermesEnabled` back to false:
+* | `android/gradle.properties`
 
-```diff
-# Use this property to enable or disable the Hermes JS engine.
-# If set to false, you will be using JSC instead.
-hermesEnabled=false
-```
+  ```diff
+  # Use this property to enable or disable the Hermes JS engine.
+  # If set to false, you will be using JSC instead.
+  hermesEnabled=false
+  ```
 
 ### iOS
 
-Edit your `ios/Podfile` file and make the change illustrated below:
+* | `ios/Podfile` 
 
-```diff
-   use_react_native!(
-     :path => config[:reactNativePath],
-+    :hermes_enabled => false,
-     # An absolute path to your application root.
-     :app_path => "#{Pod::Config.instance.installation_root}/.."
-   )
-```
+  ```diff
+     use_react_native!(
+       :path => config[:reactNativePath],
+  +    :hermes_enabled => false,
+       # An absolute path to your application root.
+       :app_path => "#{Pod::Config.instance.installation_root}/.."
+     )
+  ```
