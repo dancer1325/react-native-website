@@ -40,6 +40,8 @@ title: View
     
     export default ViewBoxesWithColorAndText;
     ```
+    
+    * or use [expo blank project](https://github.com/dancer1325/expo-examples/tree/master/blank)
 
 ### Synthetic Touch Events
 

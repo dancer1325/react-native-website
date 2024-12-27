@@ -135,6 +135,12 @@
   * Core Components
     * [Core Components & APIs](components-and-apis.md)
     * TODO:
+    * [View](view.md)
+    * TODO:
+    * Android Components
+      * TODO:
+    * iOS Components
+      * TODO:
   * Props
     * TODO:
   * Object Types
