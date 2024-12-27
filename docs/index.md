@@ -132,7 +132,13 @@
       * legacy/native-components-ios
       * legacy/direct-manipulation
 * Components
-  * TODO:
+  * Core Components
+    * [Core Components & APIs](components-and-apis.md)
+    * TODO:
+  * Props
+    * TODO:
+  * Object Types
+    * TODO:
 * APIs
   * TODO:
 * Others
