@@ -11,7 +11,7 @@
           "more-resources"
   * Environment setup
     * environment-setup
-    * set-up-your-environment
+    * [set-up-your-environment](set-up-your-environment.md)
     * integration-with-existing-apps
     * integration-with-android-fragment
     * building-for-tv
