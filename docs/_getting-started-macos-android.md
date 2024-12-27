@@ -1,25 +1,30 @@
 ## Installing dependencies
 
-You will need Node, Watchman, the React Native command line interface, a JDK, and Android Studio.
+* required dependencies
+  * Node,
+  * Watchman,
+  * React Native CL interface,
+  * JDK,
+  * Android Studio
+    * Reason: 🧠tooling -- to build your -- React Native app for Android 🧠
+    * | develop your app, ANY editor can be used
 
-While you can use any editor of your choice to develop your app, you will need to install Android Studio in order to set up the necessary tooling to build your React Native app for Android.
-
-<h3>Node &amp; Watchman</h3>
-
-We recommend installing Node and Watchman using [Homebrew](https://brew.sh/). Run the following commands in a Terminal after installing Homebrew:
+### Node & Watchman
 
 ```shell
 brew install node
 brew install watchman
 ```
 
-If you have already installed Node on your system, make sure it is Node 18.18 or newer.
+* requirements
+  * Node v18.18+
 
-[Watchman](https://facebook.github.io/watchman) is a tool by Facebook for watching changes in the filesystem. It is highly recommended you install it for better performance.
+* [Watchman](https://facebook.github.io/watchman)
+  * 👀recommended for better performance 👀
 
-<h3>Java Development Kit</h3>
+### Java Development Kit
 
-We recommend installing the OpenJDK distribution called Azul **Zulu** using [Homebrew](https://brew.sh/). Run the following commands in a Terminal after installing Homebrew:
+* recommended installing the OpenJDK distribution Azul **Zulu**
 
 ```shell
 brew install --cask zulu@17
@@ -37,100 +42,83 @@ brew info --cask zulu@17
 open /opt/homebrew/Caskroom/zulu@17/<version number> # or /usr/local/Caskroom/zulu@17/<version number>
 ```
 
-After opening Finder, double click the `Double-Click to Install Azul Zulu JDK 17.pkg` package to install the JDK.
+* add or update your `JAVA_HOME` environment variable | `~/.zshrc` or `~/.bash_profile`
+  * _Example:_ if JDK located | `/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home`
 
-After the JDK installation, add or update your `JAVA_HOME` environment variable in `~/.zshrc` (or in `~/.bash_profile`).
+    ```shell
+    export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+    ```
 
-If you used above steps, JDK will likely be located at `/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home`:
+* recommendations
+  * JDK 17
+    * Reason: 🧠 if you use JDK v17+ -> you MAY encounter problems 🧠
 
-```shell
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
-```
+### Android development environment
 
-The Zulu OpenJDK distribution offers JDKs for **both Intel and M1 Macs**. This will make sure your builds are faster on M1 Macs compared to using an Intel-based JDK.
+#### <h4 id="android-studio">1. Install Android Studio</h4>
 
-If you have already installed JDK on your system, we recommend JDK 17. You may encounter problems using higher JDK versions.
+* [Download and install Android Studio](https://developer.android.com/studio/index.html)
+  * check that you select
+    * `Android SDK`
+    * `Android SDK Platform`
+    * `Android Virtual Device`
 
-<h3>Android development environment</h3>
+#### <h4 id="android-sdk">2. Install the Android SDK</h4>
 
-Setting up your development environment can be somewhat tedious if you're new to Android development. If you're already familiar with Android development, there are a few things you may need to configure. In either case, please make sure to carefully follow the next few steps.
+* Android SDK
+  * by default, it's installed with Android Studio
+  * ⚠️if you want to build a React Native app / native code -> install `Android 15 (VanillaIceCream)` SDK ⚠️
+    * check | 
+      * Android SDK > SDK Platforms &
+        * select "Show Package Details"
+      * Android SDK > SDK Tools
+        * select "Show Package Details"
+  * if you want to install additional Android SDKs -> use the Android Studio's SDK Manager 
 
-<h4 id="android-studio">1. Install Android Studio</h4>
+![Android Studio Welcome](/website/static/docs/assets/GettingStartedAndroidStudioWelcomeMacOS.png)
 
-[Download and install Android Studio](https://developer.android.com/studio/index.html). While on Android Studio installation wizard, make sure the boxes next to all of the following items are checked:
+#### <h4>3. Configure the ANDROID_HOME environment variable</h4>
 
-- `Android SDK`
-- `Android SDK Platform`
-- `Android Virtual Device`
+* 👀environment variables / required by React Native tools -- to -- build apps with native code 👀
+  * add | 
+    * `~/.zprofile` or `~/.zshrc` or
+    * if you are using `bash` -> `~/.bash_profile` or `~/.bashrc`
 
-Then, click "Next" to install all of these components.
+    ```shell
+    export ANDROID_HOME=$HOME/Library/Android/sdk
+    export PATH=$PATH:$ANDROID_HOME/emulator
+    export PATH=$PATH:$ANDROID_HOME/platform-tools
+    ```
+  * run `source ~/.zprofile` (or `source ~/.bash_profile` for `bash`)
+    * Reason: 🧠to load the config | your current shell 🧠
+  * verify them
 
-> If the checkboxes are grayed out, you will have a chance to install these components later on.
+    ```shell
+    echo $ANDROID_HOME
+    echo $PATH
+    ```
 
-Once setup has finalized and you're presented with the Welcome screen, proceed to the next step.
+## <h2>Preparing the Android device</h2>
 
-<h4 id="android-sdk">2. Install the Android SDK</h4>
+* uses
+  * run your React Native Android app | v 
+* ways
+  * physical Android device, or
+  * Android Virtual Device
 
-Android Studio installs the latest Android SDK by default. Building a React Native app with native code, however, requires the `Android 15 (VanillaIceCream)` SDK in particular. Additional Android SDKs can be installed through the SDK Manager in Android Studio.
+### <h3>Using a physical device</h3>
 
-To do that, open Android Studio, click on "More Actions" button and select "SDK Manager".
+* plug it | your computer 
+  * -- via -- USB cable
+  * follow [these instructions](running-on-device.md)
 
-![Android Studio Welcome](/docs/assets/GettingStartedAndroidStudioWelcomeMacOS.png)
+### <h3>Using a virtual device</h3>
 
-> The SDK Manager can also be found within the Android Studio "Settings" dialog, under **Languages & Frameworks** → **Android SDK**.
+* steps
+  * open `./AwesomeProject/android` | Android Studio
+  * see the list of available Android Virtual Devices (AVDs) | Android Studio's "AVD Manager"
 
-Select the "SDK Platforms" tab from within the SDK Manager, then check the box next to "Show Package Details" in the bottom right corner. Look for and expand the `Android 15 (VanillaIceCream)` entry, then make sure the following items are checked:
+    ![Android Studio AVD Manager](/website/static/docs/assets/GettingStartedAndroidStudioAVD.png)
 
-- `Android SDK Platform 35`
-- `Intel x86 Atom_64 System Image` or `Google APIs Intel x86 Atom System Image` or (for Apple M1 Silicon) `Google APIs ARM 64 v8a System Image`
-
-Next, select the "SDK Tools" tab and check the box next to "Show Package Details" here as well. Look for and expand the "Android SDK Build-Tools" entry, then make sure that `35.0.0` is selected.
-
-Finally, click "Apply" to download and install the Android SDK and related build tools.
-
-<h4>3. Configure the ANDROID_HOME environment variable</h4>
-
-The React Native tools require some environment variables to be set up in order to build apps with native code.
-
-Add the following lines to your `~/.zprofile` or `~/.zshrc` (if you are using `bash`, then `~/.bash_profile` or `~/.bashrc`) config file:
-
-```shell
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-```
-
-Run `source ~/.zprofile` (or `source ~/.bash_profile` for `bash`) to load the config into your current shell. Verify that ANDROID_HOME has been set by running `echo $ANDROID_HOME` and the appropriate directories have been added to your path by running `echo $PATH`.
-
-> Please make sure you use the correct Android SDK path. You can find the actual location of the SDK in the Android Studio "Settings" dialog, under **Languages & Frameworks** → **Android SDK**.
-
-<h2>Preparing the Android device</h2>
-
-You will need an Android device to run your React Native Android app. This can be either a physical Android device, or more commonly, you can use an Android Virtual Device which allows you to emulate an Android device on your computer.
-
-Either way, you will need to prepare the device to run Android apps for development.
-
-<h3>Using a physical device</h3>
-
-If you have a physical Android device, you can use it for development in place of an AVD by plugging it in to your computer using a USB cable and following the instructions [here](running-on-device.md).
-
-<h3>Using a virtual device</h3>
-
-If you use Android Studio to open `./AwesomeProject/android`, you can see the list of available Android Virtual Devices (AVDs) by opening the "AVD Manager" from within Android Studio. Look for an icon that looks like this:
-
-![Android Studio AVD Manager](/docs/assets/GettingStartedAndroidStudioAVD.png)
-
-If you have recently installed Android Studio, you will likely need to [create a new AVD](https://developer.android.com/studio/run/managing-avds.html). Select "Create Virtual Device...", then pick any Phone from the list and click "Next", then select the **VanillaIceCream** API Level 35 image.
-
-Click "Next" then "Finish" to create your AVD. At this point you should be able to click on the green triangle button next to your AVD to launch it.
-
-<h3>That's it!</h3>
-
-Congratulations! You successfully set up your development environment.
-
-<center><img src="/docs/assets/GettingStartedCongratulations.png" width="150"></img></center>
-
-<h2>Now what?</h2>
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](integration-with-existing-apps.md).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](getting-started).
+  * if you want to [create a new AVD](https://developer.android.com/studio/run/managing-avds.html)
+    * 👀select the **VanillaIceCream** API Level 35 👀
