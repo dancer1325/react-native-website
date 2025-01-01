@@ -12,7 +12,7 @@
   * Environment setup
     * [environment-setup](getting-started.md)
     * [set-up-your-environment](set-up-your-environment.md)
-    * integration-with-existing-apps
+    * [integration-with-existing-apps](integration-with-existing-apps.md)
     * integration-with-android-fragment
     * building-for-tv
     * out-of-tree-platforms
@@ -134,6 +134,8 @@
 * Components
   * Core Components
     * [Core Components & APIs](components-and-apis.md)
+    * TODO:
+    * [Text](text.md)
     * TODO:
     * [View](view.md)
     * TODO:
