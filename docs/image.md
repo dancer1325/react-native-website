@@ -3,13 +3,19 @@ id: image
 title: Image
 ---
 
-A React component for displaying different types of images, including network images, static resources, temporary local images, and images from local disk, such as the camera roll.
-
-This example shows fetching and displaying an image from local storage as well as one from network and even from data provided in the `'data:'` uri scheme.
-
-> Note that for network and data images, you will need to manually specify the dimensions of your image!
+* `<Image>`
+  * == React component -- for -- displaying DIFFERENT types of images
+    * network images,
+      * requirements
+        * specify MANUALLY the dimensions
+    * static resources,
+    * temporary local images,
+    * images from local disk
+  * _Example:_
 
 ## Examples
+
+* _Example1:_ see [blank expo project](https://github.com/dancer1325/expo-examples/tree/master/blank)
 
 ```SnackPlayer name=Image%20Example
 import React from 'react';
@@ -56,7 +62,7 @@ const DisplayAnImage = () => (
 export default DisplayAnImage;
 ```
 
-You can also add `style` to an image:
+* _Example2:_ add `style` | image
 
 ```SnackPlayer name=Styled%20Image%20Example
 import React from 'react';
@@ -90,6 +96,7 @@ export default DisplayAnImageWithStyle;
 
 ## GIF and WebP support on Android
 
+* TODO:
 When building your own native code, GIF and WebP are not supported by default on Android.
 
 You will need to add some optional modules in `android/app/build.gradle`, depending on the needs of your app.
