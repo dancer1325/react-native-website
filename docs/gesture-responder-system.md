@@ -3,26 +3,50 @@ id: gesture-responder-system
 title: Gesture Responder System
 ---
 
-The gesture responder system manages the lifecycle of gestures in your app. A touch can go through several phases as the app determines what the user's intention is. For example, the app needs to determine if the touch is scrolling, sliding on a widget, or tapping. This can even change during the duration of a touch. There can also be multiple simultaneous touches.
+* gesture responder system
+  * manages the lifecycle of gestures | your app
 
-The touch responder system is needed to allow components to negotiate these touch interactions without any additional knowledge about their parent or child components.
+* touch
+  * has SEVERAL phases 
+  * type of touch
+    * can change | duration of touch
+    * _Example of type of touch:_ scrolling, sliding on a widget, or tapping
+  * touch responder system
+    * enable components -- can negotiate -- these touch interactions WITHOUT any additional knowledge about their parent or child components
 
 ### Best Practices
 
-To make your app feel great, every action should have the following attributes:
-
-- Feedback/highlighting- show the user what is handling their touch, and what will happen when they release the gesture
-- Cancel-ability- when making an action, the user should be able to abort it mid-touch by dragging their finger away
-
-These features make users more comfortable while using an app, because it allows people to experiment and interact without fear of making mistakes.
+* action's attributes
+  * Feedback/highlighting-
+    * show 
+      * the user / handles their touch
+      * what will happen | release the gesture
+  * Cancel-ability-
+    * | making an action,
+      * user -- should be able to -- abort it mid-touch 
+        * -- via -- dragging their finger away
 
 ### TouchableHighlight and Touchable\*
 
-The responder system can be complicated to use. So we have provided an abstract `Touchable` implementation for things that should be "tappable". This uses the responder system and allows you to configure tap interactions declaratively. Use `TouchableHighlight` anywhere where you would use a button or link on web.
+* responder system
+  * can be complicated to use
+* abstract `Touchable` implementation
+  * uses
+    * things / should be "tappable"
+  * makes use of the responder system
+  * allows you to
+    * configure tap interactions declaratively 
+* `TouchableHighlight`
+  * uses
+    * ANYWHERE | you would use a 
+      * button or
+      * link
 
 ## Responder Lifecycle
 
-A view can become the touch responder by implementing the correct negotiation methods. There are two methods to ask the view if it wants to become responder:
+* TODO:
+A view can become the touch responder by implementing the correct negotiation methods.
+There are two methods to ask the view if it wants to become responder:
 
 - `View.props.onStartShouldSetResponder: evt => true,` - Does this view want to become responder on the start of a touch?
 - `View.props.onMoveShouldSetResponder: evt => true,` - Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
@@ -63,4 +87,6 @@ However, sometimes a parent will want to make sure that it becomes responder. Th
 
 ### PanResponder
 
-For higher-level gesture interpretation, check out [PanResponder](panresponder.md).
+* see [PanResponder](panresponder.md)
+* uses
+  * higher-level gesture interpretation 
