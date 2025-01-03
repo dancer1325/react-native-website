@@ -3,59 +3,64 @@ id: text
 title: Text
 ---
 
-A React component for displaying text.
+* `<Text>`
+  * == React component -- for -- displaying text /
+    * supports
+      * nesting,
+      * styling, 
+      * touch handling
+  * _Example:_ 
+    * nested title and body text -- will inherit the -- `fontFamily` from `styles.baseText`
+    * title -- provides -- its own additional styles
 
-`Text` supports nesting, styling, and touch handling.
-
-In the following example, the nested title and body text will inherit the `fontFamily` from `styles.baseText`, but the title provides its own additional styles. The title and body will stack on top of each other on account of the literal newlines:
-
-```SnackPlayer name=Text%20Function%20Component%20Example
-import React, {useState} from 'react';
-import {Text, StyleSheet} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
-
-const TextInANest = () => {
-  const [titleText, setTitleText] = useState("Bird's Nest");
-  const bodyText = 'This is not really a bird nest.';
-
-  const onPressTitle = () => {
-    setTitleText("Bird's Nest [pressed]");
-  };
-
-  return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.baseText}>
-          <Text style={styles.titleText} onPress={onPressTitle}>
-            {titleText}
-            {'\n'}
-            {'\n'}
-          </Text>
-          <Text numberOfLines={5}>{bodyText}</Text>
-        </Text>
-      </SafeAreaView>
-    </SafeAreaProvider>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  baseText: {
-    fontFamily: 'Cochin',
-  },
-  titleText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-});
-
-export default TextInANest;
-```
+    ```SnackPlayer name=Text%20Function%20Component%20Example
+    import React, {useState} from 'react';
+    import {Text, StyleSheet} from 'react-native';
+    import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
+    
+    const TextInANest = () => {
+      const [titleText, setTitleText] = useState("Bird's Nest");
+      const bodyText = 'This is not really a bird nest.';
+    
+      const onPressTitle = () => {
+        setTitleText("Bird's Nest [pressed]");
+      };
+    
+      return (
+        <SafeAreaProvider>
+          <SafeAreaView style={styles.container}>
+            <Text style={styles.baseText}>
+              <Text style={styles.titleText} onPress={onPressTitle}>
+                {titleText}
+                {'\n'}
+                {'\n'}
+              </Text>
+              <Text numberOfLines={5}>{bodyText}</Text>
+            </Text>
+          </SafeAreaView>
+        </SafeAreaProvider>
+      );
+    };
+    
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+      },
+      baseText: {
+        fontFamily: 'Cochin',
+      },
+      titleText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+      },
+    });
+    
+    export default TextInANest;
+    ```
 
 ## Nested text
 
+* TODO:
 Both Android and iOS allow you to display formatted text by annotating ranges of a string with specific formatting like bold or colored text (`NSAttributedString` on iOS, `SpannableString` on Android). In practice, this is very tedious. For React Native, we decided to use the web paradigm for this, where you can nest text to achieve the same effect.
 
 ```SnackPlayer name=Nested%20Text%20Example
