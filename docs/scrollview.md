@@ -3,23 +3,43 @@ id: scrollview
 title: ScrollView
 ---
 
-Component that wraps platform ScrollView while providing integration with touch locking "responder" system.
+* `<ScrollView>`
+  * == React component /
+    * wraps platform ScrollView
+    * provides -- integration with -- touch locking "responder" system
+    * restrictions
+      * ⚠️bounded height ⚠️
+        * Reason: 🧠they contain unbounded-height children | bounded container (via a scroll interaction) 🧠
+        * ways to bound
+          * set the height of the view directly (discouraged)
+          * ALL parent views have bounded height
+      * ❌NO transfer `{flex: 1}` -- down the -- view stack ❌ 
+        * Reason: 🧠 it can lead to errors here 🧠
+      * ⚠️ScrollView is ALWAYS the responder of their children components' events ⚠️ 
 
-Keep in mind that ScrollViews must have a bounded height in order to work, since they contain unbounded-height children into a bounded container (via a scroll interaction). In order to bound the height of a ScrollView, either set the height of the view directly (discouraged) or make sure all parent views have bounded height. Forgetting to transfer `{flex: 1}` down the view stack can lead to errors here, which the element inspector makes quick to debug.
+  * `<ScrollView>` vs [`<FlatList>`](flatlist.md)
+    * 👀rendering 👀
+      * `ScrollView` renders ALL its react child components at once
+        * -> if list of items is long -> 
+          * performance downside == slow rendering 
+          * increased memory usage
+      * `FlatList` renders items lazily
+        * | they are about to appear
+        * remove items / scroll way off screen -> save 
+          * memory
+          * processing time
 
-Doesn't yet support other contained responders from blocking this scroll view from becoming the responder.
-
-`<ScrollView>` vs [`<FlatList>`](flatlist.md) - which one to use?
-
-`ScrollView` renders all its react child components at once, but this has a performance downside.
-
-Imagine you have a very long list of items you want to display, maybe several screens worth of content. Creating JS components and native views for everything all at once, much of which may not even be shown, will contribute to slow rendering and increased memory usage.
-
-This is where `FlatList` comes into play. `FlatList` renders items lazily, when they are about to appear, and removes items that scroll way off screen to save memory and processing time.
-
-`FlatList` is also handy if you want to render separators between your items, multiple columns, infinite scroll loading, or any number of other features it supports out of the box.
+* `FlatList`
+  * uses
+    * list of items long
+    * render 
+      * separators between your items,
+      * multiple columns,
+      * infinite scroll loading
 
 ## Example
+
+* see [blank expo project](https://github.com/dancer1325/expo-examples/tree/master/blank)
 
 ```SnackPlayer name=ScrollView%20Example
 import React from 'react';
@@ -66,6 +86,7 @@ export default App;
 # Reference
 
 ## Props
+* TODO:
 
 ### [View Props](view.md#props)
 
