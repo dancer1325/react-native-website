@@ -3,104 +3,121 @@ id: textinput
 title: TextInput
 ---
 
-A foundational component for inputting text into the app via a keyboard. Props provide configurability for several features, such as auto-correction, auto-capitalization, placeholder text, and different keyboard types, such as a numeric keypad.
+* `<TextInput>`
+  * == React component -- for -- inputting text -- via a -- keyboard
+  * props
+    * == configurability for features (auto-correction, auto-capitalization, placeholder text, different keyboard types)
+    * ⚠️SOME props -- require -- `multiline={true/false}` ⚠️
+  * use cases
+    * plop down a `TextInput` & subscribe to the `onChangeText` events -- to read the -- user input 
+  * ❌if `multiline=true` & you use border styles / apply | ONLY 1 side of the element (e.g., `borderBottomColor`, `borderLeftWidth`, etc.) -> will NOT be applied ❌
+    * Solution: wrap your `TextInput` | `View` -- see Example2 -- 
+  * 👀by default, has a border | bottom of its view 👀
+    * border's padding
+      * set by the background image / -- provided by the -- system
+      * can NOT be changed
+    * ways to skip this border
+      * ❌NOT set height explicitly ❌
+        * -> system will take care of displaying the border | correct position
+      * ❌NOT display the border -- by -- setting `underlineColorAndroid` == transparent ❌
+  * | Android
+    * perform text selection | input -> app's activity `windowSoftInputMode` param -- can be changed to -- `adjustResize`
+      * -> cause issues with components / have position: 'absolute' | keyboard is active
+        * Solutions
+          * specify `windowSoftInputMode` | AndroidManifest.xml ( https://developer.android.com/guide/topics/manifest/activity-element.html ) or
+          * control this param programmatically -- via -- native code
 
-The most basic use case is to plop down a `TextInput` and subscribe to the `onChangeText` events to read the user input. There are also other events, such as `onSubmitEditing` and `onFocus` that can be subscribed to. A minimal example:
+* _Examples:_
+  * _Example1:_
 
-```SnackPlayer name=TextInput%20Example
-import React from 'react';
-import {StyleSheet, TextInput} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
+    ```SnackPlayer name=TextInput%20Example
+    import React from 'react';
+    import {StyleSheet, TextInput} from 'react-native';
+    import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
+    
+    const TextInputExample = () => {
+      const [text, onChangeText] = React.useState('Useless Text');
+      const [number, onChangeNumber] = React.useState('');
+    
+      return (
+        <SafeAreaProvider>
+          <SafeAreaView>
+            <TextInput
+              style={styles.input}
+              onChangeText={onChangeText}
+              value={text}
+            />
+            <TextInput
+              style={styles.input}
+              onChangeText={onChangeNumber}
+              value={number}
+              placeholder="useless placeholder"
+              keyboardType="numeric"
+            />
+          </SafeAreaView>
+        </SafeAreaProvider>
+      );
+    };
+    
+    const styles = StyleSheet.create({
+      input: {
+        height: 40,
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
+      },
+    });
+    
+    export default TextInputExample;
+    ```
 
-const TextInputExample = () => {
-  const [text, onChangeText] = React.useState('Useless Text');
-  const [number, onChangeNumber] = React.useState('');
+  * _Example2:_
 
-  return (
-    <SafeAreaProvider>
-      <SafeAreaView>
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeText}
-          value={text}
-        />
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeNumber}
-          value={number}
-          placeholder="useless placeholder"
-          keyboardType="numeric"
-        />
-      </SafeAreaView>
-    </SafeAreaProvider>
-  );
-};
-
-const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-});
-
-export default TextInputExample;
-```
-
-Two methods exposed via the native element are `.focus()` and `.blur()` that will focus or blur the TextInput programmatically.
-
-Note that some props are only available with `multiline={true/false}`. Additionally, border styles that apply to only one side of the element (e.g., `borderBottomColor`, `borderLeftWidth`, etc.) will not be applied if `multiline=true`. To achieve the same effect, you can wrap your `TextInput` in a `View`:
-
-```SnackPlayer name=Multiline%20TextInput%20Example
-import React from 'react';
-import {TextInput, StyleSheet} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
-
-const MultilineTextInputExample = () => {
-  const [value, onChangeText] = React.useState('Useless Multiline Placeholder');
-
-  // If you type something in the text box that is a color,
-  // the background will change to that color.
-  return (
-    <SafeAreaProvider>
-      <SafeAreaView
-        style={[
-          styles.container,
-          {
-            backgroundColor: value,
-          },
-        ]}>
-        <TextInput
-          editable
-          multiline
-          numberOfLines={4}
-          maxLength={40}
-          onChangeText={text => onChangeText(text)}
-          value={value}
-          style={styles.textInput}
-        />
-      </SafeAreaView>
-    </SafeAreaProvider>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    borderBottomColor: '#000',
-    borderBottomWidth: 1,
-  },
-  textInput: {
-    padding: 10,
-  },
-});
-
-export default MultilineTextInputExample;
-```
-
-`TextInput` has a border at the bottom of its view by default. This border has its padding set by the background image provided by the system, and it cannot be changed. Solutions to avoid this are to either not set height explicitly, in which case the system will take care of displaying the border in the correct position, or to not display the border by setting `underlineColorAndroid` to transparent.
-
-Note that on Android performing text selection in an input can change the app's activity `windowSoftInputMode` param to `adjustResize`. This may cause issues with components that have position: 'absolute' while the keyboard is active. To avoid this behavior either specify `windowSoftInputMode` in AndroidManifest.xml ( https://developer.android.com/guide/topics/manifest/activity-element.html ) or control this param programmatically with native code.
+    ```SnackPlayer name=Multiline%20TextInput%20Example
+    import React from 'react';
+    import {TextInput, StyleSheet} from 'react-native';
+    import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
+    
+    const MultilineTextInputExample = () => {
+      const [value, onChangeText] = React.useState('Useless Multiline Placeholder');
+    
+      // If you type something in the text box that is a color,
+      // the background will change to that color.
+      return (
+        <SafeAreaProvider>
+          <SafeAreaView
+            style={[
+              styles.container,
+              {
+                backgroundColor: value,
+              },
+            ]}>
+            <TextInput
+              editable
+              multiline
+              numberOfLines={4}
+              maxLength={40}
+              onChangeText={text => onChangeText(text)}
+              value={value}
+              style={styles.textInput}
+            />
+          </SafeAreaView>
+        </SafeAreaProvider>
+      );
+    };
+    
+    const styles = StyleSheet.create({
+      container: {
+        borderBottomColor: '#000',
+        borderBottomWidth: 1,
+      },
+      textInput: {
+        padding: 10,
+      },
+    });
+    
+    export default MultilineTextInputExample;
+    ```
 
 ---
 
