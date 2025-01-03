@@ -29,14 +29,11 @@
               "flexbox",
               "images",
               "colors",
-    * Interaction"
-      * handling-touches",
-                    "navigation",
-                    "animations",
-                    "gesture-responder-system"
-                  ]
-                },
-                {
+    * Interaction
+      * handling-touches
+      * navigation
+      * animations
+      * [gesture-responder-system](gesture-responder-system.md)
     * Connectivity
       * network
       * security
