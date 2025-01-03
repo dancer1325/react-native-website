@@ -9,7 +9,7 @@ title: Text
       * nesting,
       * styling, 
       * touch handling
-  * _Example:_ 
+  * _Example:_ see [blank expo project](https://github.com/dancer1325/expo-examples/tree/master/blank)
     * nested title and body text -- will inherit the -- `fontFamily` from `styles.baseText`
     * title -- provides -- its own additional styles
 
