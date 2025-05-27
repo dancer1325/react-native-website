@@ -117,187 +117,200 @@ description: To understand React Native fully, you need a solid foundation in Re
 
 ## Custom Components
 
-* TODO:
-You’ve already met [React Native’s Core Components](intro-react-native-components). React lets you nest these components inside each other to create new components. These nestable, reusable components are at the heart of the React paradigm.
+* React paradigm
+  * == nest & reuse React components 
+    * _Example:_ nest [`Text`](text) + [`TextInput`](textinput) | [`View`](view) 
 
-For example, you can nest [`Text`](text) and [`TextInput`](textinput) inside a [`View`](view) below, and React Native will render them together:
+      ```SnackPlayer name=Custom%20Components
+      import React from 'react';
+      import {Text, TextInput, View} from 'react-native';
+      
+      const Cat = () => {
+        return (
+          <View>
+            <Text>Hello, I am...</Text>
+            <TextInput
+              style={{
+                height: 40,
+                borderColor: 'gray',
+                borderWidth: 1,
+              }}
+              defaultValue="Name me!"
+            />
+          </View>
+        );
+      };
+      
+      export default Cat;
+      ```
 
-```SnackPlayer name=Custom%20Components
-import React from 'react';
-import {Text, TextInput, View} from 'react-native';
+### Developer notes
 
-const Cat = () => {
-  return (
-    <View>
-      <Text>Hello, I am...</Text>
-      <TextInput
-        style={{
-          height: 40,
-          borderColor: 'gray',
-          borderWidth: 1,
-        }}
-        defaultValue="Name me!"
-      />
-    </View>
-  );
-};
+* | web
+  * `<View>` == HTML's `<div>`
+  * `<Text>` == HTML's `<p>` 
 
-export default Cat;
-```
+* | android
+  * common practices
+    * views inside `LinearLayout`, `FrameLayout`, `RelativeLayout`
+      * Reason: 🧠 define how the view’s children are arranged | screen 🧠 
 
-#### Developer notes
+* | React Native,
+  * `View`'s children’s layout -- via -- Flexbox  
+  * see [layout with Flexbox](flexbox)
 
-<Tabs groupId="guide" queryString defaultValue="web" values={constants.getDevNotesTabs(["android", "web"])}>
+* React components
+  * can be reused
+    * _Example:_ 
 
-<TabItem value="web">
+  ```SnackPlayer name=Multiple%20Components
+  import React from 'react';
+  import {Text, View} from 'react-native';
+  
+  const Cat = () => {
+    return (
+      <View>
+        <Text>I am also a cat!</Text>
+      </View>
+    );
+  };
+  
+  // Cafe   parent component
+  const Cafe = () => {
+    return (
+      <View>
+        <Text>Welcome!</Text>
+        <Cat />
+        <Cat />
+        <Cat />
+      </View>
+    );
+  };
+  
+  export default Cafe;
+  ```
 
-> If you’re familiar with web development, `<View>` and `<Text>` might remind you of HTML! You can think of them as the `<div>` and `<p>` tags of application development.
+* parent component
+  * == ANY component / renders OTHER components
 
-</TabItem>
-<TabItem value="android">
+## Props / Properties
 
-> On Android, you usually put your views inside `LinearLayout`, `FrameLayout`, `RelativeLayout`, etc. to define how the view’s children will be arranged on the screen. In React Native, `View` uses Flexbox for its children’s layout. You can learn more in [our guide to layout with Flexbox](flexbox).
+* allows you
+  * 👀customize (how to render) ANY (custom, built-in) React components 👀
+    * _Examples:_
+      * _Example1:_ | JS, DIFFERENT `name` / EACH `<Cat>` 
 
-</TabItem>
-</Tabs>
+        ```SnackPlayer name=Multiple%20Props&ext=js
+        import React from 'react';
+        import {Text, View} from 'react-native';
+        
+        const Cat = props => {
+          return (
+            <View>
+              <Text>Hello, I am {props.name}!</Text>
+            </View>
+          );
+        };
+        
+        const Cafe = () => {
+          return (
+            <View>
+              <Cat name="Maru" />
+              <Cat name="Jellylorum" />
+              <Cat name="Spot" />
+            </View>
+          );
+        };
+        
+        export default Cafe;
+        ```
 
-You can render this component multiple times and in multiple places without repeating your code by using `<Cat>`:
+      * _Example2:_ | TS, DIFFERENT `name` / EACH `<Cat>`
 
-```SnackPlayer name=Multiple%20Components
-import React from 'react';
-import {Text, View} from 'react-native';
+        ```SnackPlayer name=Multiple%20Props&ext=tsx
+        import React from 'react';
+        import {Text, View} from 'react-native';
+        
+        type CatProps = {
+          name: string;
+        };
+        
+        const Cat = (props: CatProps) => {
+          return (
+            <View>
+              <Text>Hello, I am {props.name}!</Text>
+            </View>
+          );
+        };
+        
+        const Cafe = () => {
+          return (
+            <View>
+              <Cat name="Maru" />
+              <Cat name="Jellylorum" />
+              <Cat name="Spot" />
+            </View>
+          );
+        };
+        
+        export default Cafe;
+        ```
 
-const Cat = () => {
-  return (
-    <View>
-      <Text>I am also a cat!</Text>
-    </View>
-  );
-};
+      * _Example3:_ [`Image`](image)'s [`source`](image#source)
 
-const Cafe = () => {
-  return (
-    <View>
-      <Text>Welcome!</Text>
-      <Cat />
-      <Cat />
-      <Cat />
-    </View>
-  );
-};
+        ```SnackPlayer name=Props
+        import React from 'react';
+        import {Text, View, Image} from 'react-native';
+        
+        const CatApp = () => {
+          return (
+            <View>
+              <Image
+                source={{
+                  uri: 'https://reactnative.dev/docs/assets/p_cat1.png',
+                }}
+                style={{width: 200, height: 200}}
+              />
+              <Text>Hello, I am your cat!</Text>
+            </View>
+          );
+        };
+        
+        export default CatApp;
+        ```
 
-export default Cafe;
-```
+* uses
+  * configure a component | renders
 
-Any component that renders other components is a **parent component.** Here, `Cafe` is the parent component and each `Cat` is a **child component.**
-
-You can put as many cats in your cafe as you like. Each `<Cat>` renders a unique element—which you can customize with props.
-
-## Props
-
-**Props** is short for “properties”. Props let you customize React components. For example, here you pass each `<Cat>` a different `name` for `Cat` to render:
-
-<Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
-<TabItem value="javascript">
-
-```SnackPlayer name=Multiple%20Props&ext=js
-import React from 'react';
-import {Text, View} from 'react-native';
-
-const Cat = props => {
-  return (
-    <View>
-      <Text>Hello, I am {props.name}!</Text>
-    </View>
-  );
-};
-
-const Cafe = () => {
-  return (
-    <View>
-      <Cat name="Maru" />
-      <Cat name="Jellylorum" />
-      <Cat name="Spot" />
-    </View>
-  );
-};
-
-export default Cafe;
-```
-
-</TabItem>
-<TabItem value="typescript">
-
-```SnackPlayer name=Multiple%20Props&ext=tsx
-import React from 'react';
-import {Text, View} from 'react-native';
-
-type CatProps = {
-  name: string;
-};
-
-const Cat = (props: CatProps) => {
-  return (
-    <View>
-      <Text>Hello, I am {props.name}!</Text>
-    </View>
-  );
-};
-
-const Cafe = () => {
-  return (
-    <View>
-      <Cat name="Maru" />
-      <Cat name="Jellylorum" />
-      <Cat name="Spot" />
-    </View>
-  );
-};
-
-export default Cafe;
-```
-
-</TabItem>
-</Tabs>
-
-Most of React Native’s Core Components can be customized with props, too. For example, when using [`Image`](image), you pass it a prop named [`source`](image#source) to define what image it shows:
-
-```SnackPlayer name=Props
-import React from 'react';
-import {Text, View, Image} from 'react-native';
-
-const CatApp = () => {
-  return (
-    <View>
-      <Image
-        source={{
-          uri: 'https://reactnative.dev/docs/assets/p_cat1.png',
-        }}
-        style={{width: 200, height: 200}}
-      />
-      <Text>Hello, I am your cat!</Text>
-    </View>
-  );
-};
-
-export default CatApp;
-```
-
-`Image` has [many different props](image#props), including [`style`](image#style), which accepts a JS object of design and layout related property-value pairs.
-
-> Notice the double curly braces `{{ }}` surrounding `style`‘s width and height. In JSX, JavaScript values are referenced with `{}`. This is handy if you are passing something other than a string as props, like an array or number: `<Cat food={["fish", "kibble"]} age={2} />`. However, JS objects are **_also_** denoted with curly braces: `{width: 200, height: 200}`. Therefore, to pass a JS object in JSX, you must wrap the object in **another pair** of curly braces: `{{width: 200, height: 200}}`
-
-You can build many things with props and the Core Components [`Text`](text), [`Image`](image), and [`View`](view)! But to build something interactive, you’ll need state.
+* `{{ }}`
+  * 👀pass JS object | JSX 👀
+    * Reason: 🧠
+      * | JSX,
+        * JS values -- are referenced with -- `{}`
+          * uses
+            * pass | props, something != string as props --  _Example:_ `<Cat food={["fish", "kibble"]} age={2} />` --
+      * | JS
+        * objects -- are denoted with -- `{}`
+          * _Example:_ `{width: 200, height: 200}` 🧠
+  * _Example:_ `style={{width: 200, height: 200}}` 
 
 ## State
 
-While you can think of props as arguments you use to configure how components render, **state** is like a component’s personal data storage. State is useful for handling data that changes over time or that comes from user interaction. State gives your components memory!
+* state
+  * == component’s personal data storage == components memory 
+  * uses
+    * handle data /  
+      * changes over time or
+      * comes from user interaction
+  * if you want to add state | component -> call [React’s `useState` Hook](https://react.dev/learn/state-a-components-memory)
+    A Hook is a kind of function that lets you “hook into” React features.
+    For example, `useState` is a Hook that lets you add state to function components.
+    You can learn more about [other kinds of Hooks in the React documentation.](https://react.dev/reference/react)
 
-> As a general rule, use props to configure a component when it renders. Use state to keep track of any component data that you expect to change over time.
 
-The following example takes place in a cat cafe where two hungry cats are waiting to be fed. Their hunger, which we expect to change over time (unlike their names), is stored as state. To feed the cats, press their buttons—which will update their state.
+Their hunger, which we expect to change over time (unlike their names), is stored as state.
+To feed the cats, press their buttons—which will update their state.
 
-You can add state to a component by calling [React’s `useState` Hook](https://react.dev/learn/state-a-components-memory). A Hook is a kind of function that lets you “hook into” React features. For example, `useState` is a Hook that lets you add state to function components. You can learn more about [other kinds of Hooks in the React documentation.](https://react.dev/reference/react)
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
@@ -388,7 +401,8 @@ First, you will want to import `useState` from React like so:
 import React, {useState} from 'react';
 ```
 
-Then you declare the component’s state by calling `useState` inside its function. In this example, `useState` creates an `isHungry` state variable:
+Then you declare the component’s state by calling `useState` inside its function.
+In this example, `useState` creates an `isHungry` state variable:
 
 ```tsx
 const Cat = (props: CatProps) => {
@@ -397,14 +411,16 @@ const Cat = (props: CatProps) => {
 };
 ```
 
-> You can use `useState` to track any kind of data: strings, numbers, Booleans, arrays, objects. For example, you can track the number of times a cat has been petted with `const [timesPetted, setTimesPetted] = useState(0)`!
+> You can use `useState` to track any kind of data: strings, numbers, Booleans, arrays, objects.
+> For example, you can track the number of times a cat has been petted with `const [timesPetted, setTimesPetted] = useState(0)`!
 
 Calling `useState` does two things:
 
 - it creates a “state variable” with an initial value—in this case the state variable is `isHungry` and its initial value is `true`
 - it creates a function to set that state variable’s value—`setIsHungry`
 
-It doesn’t matter what names you use. But it can be handy to think of the pattern as `[<getter>, <setter>] = useState(<initialValue>)`.
+It doesn’t matter what names you use. 
+But it can be handy to think of the pattern as `[<getter>, <setter>] = useState(<initialValue>)`.
 
 Next you add the [`Button`](button) Core Component and give it an `onPress` prop:
 
@@ -417,7 +433,9 @@ Next you add the [`Button`](button) Core Component and give it an `onPress` prop
 />
 ```
 
-Now, when someone presses the button, `onPress` will fire, calling the `setIsHungry(false)`. This sets the state variable `isHungry` to `false`. When `isHungry` is false, the `Button`’s `disabled` prop is set to `true` and its `title` also changes:
+Now, when someone presses the button, `onPress` will fire, calling the `setIsHungry(false)`.
+This sets the state variable `isHungry` to `false`.
+When `isHungry` is false, the `Button`’s `disabled` prop is set to `true` and its `title` also changes:
 
 ```tsx
 <Button
@@ -427,7 +445,9 @@ Now, when someone presses the button, `onPress` will fire, calling the `setIsHun
 />
 ```
 
-> You might’ve noticed that although `isHungry` is a [const](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/const), it is seemingly reassignable! What is happening is when a state-setting function like `setIsHungry` is called, its component will re-render. In this case the `Cat` function will run again—and this time, `useState` will give us the next value of `isHungry`.
+> You might’ve noticed that although `isHungry` is a [const](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/const), it is seemingly reassignable!
+> What is happening is when a state-setting function like `setIsHungry` is called, its component will re-render.
+> In this case the `Cat` function will run again—and this time, `useState` will give us the next value of `isHungry`.
 
 Finally, put your cats inside a `Cafe` component:
 
@@ -442,7 +462,9 @@ const Cafe = () => {
 };
 ```
 
-> See the `<>` and `</>` above? These bits of JSX are [fragments](https://react.dev/reference/react/Fragment). Adjacent JSX elements must be wrapped in an enclosing tag. Fragments let you do that without nesting an extra, unnecessary wrapping element like `View`.
+> See the `<>` and `</>` above? These bits of JSX are [fragments](https://react.dev/reference/react/Fragment). 
+> Adjacent JSX elements must be wrapped in an enclosing tag. 
+> Fragments let you do that without nesting an extra, unnecessary wrapping element like `View`.
 
 ---
 
