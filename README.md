@@ -3,23 +3,17 @@
 * goal
   * website configuration and documentation of [React Native website](https://reactnative.dev/)
 
-## Contents
-
-- [Overview](#-overview)
-- [Website configuration](#-website-configuration)
-- [Contributing](#-contributing)
-- [License](#-license)
-
 ## 📖 Overview
 
 * content == ".md" |
-  * `docs`,
+  * [docs/](docs/)
     * source files -- for -- the sections 
       * "Guides",
       * "Components"
       * "APIs"
-  * `website/architecture` 
-  * `website/contributing`
+  * [website/architecture](website/architecture) 
+  * [how to contribute](website/contributing)
+  * [blog](website/blog)
 
 * React Native website
   * == static site / -- generated via -- [Docusaurus](https://docusaurus.io/)
