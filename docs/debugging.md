@@ -67,10 +67,6 @@ LogBox is an in-app tool that displays when warnings or errors are logged by you
 
 ![A LogBox warning and an expanded LogBox syntax error](/website/static/docs/assets/debugging-logbox-076.jpg)
 
-:::note
-LogBox is disabled in release (production) builds.
-:::
-
 ### Fatal Errors
 
 When an unrecoverable error occurs, such as a JavaScript syntax error, LogBox will open with the location of the error. In this state, LogBox is not dismissable since your code cannot be executed. LogBox will automatically dismiss once the syntax error is fixed — either via Fast Refresh or after a manual reload.

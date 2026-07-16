@@ -20,12 +20,12 @@ For example, a container view that fades in when it is mounted may look like thi
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
-```SnackPlayer ext=js&supportedPlatforms=ios,android
-import React, {useEffect} from 'react';
-import {Animated, Text, View, useAnimatedValue} from 'react-native';
+```SnackPlayer ext=js
+import {useEffect, useRef} from 'react';
+import {Animated, Text, View} from 'react-native';
 
 const FadeInView = props => {
-  const fadeAnim = useAnimatedValue(0); // Initial value for opacity: 0
+  const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -74,15 +74,13 @@ export default () => {
 <TabItem value="typescript">
 
 ```SnackPlayer ext=tsx
-import React, {useEffect} from 'react';
-import {Animated, Text, View, useAnimatedValue} from 'react-native';
-import type {PropsWithChildren} from 'react';
-import type {ViewStyle} from 'react-native';
+import {useEffect, useRef, type PropsWithChildren, type FC} from 'react';
+import {Animated, Text, View, type ViewStyle} from 'react-native';
 
 type FadeInViewProps = PropsWithChildren<{style: ViewStyle}>;
 
-const FadeInView: React.FC<FadeInViewProps> = props => {
-  const fadeAnim = useAnimatedValue(0); // Initial value for opacity: 0
+const FadeInView: FC<FadeInViewProps> = props => {
+  const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -130,7 +128,7 @@ export default () => {
 </TabItem>
 </Tabs>
 
-Let's break down what's happening here. In the `FadeInView` constructor, a new `Animated.Value` called `fadeAnim` is initialized as part of `state`. The opacity property on the `View` is mapped to this animated value. Behind the scenes, the numeric value is extracted and used to set opacity.
+Let's break down what's happening here. In the `FadeInView` render method, a new `Animated.Value` called `fadeAnim` is initialized with `useRef`. The opacity property on the `View` is mapped to this animated value. Behind the scenes, the numeric value is extracted and used to set opacity.
 
 When the component mounts, the opacity is set to 0. Then, an easing animation is started on the `fadeAnim` animated value, which will update all of its dependent mappings (in this case, only the opacity) on each frame as the value animates to the final value of 1.
 
@@ -311,7 +309,6 @@ The following example implements a horizontal scrolling carousel where the scrol
 #### ScrollView with Animated Event Example
 
 ```SnackPlayer name=Animated&supportedPlatforms=ios,android
-import React from 'react';
 import {
   ScrollView,
   Text,
@@ -454,7 +451,7 @@ onPanResponderMove={Animated.event(
 #### PanResponder with Animated Event Example
 
 ```SnackPlayer name=Animated
-import React, {useRef} from 'react';
+import {useRef} from 'react';
 import {Animated, View, StyleSheet, PanResponder, Text} from 'react-native';
 
 const App = () => {
@@ -551,7 +548,7 @@ The native driver also works with `Animated.event`. This is especially useful fo
 </Animated.ScrollView>
 ```
 
-You can see the native driver in action by running the [RNTester app](https://github.com/facebook/react-native/blob/main/packages/rn-tester/), then loading the Native Animated Example. You can also take a look at the [source code](https://github.com/facebook/react-native/blob/master/packages/rn-tester/js/examples/NativeAnimation/NativeAnimationsExample.js) to learn how these examples were produced.
+You can see the native driver in action by running the [RNTester app](https://github.com/facebook/react-native/blob/main/packages/rn-tester/), then loading the Native Animated Example. You can also take a look at the [source code](https://github.com/facebook/react-native/blob/main/packages/rn-tester/js/examples/NativeAnimation/NativeAnimationsExample.js) to learn how these examples were produced.
 
 #### Caveats
 
@@ -594,8 +591,8 @@ Note that in order to get this to work on **Android** you need to set the follow
 UIManager.setLayoutAnimationEnabledExperimental(true);
 ```
 
-```SnackPlayer name=LayoutAnimations&supportedPlatforms=ios,android
-import React from 'react';
+```SnackPlayer name=LayoutAnimations
+import {useState} from 'react';
 import {
   NativeModules,
   LayoutAnimation,
@@ -610,32 +607,28 @@ const {UIManager} = NativeModules;
 UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true);
 
-export default class App extends React.Component {
-  state = {
+export default function App() {
+  const [state, setState] = useState({
     w: 100,
     h: 100,
-  };
+  });
 
-  _onPress = () => {
+  const onPress = () => {
     // Animate the update
     LayoutAnimation.spring();
-    this.setState({w: this.state.w + 15, h: this.state.h + 15});
+    setState({w: state.w + 15, h: state.h + 15});
   };
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <View
-          style={[styles.box, {width: this.state.w, height: this.state.h}]}
-        />
-        <TouchableOpacity onPress={this._onPress}>
-          <View style={styles.button}>
-            <Text style={styles.buttonText}>Press me!</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-    );
-  }
+  return (
+    <View style={styles.container}>
+      <View style={[styles.box, {width: state.w, height: state.h}]} />
+      <TouchableOpacity onPress={onPress}>
+        <View style={styles.button}>
+          <Text style={styles.buttonText}>Press me!</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -676,4 +669,4 @@ As mentioned [in the Direct Manipulation section](legacy/direct-manipulation), `
 
 We could use this in the Rebound example to update the scale - this might be helpful if the component that we are updating is deeply nested and hasn't been optimized with `shouldComponentUpdate`.
 
-If you find your animations with dropping frames (performing below 60 frames per second), look into using `setNativeProps` or `shouldComponentUpdate` to optimize them. Or you could run the animations on the UI thread rather than the JavaScript thread [with the useNativeDriver option](/blog/2017/02/14/using-native-driver-for-animated). You may also want to defer any computationally intensive work until after animations are complete, using the [InteractionManager](interactionmanager). You can monitor the frame rate by using the In-App Dev Menu "FPS Monitor" tool.
+If you find your animations with dropping frames (performing below 60 frames per second), look into using `setNativeProps` or `shouldComponentUpdate` to optimize them. Or you could run the animations on the UI thread rather than the JavaScript thread [with the useNativeDriver option](/blog/2017/02/14/using-native-driver-for-animated). You may also want to defer any computationally intensive work until the JS thread is idle (for example, with `requestIdleCallback`). You can monitor the frame rate by using the In-App Dev Menu "FPS Monitor" tool.

@@ -63,12 +63,13 @@ react-native-website/
     ├── versioned_sidebars/
     │   ├── [GENERATED VERSIONED SIDEBARS]
     │   └── ...
-    ├── docusaurus.config.js
+    ├── docusaurus.config.ts
     ├── package.json
     ├── showcase.json
-    ├── sidebars.json
-    ├── sidebarsArchitecture.json
-    ├── sidebarsContributing.json
+    ├── sidebars.ts
+    ├── sidebarsArchitecture.ts
+    ├── sidebarsCommunity.ts
+    ├── sidebarsContributing.ts
     └── versions.json
 ```
 

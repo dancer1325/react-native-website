@@ -1,3 +1,7 @@
+import {getCoreBranchNameForCurrentVersion} from '@site/src/getCoreBranchNameForCurrentVersion';
+import {getCurrentVersion} from '@site/src/getCurrentVersion';
+import CodeBlock from '@theme/CodeBlock';
+
 # Cross-Platform Native Modules (C++)
 
 import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
@@ -12,11 +16,11 @@ In this guide, we will go through the creation of a pure C++ Turbo Native Module
 4. Register the module in the Android and iOS application
 5. Test your changes in JS
 
-The rest of this guide assume that you have created your application running the command:
+The rest of this guide assumes that you have created your application running the command:
 
-```shell
-npx @react-native-community/cli@latest init SampleApp --version 0.76.0
-```
+<CodeBlock language="bash" title="shell">
+{`npx @react-native-community/cli@latest init SampleApp --version ${getCurrentVersion()}`}
+</CodeBlock>
 
 ## 1. Create the JS specs
 
@@ -68,7 +72,7 @@ export default TurboModuleRegistry.getEnforcing<Spec>(
 
 ## 2. Configure Codegen
 
-The next step is to configure [Codegen](what-is-codegen.md) in your `package.json`. Update the file to include:
+The next step is to configure [Codegen](what-is-codegen.mdx) in your `package.json`. Update the file to include:
 
 ```json title="package.json"
      "start": "react-native start",
@@ -91,7 +95,7 @@ This configuration tells Codegen to look for spec files in the `specs` folder. I
 
 ## 3. Write the Native Code
 
-Writing a C++ Turbo Native Module allows you to share the code between Android an iOS. Therefore we will be writing the code once, and we will look into what changes we need to apply to the platforms so that the C++ code can be picked up.
+Writing a C++ Turbo Native Module allows you to share the code between Android and iOS. Therefore we will be writing the code once, and we will look into what changes we need to apply to the platforms so that the C++ code can be picked up.
 
 1. Create a folder named `shared` at the same level as the `android` and `ios` folders.
 2. Inside the `shared` folder, create a new file called `NativeSampleModule.h`.
@@ -192,7 +196,7 @@ The CMake file does the following things:
 Gradle is the tool that orchestrates the Android build. We need to tell it where it can find the `CMake` files to build the Turbo Native Module.
 
 1. Open the `SampleApp/android/app/build.gradle` file.
-2. Add the following block into the Gradle file, within the existent `android` block:
+2. Add the following block into the Gradle file, within the existing `android` block:
 
 ```diff title="android/app/build.gradle"
     buildTypes {
@@ -224,9 +228,9 @@ The final step is to register the new C++ Turbo Native Module in the runtime, so
 
 1. From the folder `SampleApp/android/app/src/main/jni`, run the following command:
 
-```sh
-curl -O https://raw.githubusercontent.com/facebook/react-native/v0.76.0/packages/react-native/ReactAndroid/cmake-utils/default-app-setup/OnLoad.cpp
-```
+<CodeBlock language="sh" title="shell">
+{`curl -O https://raw.githubusercontent.com/facebook/react-native/${getCoreBranchNameForCurrentVersion()}/packages/react-native/ReactAndroid/cmake-utils/default-app-setup/OnLoad.cpp`}
+</CodeBlock>
 
 2. Then, modify this file as follows:
 
@@ -254,7 +258,7 @@ std::shared_ptr<TurboModule> cxxModuleProvider(
   //   return std::make_shared<NativeCxxModuleExample>(jsInvoker);
   // }
 
-+  // This code register the module so that when the JS side asks for it, the app can return it
++  // This code registers the module so that when the JS side asks for it, the app can return it
 +  if (name == NativeSampleModule::kModuleName) {
 +    return std::make_shared<NativeSampleModule>(jsInvoker);
 +  }
@@ -297,7 +301,7 @@ bundle exec pod install
 
 This step adds the `shared` folder to the project to make it visible to Xcode.
 
-1. Open the CocoPods generated Xcode Workspace.
+1. Open the CocoaPods generated Xcode Workspace.
 
 ```bash
 cd ios
@@ -318,38 +322,96 @@ If you did everything right, your project on the left should look like this:
 
 #### 3. Registering the Cxx Turbo Native Module in your app
 
-With this last step, we will tell the iOS app where to look for to find the pure C++ Turbo Native Module.
+To register a pure Cxx Turbo Native Module in your app, you need to:
 
-In Xcode, open the `AppDelegate.mm` file and modify it as follows:
+1. Create a `ModuleProvider` for the Native Module
+2. Configure the `package.json` to associate the JS module name with the ModuleProvider class.
 
-```diff title="SampleApp/AppDelegate.mm"
-#import <React/RCTBundleURLProvider.h>
-+ #import <RCTAppDelegate+Protected.h>
-+ #import "NativeSampleModule.h"
+The ModuleProvider is an Objective-C++ that glues together the Pure C++ module with the rest of your iOS App.
 
-// ...
-  return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
-#endif
+##### 3.1 Create the ModuleProvider
+
+1. From Xcode, select the `SampleApp` project and press <kbd>⌘</kbd> + <kbd>N</kbd> to create a new file.
+2. Select the `Cocoa Touch Class` template
+3. Add the name `NativeSampleModuleProvider` (keep the other field as `Subclass of: NSObject` and `Language: Objective-C`)
+4. Click Next to generate the files.
+5. Rename the `NativeSampleModuleProvider.m` to `NativeSampleModuleProvider.mm`. The `mm` extension denotes an Objective-C++ file.
+6. Implement the content of the `NativeSampleModuleProvider.h` with the following:
+
+```objc title="NativeSampleModuleProvider.h"
+
+#import <Foundation/Foundation.h>
+#import <ReactCommon/RCTTurboModule.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface NativeSampleModuleProvider : NSObject <RCTModuleProvider>
+
+@end
+
+NS_ASSUME_NONNULL_END
+```
+
+This declares a `NativeSampleModuleProvider` object that conforms to the `RCTModuleProvider` protocol.
+
+7. Implement the content of the `NativeSampleModuleProvider.mm` with the following:
+
+```objc title="NativeSampleModuleProvider.mm"
+
+#import "NativeSampleModuleProvider.h"
+#import <ReactCommon/CallInvoker.h>
+#import <ReactCommon/TurboModule.h>
+#import "NativeSampleModule.h"
+
+@implementation NativeSampleModuleProvider
+
+- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
+    (const facebook::react::ObjCTurboModule::InitParams &)params
+{
+  return std::make_shared<facebook::react::NativeSampleModule>(params.jsInvoker);
 }
-
-+- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:(const std::string &)name
-+                                                      jsInvoker:(std::shared_ptr<facebook::react::CallInvoker>)jsInvoker
-+{
-+  if (name == "NativeSampleModule") {
-+    return std::make_shared<facebook::react::NativeSampleModule>(jsInvoker);
-+  }
-+
-+  return [super getTurboModule:name jsInvoker:jsInvoker];
-+}
 
 @end
 ```
 
-These changes are doing a few things:
+This code implements the `RCTModuleProvider` protocol by creating the pure C++ `NativeSampleModule` when the `getTurboModule:` method is called.
 
-1. Importing the `RCTAppDelegate+Protected` header to make it visible to the AppDelegate that it is conforming to the `RCTTurboModuleManagerDelegate` protocol.
-2. Importing the Pure C++ Native Turbo Module interface `NativeSampleModule.h`
-3. Overriding the `getTurboModule` method for C++ modules so that when the JS side asks for a module called `NativeSampleModule`, the app knows which module has to be returned.
+##### 3.2 Update the package.json
+
+The last step consists in updating the `package.json` to tell React Native about the link between the JS specs of the Native Module and the concrete implementation of those spec in native code.
+
+Modify the `package.json` as it follows:
+
+```json title="package.json"
+     "start": "react-native start",
+     "test": "jest"
+   },
+   "codegenConfig": {
+     "name": "AppSpecs",
+     "type": "modules",
+     "jsSrcsDir": "specs",
+     "android": {
+       "javaPackageName": "com.sampleapp.specs"
+     // highlight-add-start
+     },
+     "ios": {
+        "modulesProvider": {
+          "NativeSampleModule":  "NativeSampleModuleProvider"
+        }
+     }
+     // highlight-add-end
+   },
+
+   "dependencies": {
+```
+
+At this point, you need to re-install the pods to make sure that codegen runs again to generate the new files:
+
+```bash
+# from the ios folder
+bundle exec pod install
+open SampleApp.xcworkspace
+```
 
 If you now build your application from Xcode, you should be able to build successfully.
 
@@ -361,7 +423,7 @@ It's now time to access our C++ Turbo Native Module from JS. To do so, we have t
 2. Replace the content of the template with the following code:
 
 ```tsx title="App.tsx"
-import React from 'react';
+import {type JSX, useState} from 'react';
 import {
   Button,
   SafeAreaView,
@@ -372,9 +434,9 @@ import {
 } from 'react-native';
 import SampleTurboModule from './specs/NativeSampleModule';
 
-function App(): React.JSX.Element {
-  const [value, setValue] = React.useState('');
-  const [reversedValue, setReversedValue] = React.useState('');
+function App(): JSX.Element {
+  const [value, setValue] = useState('');
+  const [reversedValue, setReversedValue] = useState('');
 
   const onPress = () => {
     const revString = SampleTurboModule.reverseString(value);
@@ -387,7 +449,7 @@ function App(): React.JSX.Element {
         <Text style={styles.title}>
           Welcome to C++ Turbo Native Module Example
         </Text>
-        <Text>Write down here he text you want to revert</Text>
+        <Text>Write down here the text you want to reverse</Text>
         <TextInput
           style={styles.textInput}
           placeholder="Write your text here"

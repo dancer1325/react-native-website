@@ -8,7 +8,7 @@ title: Settings
 ## Example
 
 ```SnackPlayer name=Settings%20Example&supportedPlatforms=ios
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Button, Settings, StyleSheet, Text} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -98,4 +98,6 @@ static watchKeys(keys: string | array<string>, callback: () => void): number;
 
 Subscribe to be notified when the value for any of the keys specified by the `keys` parameter has been changed in `NSUserDefaults`. Returns a `watchId` number that may be used with `clearWatch()` to unsubscribe.
 
-> **Note:** `watchKeys()` by design ignores internal `set()` calls and fires callback only on changes preformed outside of React Native code.
+:::note
+`watchKeys()` by design ignores internal `set()` calls and fires callback only on changes preformed outside of React Native code.
+:::

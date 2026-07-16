@@ -13,7 +13,7 @@ Use `setNativeProps` when frequent re-rendering creates a performance bottleneck
 Direct manipulation will not be a tool that you reach for frequently. You will typically only be using it for creating continuous animations to avoid the overhead of rendering the component hierarchy and reconciling many views.
 `setNativeProps` is imperative and stores state in the native layer (DOM, UIView, etc.) and not within your React components, which makes your code more difficult to reason about.
 
-Before you use it, try to solve your problem with `setState` and [`shouldComponentUpdate`](https://reactjs.org/docs/optimizing-performance.html#shouldcomponentupdate-in-action).
+Before you use it, try to solve your problem with `setState` and [`shouldComponentUpdate`](https://react.dev/reference/react/Component#shouldcomponentupdate).
 :::
 
 ## setNativeProps with TouchableOpacity
@@ -67,7 +67,6 @@ Composite components are not backed by a native view, so you cannot call `setNat
 <TabItem value="javascript">
 
 ```SnackPlayer name=setNativeProps%20with%20Composite%20Components&ext=js
-import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 
 const MyButton = props => (
@@ -89,7 +88,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=setNativeProps%20with%20Composite%20Components&ext=tsx
-import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 
 const MyButton = (props: {label: string}) => (
@@ -120,10 +118,10 @@ Since the `setNativeProps` method exists on any ref to a `View` component, it is
 <TabItem value="javascript">
 
 ```SnackPlayer name=Forwarding%20setNativeProps&ext=js
-import React from 'react';
+import {forwardRef} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 
-const MyButton = React.forwardRef((props, ref) => (
+const MyButton = forwardRef((props, ref) => (
   <View {...props} ref={ref} style={{marginTop: 50}}>
     <Text>{props.label}</Text>
   </View>
@@ -142,10 +140,10 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Forwarding%20setNativeProps&ext=tsx
-import React from 'react';
+import {forwardRef} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 
-const MyButton = React.forwardRef<View, {label: string}>((props, ref) => (
+const MyButton = forwardRef<View, {label: string}>((props, ref) => (
   <View {...props} ref={ref} style={{marginTop: 50}}>
     <Text>{props.label}</Text>
   </View>
@@ -175,7 +173,6 @@ Another very common use case of `setNativeProps` is to edit the value of the Tex
 <TabItem value="javascript">
 
 ```SnackPlayer name=Clear%20text&ext=js
-import React from 'react';
 import {useCallback, useRef} from 'react';
 import {
   StyleSheet,
@@ -223,7 +220,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Clear%20text&ext=tsx
-import React from 'react';
 import {useCallback, useRef} from 'react';
 import {
   StyleSheet,
@@ -278,7 +274,7 @@ If you update a property that is also managed by the render function, you might 
 
 ## setNativeProps & shouldComponentUpdate
 
-By [intelligently applying `shouldComponentUpdate`](https://reactjs.org/docs/optimizing-performance.html#avoid-reconciliation) you can avoid the unnecessary overhead involved in reconciling unchanged component subtrees, to the point where it may be performant enough to use `setState` instead of `setNativeProps`.
+By [intelligently applying `shouldComponentUpdate`](https://react.dev/reference/react/Component#shouldcomponentupdate) you can avoid the unnecessary overhead involved in reconciling unchanged component subtrees, to the point where it may be performant enough to use `setState` instead of `setNativeProps`.
 
 ## Other native methods
 
@@ -320,7 +316,7 @@ This method can also be called with a `relativeToNativeNode` handler (instead of
 <TabItem value="javascript">
 
 ```SnackPlayer name=measureLayout%20example&supportedPlatforms=android,ios&ext=js
-import React, {useEffect, useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 
 const App = () => {
@@ -373,7 +369,7 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=measureLayout%20example&ext=tsx
-import React, {useEffect, useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 
 type Measurements = {

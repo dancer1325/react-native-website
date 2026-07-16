@@ -86,10 +86,125 @@ Breakpoints are a fundamental tool in your debugging toolkit!
 
 #### Useful tips
 
-- A "Paused in Debugger" overlay will appear when your app is paused. Tap it to resume.
-- Pay attention to the right hand side panels when on a breakpoint, which allow you to inspect the current scope and call stack, and set watch expressions.
+- A "Paused in Debugger" overlay appears when your app is paused. Tap it to resume.
+- Pay attention to the right-hand panels when on a breakpoint, which allow you to inspect the current scope and call stack, and set watch expressions.
 - Use a `debugger;` statement to quickly set a breakpoint from your text editor. This will reach the device immediately via Fast Refresh.
 - There are multiple kinds of breakpoints! For example, [Conditional Breakpoints and Logpoints](https://developer.chrome.com/docs/devtools/javascript/breakpoints#overview).
+
+### Network <div className="label primary">Since 0.83</div>
+
+![A network request in the React Native DevTools Network panel](/docs/assets/debugging-rndt-network.jpg)
+
+The Network panel allows you to view and inspect the network requests made by your app. Logged requests provide detailed metadata such as timings and headers sent/received, as well as response previews.
+
+Network requests are recorded automatically when DevTools is open. We support most features from Chrome, with some exceptions. See more below.
+
+<details>
+<summary><strong>💡 Network event coverage, Expo support</strong></summary>
+
+**Which network events are captured?**
+
+Today, we record all network calls through `fetch()`, `XMLHttpRequest`, and `<Image>` — with support for custom networking libraries, such as Expo Fetch, coming later.
+
+**Expo Network differences**
+
+Because of this, apps using Expo will continue to see the "Expo Network" panel — a separate implementation by the Expo framework which will log these additional request sources but has slightly reduced features.
+
+- Coverage for Expo-specific network events.
+- No request initiator support.
+- No Performance panel integration.
+
+We're working with Expo to integrate Expo Fetch and third party networking libraries with our new Network inspection pipeline in future releases.
+
+**Unimplemented features**
+
+At launch, these are the features we don't yet support in React Native:
+
+- WebSocket events
+- Network response mocking
+- Simulated network throttling
+
+</details>
+
+<details>
+<summary><strong>💡 Response previews buffer size</strong></summary>
+
+If you are inspecting a large volume of response data, please note that response previews are cached in an on-device buffer with a maximum size of 100MB. This means we may evict response previews (but not metadata) if the cache becomes too large, oldest request first.
+
+</details>
+
+#### Useful tips
+
+- Use the Initiator tab to see the call stack of where a network request was initiated in your app.
+- Network events will also be shown in the Network track in the Performance panel.
+
+### Performance <div className="label primary">Since 0.83</div>
+
+![A performance trace in the React Native DevTools Performance panel](/docs/assets/debugging-rndt-performance.jpg)
+
+Performance tracing allows you to record a performance session within your app to understand how your JavaScript code is running and what operations took the most time. In React Native, we show JavaScript execution, React Performance tracks, Network events, and custom [User Timings](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/User_timing), rendered in a single performance timeline.
+
+#### Useful tips
+
+- Use [Annotations](https://developer.chrome.com/docs/devtools/performance/annotations) (shift-drag) to label and mark up a performance trace — useful before [downloading and sharing](https://developer.chrome.com/docs/devtools/performance/save-trace) a trace with a teammate. Annotations also provide a quick way to gauge time spans in **seconds**.
+- Use the [`PerformanceObserver` API](./global-PerformanceObserver.md) in your app to observe performance events at runtime — useful if you want to capture performance telemetry.
+
+#### Learn more
+
+- [React Performance tracks](https://react.dev/reference/dev-tools/react-performance-tracks)
+- [Performance APIs > User Timings | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/User_timing)
+- ["Debug Like a Senior — React Native Performance Panel" | Software Mansion](https://blog.swmansion.com/react-native-debugging-new-performance-panel-in-react-native-0-83-21ca90871f6d)
+
+### Memory
+
+![Inspecting a heap snapshot in the Memory panel](/docs/assets/debugging-rndt-memory.jpg)
+
+The Memory panel allows you to take a heap snapshot and view the memory usage of your JavaScript code over time.
+
+[Record heap snapshots | Chrome DevTools](https://developer.chrome.com/docs/devtools/memory-problems/heap-snapshots)
+
+#### Useful tips
+
+- Use <kbd>Cmd ⌘</kbd>+<kbd>F</kbd> / <kbd>Ctrl</kbd>+<kbd>F</kbd> to filter for specific objects in the heap.
+- Taking an [allocation timeline report](https://developer.chrome.com/docs/devtools/memory-problems/allocation-profiler) can be useful to see memory usage over time as a graph, to identify possible memory leaks.
+
+## React DevTools features
+
+In the integrated Components and Profiler panels, you'll find all the features of the [React DevTools](https://react.dev/learn/react-developer-tools) browser extension. These work seamlessly in React Native DevTools.
+
+### React Components
+
+![Selecting and locating elements using the React Components panel](/docs/assets/debugging-rndt-react-components.gif)
+
+The React Components panel allows you to inspect and update the rendered React component tree.
+
+- Hover or select an element in DevTools to highlight it on the device.
+- To locate an element in DevTools, click the top-left "Select element" button, then tap any element in the app.
+
+#### Useful tips
+
+- Props and state on a component can be viewed and modified at runtime using the right hand panel.
+- Components optimized with [React Compiler](https://react.dev/learn/react-compiler) will be annotated with a "Memo ✨" badge.
+
+:::tip
+
+#### Protip: Highlight re-renders
+
+Re-renders can be a significant contributor to performance issues in React apps. DevTools can highlight component re-renders as they happen.
+
+- To enable, click the View Settings (`⚙︎`) icon and check "Highlight updates when components render".
+
+![Location of the "highlight updates" setting, next to a recording of the live render overlay](/docs/assets/debugging-rndt-highlight-renders.gif)
+
+:::
+
+### React Profiler
+
+![A profile rendered as a flame graph](/docs/assets/debugging-rndt-react-profiler.jpg)
+
+The React Profiler panel allows you to record performance profiles to understand the timing of component renders and React commits.
+
+For more info, see the [original 2018 guide](https://legacy.reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html#reading-performance-data) (note that parts of this may be outdated).
 
 ## Reconnecting DevTools
 
@@ -97,7 +212,7 @@ Occasionally, DevTools might disconnect from the target device. This can happen 
 
 - The app is closed.
 - The app is rebuilt (a new native build is installed).
-- The app has crashed on the native side.
+- The app crashes on the native side.
 - The dev server (Metro) is quit.
 - A physical device is disconnected.
 

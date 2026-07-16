@@ -64,7 +64,6 @@ title: Text
 Both Android and iOS allow you to display formatted text by annotating ranges of a string with specific formatting like bold or colored text (`NSAttributedString` on iOS, `SpannableString` on Android). In practice, this is very tedious. For React Native, we decided to use the web paradigm for this, where you can nest text to achieve the same effect.
 
 ```SnackPlayer name=Nested%20Text%20Example
-import React from 'react';
 import {Text, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -139,7 +138,8 @@ On the web, the usual way to set a font family and size for the entire document 
 
 ```css
 html {
-  font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+  font-family:
+    'lucida grande', tahoma, verdana, arial, sans-serif;
   font-size: 11px;
   color: #141823;
 }
@@ -219,7 +219,7 @@ An accessibility hint helps users understand what will happen when they perform 
 
 ---
 
-### `accessibilityLanguage` <div class="label ios">iOS</div>
+### `accessibilityLanguage` <div className="label ios">iOS</div>
 
 A value indicating which language should be used by the screen reader when the user interacts with the element. It should follow the [BCP 47 specification](https://www.rfc-editor.org/info/bcp47).
 
@@ -323,7 +323,7 @@ Specifies whether fonts should scale to respect Text Size accessibility settings
 
 ---
 
-### `android_hyphenationFrequency` <div class="label android">Android</div>
+### `android_hyphenationFrequency` <div className="label android">Android</div>
 
 Sets the frequency of automatic hyphenation to use when determining word breaks on Android API Level 23+.
 
@@ -391,7 +391,7 @@ Indicates whether a selectable element is currently selected or not.
 | ------- |
 | boolean |
 
-### `dataDetectorType` <div class="label android">Android</div>
+### `dataDetectorType` <div className="label android">Android</div>
 
 Determines the types of data converted to clickable URLs in the text element. By default, no data types are detected.
 
@@ -403,7 +403,7 @@ You can provide only one type.
 
 ---
 
-### `disabled` <div class="label android">Android</div>
+### `disabled` <div className="label android">Android</div>
 
 Specifies the disabled state of the text view for testing purposes.
 
@@ -413,7 +413,7 @@ Specifies the disabled state of the text view for testing purposes.
 
 ---
 
-### `dynamicTypeRamp` <div class="label ios">iOS</div>
+### `dynamicTypeRamp` <div className="label ios">iOS</div>
 
 The [Dynamic Type](https://developer.apple.com/documentation/uikit/uifont/scaling_fonts_automatically) ramp to apply to this element on iOS.
 
@@ -434,7 +434,9 @@ This can be one of the following values:
 - `tail` - The line is displayed so that the beginning fits in the container and the missing text at the end of the line is indicated by an ellipsis glyph. e.g., "abcd..."
 - `clip` - Lines are not drawn past the edge of the text container.
 
-> On Android, when `numberOfLines` is set to a value higher than `1`, only `tail` value will work correctly.
+:::note
+On Android, when `numberOfLines` is set to a value higher than `1`, only `tail` value will work correctly.
+:::
 
 | Type                                           | Default |
 | ---------------------------------------------- | ------- |
@@ -466,7 +468,7 @@ Specifies the largest possible scale a font can reach when `allowFontScaling` is
 
 ---
 
-### `minimumFontScale` <div class="label ios">iOS</div>
+### `minimumFontScale`
 
 Specifies the smallest possible scale a font can reach when `adjustsFontSizeToFit` is enabled. (values 0.01-1.0).
 
@@ -640,6 +642,14 @@ When the scroll view is disabled, this defines how far your touch may move off o
 
 ---
 
+### `ref`
+
+A ref setter that will be assigned an [element node](element-nodes) when mounted.
+
+Note that `Text` components don't provide text nodes, the same way that paragraph elements (`<p>`) on Web are element nodes instead of text nodes. Text nodes can be found as their child nodes instead.
+
+---
+
 ### `role`
 
 `role` communicates the purpose of a component to the user of an assistive technology. Has precedence over the [`accessibilityRole`](text#accessibilityrole) prop.
@@ -660,7 +670,7 @@ Lets the user select text, to use the native copy and paste functionality.
 
 ---
 
-### `selectionColor` <div class="label android">Android</div>
+### `selectionColor` <div className="label android">Android</div>
 
 The highlight color of the text.
 
@@ -678,7 +688,7 @@ The highlight color of the text.
 
 ---
 
-### `suppressHighlighting` <div class="label ios">iOS</div>
+### `suppressHighlighting` <div className="label ios">iOS</div>
 
 When `true`, no visual change is made when text is pressed down. By default, a gray oval highlights the text on press down.
 
@@ -698,7 +708,7 @@ Used to locate this view in end-to-end tests.
 
 ---
 
-### `textBreakStrategy` <div class="label android">Android</div>
+### `textBreakStrategy` <div className="label android">Android</div>
 
 Set text break strategy on Android API Level 23+, possible values are `simple`, `highQuality`, `balanced`.
 
@@ -708,7 +718,7 @@ Set text break strategy on Android API Level 23+, possible values are `simple`, 
 
 ---
 
-### `lineBreakStrategyIOS` <div class="label ios">iOS</div>
+### `lineBreakStrategyIOS` <div className="label ios">iOS</div>
 
 Set line break strategy on iOS 14+. Possible values are `none`, `standard`, `hangul-word` and `push-out`.
 

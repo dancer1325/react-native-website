@@ -26,7 +26,6 @@ If you need section support, use [`<SectionList>`](sectionlist.md).
 <TabItem value="javascript">
 
 ```SnackPlayer name=Simple%20FlatList%20Example&ext=js
-import React from 'react';
 import {View, FlatList, StyleSheet, Text, StatusBar} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -86,7 +85,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Simple%20FlatList%20Example&ext=tsx
-import React from 'react';
 import {View, FlatList, StyleSheet, Text, StatusBar} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
@@ -158,7 +156,7 @@ More complex, selectable example below.
 <TabItem value="javascript">
 
 ```SnackPlayer name=flatlist-selectable&ext=js
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {
   FlatList,
   StatusBar,
@@ -242,7 +240,7 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=flatlist-selectable&ext=tsx
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {
   FlatList,
   StatusBar,
@@ -356,7 +354,7 @@ Inherits [VirtualizedList Props](virtualizedlist.md#props).
 
 ---
 
-### <div class="label required basic">Required</div> **`renderItem`**
+### <div className="label required basic">Required</div> **`renderItem`**
 
 ```tsx
 renderItem({
@@ -416,7 +414,7 @@ Example usage:
 
 ---
 
-### <div class="label required basic">Required</div> **`data`**
+### <div className="label required basic">Required</div> **`data`**
 
 An array (or array-like list) of items to render. Other data types can be used by targeting [`VirtualizedList`](virtualizedlist.md) directly.
 
@@ -638,9 +636,11 @@ Set this true while waiting for new data from a refresh.
 
 ### `removeClippedSubviews`
 
-This may improve scroll performance for large lists. On Android the default value is `true`.
+:::warning
+Using this property may lead to bugs (missing content) in some circumstances - use at your own risk.
+:::
 
-> Note: May have bugs (missing content) in some circumstances - use at your own risk.
+When `true`, offscreen child views are removed from their native backing superview when offscreen. This may improve scroll performance for large lists. On Android the default value is `true`.
 
 | Type    |
 | ------- |
@@ -787,7 +787,9 @@ scrollToIndex: (params: {
 
 Scrolls to the item at the specified index such that it is positioned in the viewable area such that `viewPosition` 0 places it at the top, 1 at the bottom, and 0.5 centered in the middle.
 
-> Note: Cannot scroll to locations outside the render window without specifying the `getItemLayout` prop.
+:::note
+Cannot scroll to locations outside the render window without specifying the `getItemLayout` prop.
+:::
 
 **Parameters:**
 
@@ -816,7 +818,9 @@ scrollToItem(params: {
 
 Requires linear scan through data - use `scrollToIndex` instead if possible.
 
-> Note: Cannot scroll to locations outside the render window without specifying the `getItemLayout` prop.
+:::note
+Cannot scroll to locations outside the render window without specifying the `getItemLayout` prop.
+:::
 
 **Parameters:**
 

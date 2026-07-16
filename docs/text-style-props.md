@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 <TabItem value="javascript">
 
 ```SnackPlayer name=TextStyleProps&supportedPlatforms=ios,android&ext=js&dependencies=@react-native-community/slider
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {
   FlatList,
   Platform,
@@ -372,7 +372,7 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=TextStyleProps&supportedPlatforms=ios,android&ext=tsx&dependencies=@react-native-community/slider
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {
   FlatList,
   Platform,
@@ -777,6 +777,8 @@ export default App;
 | ------ |
 | string |
 
+The generic font families `system-ui`, `ui-sans-serif`, `ui-serif`, `ui-monospace`, and `ui-rounded` are supported on iOS.
+
 ---
 
 ### `fontSize`
@@ -805,7 +807,7 @@ Specifies font weight. The values `'normal'` and `'bold'` are supported for most
 
 ---
 
-### `includeFontPadding` <div class="label android">Android</div>
+### `includeFontPadding` <div className="label android">Android</div>
 
 Set to `false` to remove extra font padding intended to make space for certain ascenders / descenders. With some fonts, this padding can make text look slightly misaligned when centered vertically. For best results also set `textAlignVertical` to `center`.
 
@@ -855,7 +857,9 @@ Specifies text alignment. On Android, the value 'justify' is only supported on O
 
 ---
 
-### `textAlignVertical` <div class="label android">Android</div>
+### `textAlignVertical` <div className="label android">Android</div>
+
+An alias for `verticalAlign` style prop, if you use both properties, `verticalAlign` will take precedence over `textAlignVertical`
 
 | Type                                            | Default  |
 | ----------------------------------------------- | -------- |
@@ -863,7 +867,7 @@ Specifies text alignment. On Android, the value 'justify' is only supported on O
 
 ---
 
-### `textDecorationColor` <div class="label ios">iOS</div>
+### `textDecorationColor` <div className="label ios">iOS</div>
 
 | Type               |
 | ------------------ |
@@ -879,7 +883,7 @@ Specifies text alignment. On Android, the value 'justify' is only supported on O
 
 ---
 
-### `textDecorationStyle` <div class="label ios">iOS</div>
+### `textDecorationStyle` <div className="label ios">iOS</div>
 
 | Type                                                | Default   |
 | --------------------------------------------------- | --------- |
@@ -919,7 +923,7 @@ Specifies text alignment. On Android, the value 'justify' is only supported on O
 
 ---
 
-### `verticalAlign` <div class="label android">Android</div>
+### `verticalAlign` <div className="label android">Android</div>
 
 | Type                                            | Default  |
 | ----------------------------------------------- | -------- |
@@ -927,7 +931,7 @@ Specifies text alignment. On Android, the value 'justify' is only supported on O
 
 ---
 
-### `writingDirection` <div class="label ios">iOS</div>
+### `writingDirection` <div className="label ios">iOS</div>
 
 | Type                             | Default  |
 | -------------------------------- | -------- |
