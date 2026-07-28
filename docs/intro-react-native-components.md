@@ -5,12 +5,9 @@ description: 'React Native lets you compose app interfaces using Native Componen
 ---
 
 * React Native
-  * open source framework /
-    * allows 
-      * building Android & iOS applications / has app platform’s native capabilities -- via -- [React](https://reactjs.org/)
   * how does it work?
     * using JavaScript, you can
-      * access your platform’s APIs
+      * access your [platform’s APIs](native-platforms.md)
       * describe your UI's appearance and behavior -- via -- React components
 
 * React components
@@ -29,10 +26,7 @@ description: 'React Native lets you compose app interfaces using Native Componen
       * _Example:_ line of text or a button
     * 👀SOME kinds of views -- can contain -- OTHER views 👀
 
-<figure>
-  <img src="/website/static/docs/assets/diagram_ios-android-views.svg" width="1000" alt="Diagram of Android and iOS app showing them both built on top of atomic elements called views." />
-  <figcaption>MANY views / used | Android and iOS apps</figcaption>
-</figure>
+![](../website/static/docs/assets/diagram_ios-android-views.svg)
 
 ## Native Components
 
@@ -61,7 +55,7 @@ description: 'React Native lets you compose app interfaces using Native Componen
 
 ## Core Components
 
-* see ALL [here](components-and-apis) 
+* [here](components-and-apis) 
 
 * MOST common one
   * ⚠️this documentation 
@@ -75,37 +69,3 @@ description: 'React Native lets you compose app interfaces using Native Componen
 | `<Image>`                 | `<ImageView>`  | `<UIImageView>`  | `<img>`                 | Displays different types of images                                                                     |
 | `<ScrollView>`            | `<ScrollView>` | `<UIScrollView>` | `<div>`                 | generic scrolling container / can contain MULTIPLE components & views                                  |
 | `<TextInput>`             | `<EditText>`   | `<UITextField>`  | `<input type="text">`   | Allows the user to enter text                                                                          |
-
-* _Example:_ 
-
-  ```SnackPlayer name=Hello%20World
-  import React from 'react';
-  import {View, Text, Image, ScrollView, TextInput} from 'react-native';
-  
-  const App = () => {
-    return (
-      <ScrollView>
-        <Text>Some text</Text>
-        <View>
-          <Text>Some more text</Text>
-          <Image
-            source={{
-              uri: 'https://reactnative.dev/docs/assets/p_cat2.png',
-            }}
-            style={{width: 200, height: 200}}
-          />
-        </View>
-        <TextInput
-          style={{
-            height: 40,
-            borderColor: 'gray',
-            borderWidth: 1,
-          }}
-          defaultValue="You can type in me"
-        />
-      </ScrollView>
-    );
-  };
-  
-  export default App;
-  ```
