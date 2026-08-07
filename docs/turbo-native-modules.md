@@ -3,16 +3,12 @@ id: turbo-native-modules-introduction
 title: 'Native Modules: Introduction'
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import constants from '@site/core/TabsConstants';
-import CodeBlock from '@theme/CodeBlock';
-import {getCurrentVersion} from '@site/src/getCurrentVersion';
-import {TurboNativeModulesAndroid, TurboNativeModulesIOS} from './\_turbo-native-modules-components';
-
 # Native Modules
 
-Your React Native application code may need to interact with native platform APIs that aren't provided by React Native or an existing library. You can write the integration code yourself using a **Turbo Native Module**. This guide will show you how to write one.
+Your React Native application code may need to interact with native platform APIs that 
+aren't provided by React Native or an existing library
+* You can write the integration code yourself using a **Turbo Native Module**
+* This guide will show you how to write one.
 
 The basic steps are:
 
@@ -21,15 +17,17 @@ The basic steps are:
 3. **write your application code** using your specification; and
 4. **write your native platform code using the generated interfaces** to write and hook your native code into the React Native runtime environment.
 
-Lets work through each of these steps by building an example Turbo Native Module. The rest of this guide assume that you have created your application running the command:
+Lets work through each of these steps by building an example Turbo Native Module
+* The rest of this guide assume that you have created your application running the command:
 
-<CodeBlock language="bash" title="shell">
-{`npx @react-native-community/cli@latest init TurboModuleExample --version ${getCurrentVersion()}`}
-</CodeBlock>
+```shell
+npx @react-native-community/cli@latest init TurboModuleExample --version ${getCurrentVersion()}
+```
 
 ## Native Persistent Storage
 
-This guide will show you how to write an implementation of the [Web Storage API](https://html.spec.whatwg.org/multipage/webstorage.html#dom-localstorage-dev): `localStorage`. The API is relatable to a React developer who might be writing application code on your project.
+This guide will show you how to write an implementation of the [Web Storage API](https://html.spec.whatwg.org/multipage/webstorage.html#dom-localstorage-dev): `localStorage`
+* The API is relatable to a React developer who might be writing application code on your project.
 
 To make this work on mobile, we need to use Android and iOS APIs:
 
@@ -38,7 +36,12 @@ To make this work on mobile, we need to use Android and iOS APIs:
 
 ### 1. Declare Typed Specification
 
-React Native provides a tool called [Codegen](/docs/the-new-architecture/what-is-codegen), which takes a specification written in TypeScript or Flow and generates platform specific code for Android and iOS. The specification declares the methods and data types that will pass back and forth between your native code and the React Native JavaScript runtime. A Turbo Native Module is both your specification, the native code you write, and the Codegen interfaces generated from your specification.
+React Native provides a tool called [Codegen](/docs/the-new-architecture/what-is-codegen), which takes a specification written in TypeScript or Flow and 
+generates platform specific code for Android and iOS
+* The specification declares the methods and data types that will pass back and forth between your native code and 
+the React Native JavaScript runtime
+* A Turbo Native Module is both your specification, the native code you write, and 
+the Codegen interfaces generated from your specification.
 
 To create a specs file:
 

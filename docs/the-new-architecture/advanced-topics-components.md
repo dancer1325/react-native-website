@@ -1,9 +1,13 @@
 # Advanced Topics on Native Modules Development
 
-This document contains a set of advanced topics to implement more complex functionalities of Native Components. It is recommended to first read the [Codegen](/docs/the-new-architecture/what-is-codegen) section and the guides on [Native Components](/docs/fabric-native-components-introduction).
+* goal
+  * advanced topics / 
+    * enable: implement Native Components' MORE COMPLEX functionalities
+      * [Direct Manipulation](direct-manipulation)
+      * [Measuring the Layout](layout-measurements)
+      * [invoking native functions | your NATIVE component](fabric-component-native-commands)
 
-This guide will cover the following topics:
-
-- [Direct Manipulation](/docs/the-new-architecture/direct-manipulation-new-architecture)
-- [Measuring the Layout](/docs/the-new-architecture/layout-measurements)
-- [Invoking native functions on your native component](/docs/next/the-new-architecture/fabric-component-native-commands)
+* requirements
+  * read
+    * [Codegen](what-is-codegen)
+    * [Native Components](../fabric-native-components)
