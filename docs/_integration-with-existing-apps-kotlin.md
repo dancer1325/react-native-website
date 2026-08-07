@@ -1,9 +1,3 @@
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import constants from '@site/core/TabsConstants';
-import CodeBlock from '@theme/CodeBlock';
-import RNTemplateRepoLink from '@site/core/RNTemplateRepoLink';
-import {getTemplateBranchNameForCurrentVersion} from '@site/src/getTemplateBranchNameForCurrentVersion';
 
 ## Key Concepts
 
@@ -181,8 +175,6 @@ First, create an empty `index.js` file in the root of your React Native project.
 Our index.js should look as follows (here the <RNTemplateRepoLink href="template/index.js">Community template file as reference</RNTemplateRepoLink>):
 
 ```js
-import {AppRegistry} from 'react-native';
-import App from './App';
 
 AppRegistry.registerComponent('HelloWorld', () => App);
 ```
@@ -192,8 +184,6 @@ AppRegistry.registerComponent('HelloWorld', () => App);
 Let's create an `App.tsx` file. This is a [TypeScript](https://www.typescriptlang.org/) file that can have [JSX](<https://en.wikipedia.org/wiki/JSX_(JavaScript)>) expressions. It contains the root React Native component that we will integrate into our Android application (<RNTemplateRepoLink href="template/App.tsx">link</RNTemplateRepoLink>):
 
 ```tsx
-import {type JSX} from 'react';
-import {
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -202,7 +192,6 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import {
   Colors,
   DebugInstructions,
   Header,
@@ -278,7 +267,6 @@ First, we need to update your `Application` class to properly initialize React N
 ```diff
 package <your-package-here>;
 
-import android.app.Application;
 +import com.facebook.react.PackageList;
 +import com.facebook.react.ReactApplication;
 +import com.facebook.react.ReactHost;
@@ -332,7 +320,6 @@ import android.app.Application;
 ```diff
 // package <your-package-here>
 
-import android.app.Application
 +import com.facebook.react.PackageList
 +import com.facebook.react.ReactApplication
 +import com.facebook.react.ReactHost
@@ -385,10 +372,6 @@ Finally, we need to create a new `Activity` that will extend `ReactActivity` and
 ```java
 // package <your-package-here>;
 
-import com.facebook.react.ReactActivity;
-import com.facebook.react.ReactActivityDelegate;
-import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
-import com.facebook.react.defaults.DefaultReactActivityDelegate;
 
 public class MyReactActivity extends ReactActivity {
 
@@ -411,10 +394,6 @@ public class MyReactActivity extends ReactActivity {
 ```kotlin
 // package <your-package-here>
 
-import com.facebook.react.ReactActivity
-import com.facebook.react.ReactActivityDelegate
-import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
-import com.facebook.react.defaults.DefaultReactActivityDelegate
 
 class MyReactActivity : ReactActivity() {
 

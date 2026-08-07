@@ -42,8 +42,6 @@ title: ScrollView
 * see [blank expo project](https://github.com/dancer1325/expo-examples/tree/master/blank)
 
 ```SnackPlayer name=ScrollView%20Example
-import {StyleSheet, Text, ScrollView, StatusBar} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => (
   <SafeAreaProvider>

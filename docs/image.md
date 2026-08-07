@@ -18,8 +18,6 @@ title: Image
 * _Example1:_ see [blank expo project](https://github.com/dancer1325/expo-examples/tree/master/blank)
 
 ```SnackPlayer name=Image%20Example
-import {Image, StyleSheet} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const styles = StyleSheet.create({
   container: {
@@ -64,8 +62,6 @@ export default DisplayAnImage;
 * _Example2:_ add `style` | image
 
 ```SnackPlayer name=Styled%20Image%20Example
-import {Image, StyleSheet} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const styles = StyleSheet.create({
   container: {

@@ -3,7 +3,6 @@ id: turbo-native-modules-ios
 title: 'Turbo Native Modules: iOS'
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 Now it's time to write some iOS platform code to make sure `localStorage` survives after the application is closed.
 

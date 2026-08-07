@@ -8,8 +8,6 @@ Displays a circular loading indicator.
 ## Example
 
 ```SnackPlayer name=ActivityIndicator%20Example
-import {ActivityIndicator, StyleSheet} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => (
   <SafeAreaProvider>

@@ -3,7 +3,6 @@ id: easing
 title: Easing
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 The `Easing` module implements common easing functions. This module is used by [`Animated.timing()`](animated.md#timing) to convey physically believable motion in animations.
 
@@ -49,8 +48,6 @@ The following helpers are used to modify other easing functions.
 <TabItem value="javascript">
 
 ```SnackPlayer name=Easing%20Demo&ext=js
-import {useRef} from 'react';
-import {
   Animated,
   Easing,
   SectionList,
@@ -60,7 +57,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   const opacity = useRef(new Animated.Value(0)).current;
@@ -209,8 +205,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Easing%20Demo&ext=tsx
-import {useRef} from 'react';
-import {
   Animated,
   Easing,
   SectionList,
@@ -221,7 +215,6 @@ import {
   View,
   type EasingFunction,
 } from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   const opacity = useRef(new Animated.Value(0)).current;

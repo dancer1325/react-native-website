@@ -3,7 +3,6 @@ id: flatlist
 title: FlatList
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 A performant interface for rendering basic, flat lists, supporting the most handy features:
 
@@ -26,8 +25,6 @@ If you need section support, use [`<SectionList>`](sectionlist.md).
 <TabItem value="javascript">
 
 ```SnackPlayer name=Simple%20FlatList%20Example&ext=js
-import {View, FlatList, StyleSheet, Text, StatusBar} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const DATA = [
   {
@@ -85,8 +82,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Simple%20FlatList%20Example&ext=tsx
-import {View, FlatList, StyleSheet, Text, StatusBar} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const DATA = [
   {
@@ -156,15 +151,12 @@ More complex, selectable example below.
 <TabItem value="javascript">
 
 ```SnackPlayer name=flatlist-selectable&ext=js
-import {useState} from 'react';
-import {
   FlatList,
   StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
 } from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const DATA = [
   {
@@ -240,15 +232,12 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=flatlist-selectable&ext=tsx
-import {useState} from 'react';
-import {
   FlatList,
   StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
 } from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 type ItemData = {
   id: string;

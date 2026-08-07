@@ -4,7 +4,6 @@ title: useWindowDimensions
 ---
 
 ```tsx
-import {useWindowDimensions} from 'react-native';
 ```
 
 `useWindowDimensions` automatically updates all of its values when screen size or font scale changes. You can get your application window's width and height like so:
@@ -16,8 +15,6 @@ const {height, width} = useWindowDimensions();
 ## Example
 
 ```SnackPlayer name=useWindowDimensions&supportedPlatforms=ios,android
-import {StyleSheet, Text, useWindowDimensions} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   const {height, width, scale, fontScale} = useWindowDimensions();

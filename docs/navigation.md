@@ -64,8 +64,6 @@ Now you are ready to build and run your app on the device/simulator.
 Now you can create an app with a home screen and a profile screen:
 
 ```tsx title="App.tsx"
-import {createStaticNavigation} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 const RootStack = createNativeStackNavigator({
   screens: {
@@ -93,7 +91,6 @@ You can specify options such as the screen title for each screen in the `options
 Inside each screen component, you can use the `useNavigation` hook to get the `navigation` object, which has various methods to link to other screens. For example, you can use `navigation.navigate` to go to the `Profile` screen:
 
 ```tsx title="HomeScreen.tsx"
-import {useNavigation} from '@react-navigation/native';
 
 export default function HomeScreen() {
   const navigation = useNavigation();

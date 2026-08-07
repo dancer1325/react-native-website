@@ -3,7 +3,6 @@ id: typescript
 title: Using TypeScript
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 [TypeScript][ts] is a language which extends JavaScript by adding type definitions. New React Native projects target TypeScript by default, but also support JavaScript and Flow.
 
@@ -88,8 +87,6 @@ Out of the box, TypeScript sources are transformed by [Babel][babel] during bund
 You can provide an interface for a React Component's [Props](props) and [State](state) via `React.Component<Props, State>` which will provide type-checking and editor auto-completing when working with that component in JSX.
 
 ```tsx title="components/Hello.tsx"
-import {useState} from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
 
 export type Props = {
   name: string;

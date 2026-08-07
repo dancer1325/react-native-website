@@ -31,7 +31,6 @@ To achieve that, please follow these steps:
 2. Add the implementation in your Swift module like it follows:
 
 ```swift title="NativeLocalStorage.swift"
-import Foundation
 
 @objcMembers public class NativeLocalStorage: NSObject {
   let userDefaults = UserDefaults(suiteName: "local-storage");

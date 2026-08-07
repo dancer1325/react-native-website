@@ -98,8 +98,6 @@ The heavier your components are, the slower they render. Avoid heavy images (use
 `React.memo()` creates a memoized component that will be re-rendered only when the props passed to the component change. We can use this function to optimize the components in the FlatList.
 
 ```tsx
-import {memo} from 'react';
-import {View, Text} from 'react-native';
 
 const MyListItem = memo(
   ({title}: {title: string}) => (

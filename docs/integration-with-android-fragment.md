@@ -3,7 +3,6 @@ id: integration-with-android-fragment
 title: Integration with an Android Fragment
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 The guide for [Integration with Existing Apps](/docs/integration-with-existing-apps) details how to integrate a full-screen React Native app into an existing Android app as an **Activity**.
 
@@ -43,8 +42,6 @@ Go into your host activity and make sure it implements the `DefaultHardwareBackB
 ```diff
 package <your-package-here>
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 +import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler
 
 +class MainActivity : AppCompatActivity() {
@@ -71,8 +68,6 @@ import androidx.appcompat.app.AppCompatActivity
 ```diff
 package <your-package-here>;
 
-import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 +import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 
 -class MainActivity extends AppCompatActivity {
@@ -111,10 +106,7 @@ Update your Activity's `onCreate` method as follows:
 ```diff
 package <your-package-here>
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 +import com.facebook.react.ReactFragment
-import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler
 
 public class MainActivity : AppCompatActivity(), DefaultHardwareBackBtnHandler {
 
@@ -146,10 +138,7 @@ public class MainActivity : AppCompatActivity(), DefaultHardwareBackBtnHandler {
 ```diff
 package <your-package-here>;
 
-import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 +import com.facebook.react.ReactFragment;
-import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 
 public class MainActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler {
 

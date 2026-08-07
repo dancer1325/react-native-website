@@ -3,10 +3,8 @@ id: appearance
 title: Appearance
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 ```tsx
-import {Appearance} from 'react-native';
 ```
 
 The `Appearance` module exposes information about the user's appearance preferences, such as their preferred system color scheme (light or dark).

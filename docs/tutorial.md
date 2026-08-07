@@ -3,7 +3,6 @@ id: tutorial
 title: Learn the Basics
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 React Native is like React, but it uses native components instead of web components as building blocks. So to understand the basic structure of a React Native app, you need to understand some of the basic React concepts, like JSX, components, `state`, and `props`. If you already know React, you still need to learn some React Native specific stuff, like the native components. This tutorial is aimed at all audiences, whether you have React experience or not.
 
@@ -14,7 +13,6 @@ Let's do this thing.
 In accordance with the ancient traditions of our people, we must first build an app that does nothing except say "Hello, world!". Here it is:
 
 ```SnackPlayer name=Hello%20World
-import {Text, View} from 'react-native';
 
 const HelloWorldApp = () => {
   return (
@@ -66,7 +64,6 @@ Your own components can also use `props`. This lets you make a single component 
 <TabItem value="javascript">
 
 ```SnackPlayer name=Hello%20Props&ext=js
-import {Text, View, StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   center: {
@@ -99,7 +96,6 @@ export default LotsOfGreetings;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Hello%20Props&ext=tsx
-import {Text, View, StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   center: {
@@ -156,7 +152,6 @@ In a React component, the props are the variables that we pass from a parent com
 ```tsx
 // React Counter Example using Hooks!
 
-import {useState} from 'react';
 
 
 
@@ -187,8 +182,6 @@ const App = () => {
 ```tsx
 // React Native Counter Example using Hooks!
 
-import {useState} from 'react';
-import {View, Text, Button, StyleSheet} from 'react-native';
 
 const App = () => {
   const [count, setCount] = useState(0);
@@ -221,8 +214,6 @@ As shown above, there is no difference in handling the `state` between [React](h
 In the following example we will show the same above counter example using classes.
 
 ```SnackPlayer name=Hello%20Classes
-import {Component} from 'react';
-import {StyleSheet, TouchableOpacity, Text, View} from 'react-native';
 
 class App extends Component {
   state = {

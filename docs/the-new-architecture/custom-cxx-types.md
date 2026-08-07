@@ -1,4 +1,3 @@
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 # Advanced: Custom C++ Types
 
@@ -75,7 +74,6 @@ Now, we can modify the JS spec to add a method that uses the new type. As usual,
 <TabItem value="typescript">
 
 ```diff title="NativeSampleModule.ts"
-import {TurboModule, TurboModuleRegistry} from 'react-native';
 
 export interface Spec extends TurboModule {
   readonly reverseString: (input: string) => string;
@@ -92,8 +90,6 @@ export default TurboModuleRegistry.getEnforcing<Spec>(
 
 ```diff title="NativeSampleModule.js"
 // @flow
-import type {TurboModule} from 'react-native';
-import { TurboModuleRegistry } from "react-native";
 
 export interface Spec extends TurboModule {
   +reverseString: (input: string) => string;
@@ -233,7 +229,6 @@ For the first step, let's define the new custom type in the JS specs, so that Co
 <TabItem value="typescript">
 
 ```diff title="NativeSampleModule (Add Address type and validateAddress function)"
-import {TurboModule, TurboModuleRegistry} from 'react-native';
 
 +export type Address = {
 +  street: string,
@@ -257,8 +252,6 @@ export default TurboModuleRegistry.getEnforcing<Spec>(
 ```diff title="NativeSampleModule (Add Address type and validateAddress function)"
 
 // @flow
-import type {TurboModule} from 'react-native';
-import { TurboModuleRegistry } from "react-native";
 
 +export type Address = {
 +  street: string,

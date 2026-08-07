@@ -3,7 +3,6 @@ id: turbo-native-modules-android
 title: 'Turbo Native Modules: Android'
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 Now it's time to write some Android platform code to make sure `localStorage` survives after the application is closed.
 
@@ -15,10 +14,6 @@ The first step is to implement the generated `NativeLocalStorageSpec` interface:
 ```java title="android/app/src/main/java/com/nativelocalstorage/NativeLocalStorageModule.java"
 package com.nativelocalstorage;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import com.nativelocalstorage.NativeLocalStorageSpec;
-import com.facebook.react.bridge.ReactApplicationContext;
 
 public class NativeLocalStorageModule extends NativeLocalStorageSpec {
 
@@ -68,10 +63,6 @@ public class NativeLocalStorageModule extends NativeLocalStorageSpec {
 ```kotlin title="android/app/src/main/java/com/nativelocalstorage/NativeLocalStorageModule.kt"
 package com.nativelocalstorage
 
-import android.content.Context
-import android.content.SharedPreferences
-import com.nativelocalstorage.NativeLocalStorageSpec
-import com.facebook.react.bridge.ReactApplicationContext
 
 class NativeLocalStorageModule(reactContext: ReactApplicationContext) : NativeLocalStorageSpec(reactContext) {
 
@@ -121,14 +112,7 @@ Next we need to create `NativeLocalStoragePackage`. It provides an object to reg
 ```java title="android/app/src/main/java/com/nativelocalstorage/NativeLocalStoragePackage.java"
 package com.nativelocalstorage;
 
-import com.facebook.react.BaseReactPackage;
-import com.facebook.react.bridge.NativeModule;
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.module.model.ReactModuleInfo;
-import com.facebook.react.module.model.ReactModuleInfoProvider;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class NativeLocalStoragePackage extends BaseReactPackage {
 
@@ -168,11 +152,6 @@ public class NativeLocalStoragePackage extends BaseReactPackage {
 ```kotlin title="android/app/src/main/java/com/nativelocalstorage/NativeLocalStoragePackage.kt"
 package com.nativelocalstorage
 
-import com.facebook.react.BaseReactPackage
-import com.facebook.react.bridge.NativeModule
-import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.module.model.ReactModuleInfo
-import com.facebook.react.module.model.ReactModuleInfoProvider
 
 class NativeLocalStoragePackage : BaseReactPackage() {
 
@@ -215,21 +194,8 @@ Later you’ll learn how to distribute your Native Modules as [npm packages](the
 ```java title="android/app/src/main/java/com/turobmoduleexample/MainApplication.java"
 package com.inappmodule;
 
-import android.app.Application;
-import com.facebook.react.PackageList;
-import com.facebook.react.ReactApplication;
-import com.facebook.react.ReactHost;
-import com.facebook.react.ReactNativeHost;
-import com.facebook.react.ReactPackage;
-import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
-import com.facebook.react.defaults.DefaultReactHost;
-import com.facebook.react.defaults.DefaultReactNativeHost;
-import com.facebook.soloader.SoLoader;
 // highlight-add-next-line
-import com.nativelocalstorage.NativeLocalStoragePackage;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -288,18 +254,7 @@ public class MainApplication extends Application implements ReactApplication {
 ```kotlin title="android/app/src/main/java/com/turobmoduleexample/MainApplication.kt"
 package com.inappmodule
 
-import android.app.Application
-import com.facebook.react.PackageList
-import com.facebook.react.ReactApplication
-import com.facebook.react.ReactHost
-import com.facebook.react.ReactNativeHost
-import com.facebook.react.ReactPackage
-import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.load
-import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
-import com.facebook.react.defaults.DefaultReactNativeHost
-import com.facebook.soloader.SoLoader
 // highlight-add-next-line
-import com.nativelocalstorage.NativeLocalStoragePackage
 
 class MainApplication : Application(), ReactApplication {
 

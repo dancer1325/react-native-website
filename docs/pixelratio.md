@@ -30,7 +30,6 @@ In React Native, everything in JavaScript and within the layout engine works wit
 ## Example
 
 ```SnackPlayer name=PixelRatio%20Example
-import {
   Image,
   PixelRatio,
   ScrollView,
@@ -38,7 +37,6 @@ import {
   Text,
   View,
 } from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const size = 50;
 const cat = {

@@ -86,7 +86,6 @@ When React Native DevTools is open, all errors except fatal errors will be hidde
 LogBox can be configured via the `LogBox` API.
 
 ```js
-import {LogBox} from 'react-native';
 ```
 
 #### Ignore all logs

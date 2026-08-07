@@ -3,7 +3,6 @@ id: optimizing-javascript-loading
 title: Optimizing JavaScript loading
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 Parsing and running JavaScript code requires memory and time. Because of this, as your app grows, it's often useful to delay loading code until it's needed for the first time. React Native comes with some standard optimizations that are on by default, and there are techniques you can adopt in your own code to help React load your app more efficiently. There are also some advanced automatic optimizations (with their own tradeoffs) that are suitable for very large apps.
 
@@ -29,7 +28,6 @@ Read more about [lazy-loading components with Suspense
 Lazy-loading components can change the behavior of your app if your component modules (or their dependencies) have _side effects_, such as modifying global variables or subscribing to events outside of a component. Most modules in React apps should not have any side effects.
 
 ```tsx title="SideEffects.tsx"
-import Logger from './utils/Logger';
 
 //  🚩 🚩 🚩 Side effect! This must be executed before React can even begin to
 // render the SplashScreen component, and can unexpectedly break code elsewhere
@@ -46,8 +44,6 @@ export function SplashScreen() {
 Sometimes you may want to defer loading some code until you use it for the first time, without using `lazy` or an asynchronous `import()`. You can do this by using the [`require()`](https://metrobundler.dev/docs/module-api/#require) function where you would otherwise use a static `import` at the top of the file.
 
 ```tsx title="VeryExpensive.tsx"
-import {Component} from 'react';
-import {Text} from 'react-native';
 // ... import some very expensive modules
 
 export default function VeryExpensive() {
@@ -57,8 +53,6 @@ export default function VeryExpensive() {
 ```
 
 ```tsx title="Optimized.tsx"
-import {useCallback, useState} from 'react';
-import {TouchableOpacity, View, Text} from 'react-native';
 // Usually we would write a static import:
 // import VeryExpensive from './VeryExpensive';
 
@@ -90,8 +84,6 @@ export default function Optimize() {
 If you use the React Native CLI to build your app, `require` calls (but not `import`s) will automatically be inlined for you, both in your code and inside any third-party packages (`node_modules`) you use.
 
 ```tsx
-import {useCallback, useState} from 'react';
-import {TouchableOpacity, View, Text} from 'react-native';
 
 // This top-level require call will be evaluated lazily as part of the component below.
 const VeryExpensive = require('./VeryExpensive').default;

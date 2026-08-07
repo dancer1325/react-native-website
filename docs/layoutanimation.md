@@ -20,8 +20,6 @@ if (Platform.OS === 'android') {
 ## Example
 
 ```SnackPlayer name=LayoutAnimation%20Example&supportedPlatforms=android,ios
-import {useState} from 'react';
-import {
   LayoutAnimation,
   Platform,
   StyleSheet,
@@ -30,7 +28,6 @@ import {
   UIManager,
   View,
 } from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 if (
   Platform.OS === 'android' &&
@@ -134,8 +131,6 @@ Helper that creates an object (with `create`, `update`, and `delete` fields) to 
 **Example:**
 
 ```SnackPlayer name=LayoutAnimation&supportedPlatforms=android,ios
-import {useState} from 'react';
-import {
   View,
   Platform,
   UIManager,
@@ -263,8 +258,6 @@ Calls `configureNext()` with `Presets.spring`.
 **Example:**
 
 ```SnackPlayer name=LayoutAnimation&supportedPlatforms=android,ios
-import {useState} from 'react';
-import {
   View,
   Platform,
   UIManager,

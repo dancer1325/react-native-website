@@ -10,7 +10,6 @@ A component's height and width determine its size on the screen.
 The general way to set the dimensions of a component is by adding a fixed `width` and `height` to style. All dimensions in React Native are unitless, and represent density-independent pixels.
 
 ```SnackPlayer name=Height%20and%20Width
-import {View} from 'react-native';
 
 const FixedDimensionsBasics = () => {
   return (
@@ -58,7 +57,6 @@ A component can only expand to fill available space if its parent has dimensions
 :::
 
 ```SnackPlayer name=Flex%20Dimensions
-import {View} from 'react-native';
 
 const FlexDimensionsBasics = () => {
   return (
@@ -83,7 +81,6 @@ After you can control a component's size, the next step is to [learn how to lay 
 If you want to fill a certain portion of the screen, but you _don't_ want to use the `flex` layout, you _can_ use **percentage values** in the component's style. Similar to flex dimensions, percentage dimensions require parent with a defined size.
 
 ```SnackPlayer name=Percentage%20Dimensions
-import {View} from 'react-native';
 
 const PercentageDimensionsBasics = () => {
   // Try removing the `height: '100%'` on the parent View.

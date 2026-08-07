@@ -3,7 +3,6 @@ id: layout-props
 title: Layout Props
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 :::info
 More detailed examples about those properties can be found on the [Layout with Flexbox](flexbox) page.
@@ -17,9 +16,6 @@ The following example shows how different properties can affect or shape a React
 <TabItem value="javascript">
 
 ```SnackPlayer name=LayoutProps%20Example&ext=js
-import {useState} from 'react';
-import {Button, ScrollView, StyleSheet, Text, View} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   const [flexDirection, setFlexDirection] = useState(0);
@@ -190,8 +186,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=LayoutProps%20Example&ext=tsx
-import {useState} from 'react';
-import {
   Button,
   ScrollView,
   StyleSheet,
@@ -200,7 +194,6 @@ import {
   FlexAlignType,
   FlexStyle,
 } from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   const [flexDirection, setFlexDirection] = useState(0);

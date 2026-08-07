@@ -3,7 +3,6 @@ id: panresponder
 title: PanResponder
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 `PanResponder` reconciles several touches into a single gesture. It makes single-touch gestures resilient to extra touches, and can be used to recognize basic multi-touch gestures.
 
@@ -81,9 +80,6 @@ const ExampleComponent = () => {
 `PanResponder` works with `Animated` API to help build complex gestures in the UI. The following example contains an animated `View` component which can be dragged freely across the screen
 
 ```SnackPlayer name=PanResponder
-import {useRef} from 'react';
-import {Animated, View, StyleSheet, PanResponder, Text} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   const pan = useRef(new Animated.ValueXY()).current;

@@ -3,7 +3,6 @@ id: share
 title: Share
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 ## Example
 
@@ -11,8 +10,6 @@ import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import con
 <TabItem value="javascript">
 
 ```SnackPlayer name=Example&supportedPlatforms=ios,android&ext=js
-import {Alert, Share, Button} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const ShareExample = () => {
   const onShare = async () => {
@@ -50,8 +47,6 @@ export default ShareExample;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Example&supportedPlatforms=ios,android&ext=tsx
-import {Alert, Share, Button} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const ShareExample = () => {
   const onShare = async () => {

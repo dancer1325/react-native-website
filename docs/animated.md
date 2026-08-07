@@ -26,8 +26,6 @@ title: Animated
 The following example contains a `View` which will fade in and fade out based on the animated value `fadeAnim`
 
 ```SnackPlayer name=Animated%20Example
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
-import {
   Animated,
   Text,
   View,

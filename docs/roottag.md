@@ -3,7 +3,6 @@ id: roottag
 title: RootTag
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 `RootTag` is an opaque identifier assigned to the native root view of your React Native surface — i.e. the `ReactRootView` or `RCTRootView` instance for Android or iOS respectively. In short, it is a surface identifier.
 
@@ -26,9 +25,6 @@ In versions 0.65 and below, RootTag is accessed via a [legacy context](https://g
 How to access `RootTag` via the `RootTagContext`.
 
 ```js
-import {RootTagContext} from 'react-native';
-import NativeAnalytics from 'native-analytics';
-import NativeNavigation from 'native-navigation';
 
 function ScreenA() {
   const rootTag = useContext(RootTagContext);

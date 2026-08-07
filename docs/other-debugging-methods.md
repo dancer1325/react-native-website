@@ -3,7 +3,6 @@ id: other-debugging-methods
 title: Other Debugging Methods
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 This page covers how to use legacy JavaScript debugging methods. If you are getting started with a new React Native or Expo app, we recommend using [React Native DevTools](./react-native-devtools).
 

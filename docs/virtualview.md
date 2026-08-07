@@ -3,7 +3,6 @@ id: virtualview
 title: VirtualView 🧪
 ---
 
-import ExperimentalAPIWarning from './\_experimental-api-warning.mdx';
 
 <ExperimentalAPIWarning />
 

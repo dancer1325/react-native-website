@@ -3,7 +3,6 @@ id: communication-android
 title: Communication between native and React Native
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 In [Integrating with Existing Apps guide](integration-with-existing-apps) and [Native UI Components guide](legacy/native-components-android) we learn how to embed React Native in a native component and vice versa. When we mix native and React Native components, we'll eventually find a need to communicate between these two worlds. Some ways to achieve that have been already mentioned in other guides. This article summarizes available techniques.
 
@@ -67,7 +66,6 @@ class MainActivity : ReactActivity() {
 </Tabs>
 
 ```tsx
-import {View, Image} from 'react-native';
 
 export default class ImageBrowserApp extends React.Component {
   renderImage(imgURI) {

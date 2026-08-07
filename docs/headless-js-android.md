@@ -3,8 +3,6 @@ id: headless-js-android
 title: Headless JS
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem';
-import constants from '@site/core/TabsConstants';
 
 Headless JS is a way to run tasks in JavaScript while your app is in the background. It can be used, for example, to sync fresh data, handle push notifications, or play music.
 
@@ -13,7 +11,6 @@ Headless JS is a way to run tasks in JavaScript while your app is in the backgro
 A task is an async function that you register on `AppRegistry`, similar to registering React applications:
 
 ```tsx
-import {AppRegistry} from 'react-native';
 AppRegistry.registerHeadlessTask('SomeTaskName', () =>
   require('SomeTaskName'),
 );
@@ -39,12 +36,6 @@ Yes, this does still require some native code, but it's pretty thin. You need to
 ```java
 package com.your_application_name;
 
-import android.content.Intent;
-import android.os.Bundle;
-import com.facebook.react.HeadlessJsTaskService;
-import com.facebook.react.bridge.Arguments;
-import com.facebook.react.jstasks.HeadlessJsTaskConfig;
-import javax.annotation.Nullable;
 
 public class MyTaskService extends HeadlessJsTaskService {
 
@@ -70,10 +61,6 @@ public class MyTaskService extends HeadlessJsTaskService {
 ```kotlin
 package com.your_application_name;
 
-import android.content.Intent
-import com.facebook.react.HeadlessJsTaskService
-import com.facebook.react.bridge.Arguments
-import com.facebook.react.jstasks.HeadlessJsTaskConfig
 
 class MyTaskService : HeadlessJsTaskService() {
     override fun getTaskConfig(intent: Intent?): HeadlessJsTaskConfig? {
@@ -179,7 +166,6 @@ A retry attempt will only be made when a specific `Error` is thrown. Inside a he
 Example:
 
 ```tsx
-import {HeadlessJsTaskError} from 'HeadlessJsTask';
 
 module.exports = async taskData => {
   const condition = ...;
@@ -216,17 +202,7 @@ Broadcast receiver then handles intent that was broadcasted in onReceive functio
 <TabItem value="java">
 
 ```java
-import android.app.ActivityManager;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.Network;
-import android.net.NetworkCapabilities;
-import android.net.NetworkInfo;
-import android.os.Build;
 
-import com.facebook.react.HeadlessJsTaskService;
 
 public class NetworkChangeReceiver extends BroadcastReceiver {
 
@@ -306,15 +282,6 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
 <TabItem value="kotlin">
 
 ```kotlin
-import android.app.ActivityManager
-import android.app.ActivityManager.RunningAppProcessInfo
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
-import com.facebook.react.HeadlessJsTaskService
 
 class NetworkChangeReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent?) {

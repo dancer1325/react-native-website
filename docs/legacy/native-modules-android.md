@@ -3,8 +3,6 @@ id: native-modules-android
 title: Android Native Modules
 ---
 
-import NativeDeprecated from '../the-new-architecture/\_markdown_native_deprecation.mdx'
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 <NativeDeprecated />
 
@@ -43,13 +41,6 @@ Then add the following content:
 
 ```java
 package com.your-apps-package-name; // replace your-apps-package-name with your app’s package name
-import com.facebook.react.bridge.NativeModule;
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.bridge.ReactContextBaseJavaModule;
-import com.facebook.react.bridge.ReactMethod;
-import java.util.Map;
-import java.util.HashMap;
 
 public class CalendarModule extends ReactContextBaseJavaModule {
    CalendarModule(ReactApplicationContext context) {
@@ -63,11 +54,6 @@ public class CalendarModule extends ReactContextBaseJavaModule {
 
 ```kotlin
 package com.your-apps-package-name; // replace your-apps-package-name with your app’s package name
-import com.facebook.react.bridge.NativeModule
-import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactContext
-import com.facebook.react.bridge.ReactContextBaseJavaModule
-import com.facebook.react.bridge.ReactMethod
 
 class CalendarModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {...}
 ```
@@ -146,7 +132,6 @@ Add a debug log in the method to confirm it has been invoked when you call it fr
 <TabItem value="java">
 
 ```java
-import android.util.Log;
 
 @ReactMethod
 public void createCalendarEvent(String name, String location) {
@@ -159,7 +144,6 @@ public void createCalendarEvent(String name, String location) {
 <TabItem value="kotlin">
 
 ```kotlin
-import android.util.Log
 
 @ReactMethod
 fun createCalendarEvent(name: String, location: String) {
@@ -210,14 +194,7 @@ Then add the following content:
 
 ```java
 package com.your-app-name; // replace your-app-name with your app’s name
-import com.facebook.react.ReactPackage;
-import com.facebook.react.bridge.NativeModule;
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.uimanager.ViewManager;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class MyAppPackage implements ReactPackage {
 
@@ -245,12 +222,6 @@ public class MyAppPackage implements ReactPackage {
 ```kotlin
 package com.your-app-name // replace your-app-name with your app’s name
 
-import android.view.View
-import com.facebook.react.ReactPackage
-import com.facebook.react.bridge.NativeModule
-import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.uimanager.ReactShadowNode
-import com.facebook.react.uimanager.ViewManager
 
 class MyAppPackage : ReactPackage {
 
@@ -315,7 +286,6 @@ At this point, you have set up the basic scaffolding for your native module in A
 Find a place in your application where you would like to add a call to the native module’s `createCalendarEvent()` method. Below is an example of a component, `NewModuleButton` you can add in your app. You can invoke the native module inside `NewModuleButton`'s `onPress()` function.
 
 ```tsx
-import {NativeModules, Button} from 'react-native';
 
 const NewModuleButton = () => {
   const onPress = () => {
@@ -337,7 +307,6 @@ export default NewModuleButton;
 In order to access your native module from JavaScript you need to first import `NativeModules` from React Native:
 
 ```tsx
-import {NativeModules} from 'react-native';
 ```
 
 You can then access the `CalendarModule` native module off of `NativeModules`.
@@ -404,7 +373,6 @@ To save consumers of your native module from needing to do that each time they w
 * 1. String name: A string representing the name of the event
 * 2. String location: A string representing the location of the event
 */
-import {NativeModules} from 'react-native';
 const {CalendarModule} = NativeModules;
 export default CalendarModule;
 ```
@@ -419,7 +387,6 @@ This JavaScript file also becomes a good location for you to add any JavaScript 
  * 1. String name: A string representing the name of the event
  * 2. String location: A string representing the location of the event
  */
-import {NativeModules} from 'react-native';
 const {CalendarModule} = NativeModules;
 interface CalendarInterface {
   createCalendarEvent(name: string, location: string): void;
@@ -430,7 +397,6 @@ export default CalendarModule as CalendarInterface;
 In your other JavaScript files you can access the native module and invoke its method like this:
 
 ```tsx
-import CalendarModule from './CalendarModule';
 CalendarModule.createCalendarEvent('foo', 'bar');
 ```
 
@@ -545,7 +511,6 @@ In order to create a native module method with a callback, first import the `Cal
 <TabItem value="java">
 
 ```java
-import com.facebook.react.bridge.Callback;
 
 @ReactMethod
 public void createCalendarEvent(String name, String location, Callback callBack) {
@@ -556,7 +521,6 @@ public void createCalendarEvent(String name, String location, Callback callBack)
 <TabItem value="kotlin">
 
 ```kotlin
-import com.facebook.react.bridge.Callback
 
 @ReactMethod fun createCalendarEvent(name: String, location: String, callback: Callback) {}
 ```
@@ -705,7 +669,6 @@ Refactoring the above code to use a promise instead of callbacks looks like this
 <TabItem value="java">
 
 ```java
-import com.facebook.react.bridge.Promise;
 
 @ReactMethod
 public void createCalendarEvent(String name, String location, Promise promise) {
@@ -722,7 +685,6 @@ public void createCalendarEvent(String name, String location, Promise promise) {
 <TabItem value="kotlin">
 
 ```kotlin
-import com.facebook.react.bridge.Promise
 
 @ReactMethod
 fun createCalendarEvent(name: String, location: String, promise: Promise) {
@@ -814,9 +776,6 @@ Native modules can signal events to JavaScript without being invoked directly. F
 
 ```java
 ...
-import com.facebook.react.modules.core.DeviceEventManagerModule;
-import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.bridge.Arguments;
 ...
 private void sendEvent(ReactContext reactContext,
                       String eventName,
@@ -856,9 +815,6 @@ sendEvent(reactContext, "EventReminder", params);
 
 ```kotlin
 ...
-import com.facebook.react.bridge.WritableMap
-import com.facebook.react.bridge.Arguments
-import com.facebook.react.modules.core.DeviceEventManagerModule
 ...
 
 private fun sendEvent(reactContext: ReactContext, eventName: String, params: WritableMap?) {
@@ -899,7 +855,6 @@ sendEvent(reactContext, "EventReminder", params)
 JavaScript modules can then register to receive events by `addListener` on the [NativeEventEmitter](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/EventEmitter/NativeEventEmitter.js) class.
 
 ```tsx
-import {NativeEventEmitter, NativeModules} from 'react-native';
 ...
 useEffect(() => {
     const eventEmitter = new NativeEventEmitter(NativeModules.ToastExample);

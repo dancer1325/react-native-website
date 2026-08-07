@@ -10,9 +10,6 @@ This is a controlled component that requires an `onValueChange` callback that up
 ## Example
 
 ```SnackPlayer name=Switch&supportedPlatforms=android,ios
-import {useState} from 'react';
-import {Switch, StyleSheet} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   const [isEnabled, setIsEnabled] = useState(false);

@@ -3,7 +3,6 @@ id: fabric-native-components-ios
 title: 'Fabric Native Components: iOS'
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 Now it's time to write some iOS platform code to be able to render the web view. The steps you need to follow are:
 

@@ -3,7 +3,6 @@ id: statusbar
 title: StatusBar
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 Component to control the app's status bar. The status bar is the zone, typically at the top of the screen, that displays the current time, Wi-Fi and cellular network information, battery level and/or other status icons.
 
@@ -15,8 +14,6 @@ It is possible to have multiple `StatusBar` components mounted at the same time.
 <TabItem value="javascript">
 
 ```SnackPlayer name=StatusBar%20Component%20Example&supportedPlatforms=android,ios&ext=js
-import {useState} from 'react';
-import {
   Button,
   Platform,
   StatusBar,
@@ -24,7 +21,6 @@ import {
   Text,
   View,
 } from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const STYLES = ['default', 'dark-content', 'light-content'];
 const TRANSITIONS = ['fade', 'slide', 'none'];
@@ -122,8 +118,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=StatusBar%20Component%20Example&supportedPlatforms=android,ios&ext=tsx
-import {useState} from 'react';
-import {
   Button,
   Platform,
   StatusBar,
@@ -132,7 +126,6 @@ import {
   View,
   StatusBarStyle,
 } from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const STYLES = ['default', 'dark-content', 'light-content'] as const;
 const TRANSITIONS = ['fade', 'slide', 'none'] as const;

@@ -62,8 +62,6 @@ Here is an implementation of the `localStorage` specification:
 <TabItem value="typescript">
 
 ```typescript title="specs/NativeLocalStorage.ts"
-import type {TurboModule} from 'react-native';
-import {TurboModuleRegistry} from 'react-native';
 
 export interface Spec extends TurboModule {
   setItem(value: string, key: string): void;
@@ -81,8 +79,6 @@ export default TurboModuleRegistry.getEnforcing<Spec>(
 <TabItem value="flow">
 
 ```flow title="NativeLocalStorage.js"
-import type {TurboModule} from 'react-native';
-import {TurboModule, TurboModuleRegistry} from 'react-native';
 
 export interface Spec extends TurboModule {
   setItem(value: string, key: string): void;
@@ -169,8 +165,6 @@ The `TurboModuleRegistry` supports 2 modes of retrieving a Turbo Native Module:
 - `getEnforcing<T>(name: string): T` which will throw an exception if the Turbo Native Module is unavailable. This assumes the module is always available.
 
 ```tsx title="App.tsx"
-import {useEffect, useState, type JSX} from 'react';
-import {
   SafeAreaView,
   StyleSheet,
   Text,
@@ -178,7 +172,6 @@ import {
   Button,
 } from 'react-native';
 
-import NativeLocalStorage from './specs/NativeLocalStorage';
 
 const EMPTY = '<empty>';
 

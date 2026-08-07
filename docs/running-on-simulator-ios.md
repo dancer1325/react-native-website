@@ -3,7 +3,6 @@ id: running-on-simulator-ios
 title: Running On Simulator
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 ## Starting the simulator
 

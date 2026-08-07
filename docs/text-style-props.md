@@ -5,14 +5,11 @@ title: Text Style Props
 
 ### Example
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=TextStyleProps&supportedPlatforms=ios,android&ext=js&dependencies=@react-native-community/slider
-import {useState} from 'react';
-import {
   FlatList,
   Platform,
   ScrollView,
@@ -22,8 +19,6 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import Slider from '@react-native-community/slider';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const fontStyles = ['normal', 'italic'];
 const fontVariants = [
@@ -372,8 +367,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=TextStyleProps&supportedPlatforms=ios,android&ext=tsx&dependencies=@react-native-community/slider
-import {useState} from 'react';
-import {
   FlatList,
   Platform,
   ScrollView,
@@ -384,8 +377,6 @@ import {
   View,
   TextStyle,
 } from 'react-native';
-import Slider from '@react-native-community/slider';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   const [fontSize, setFontSize] = useState(20);

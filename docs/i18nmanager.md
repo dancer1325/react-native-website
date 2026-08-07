@@ -14,8 +14,6 @@ The `I18nManager` module provides utilities for managing Right-to-Left (RTL) lay
 If you absolutely position elements to align with other flexbox elements, they may not align in RTL languages. Using `isRTL` can be used to adjust alignment or animations.
 
 ```SnackPlayer name=I18nManager%20Change%20Absolute%20Positions%20And%20Animations
-import {I18nManager, Text, View} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   // Change to `true` to see the effect in a non-RTL language
@@ -42,9 +40,6 @@ export default App;
 ### During Development
 
 ```SnackPlayer name=I18nManager%20During%20Development
-import {useState} from 'react';
-import {Alert, I18nManager, StyleSheet, Switch, Text, View} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   const [rtl, setRTL] = useState(I18nManager.isRTL);

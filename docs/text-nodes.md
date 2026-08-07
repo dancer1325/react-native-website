@@ -6,8 +6,6 @@ title: Text nodes
 Text nodes represent raw text content on the tree (similar to [`Text`](https://developer.mozilla.org/en-US/docs/Web/API/Text) nodes on Web). They are not directly accessible via `refs`, but can be accessed using methods like [`childNodes`](https://developer.mozilla.org/en-US/docs/Web/API/Node/childNodes) on element refs.
 
 ```SnackPlayer ext=js&name=Text%20instances%20example
-import {useEffect, useRef, useState} from 'react';
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
 
 const TextWithRefs = () => {
   const ref = useRef(null);

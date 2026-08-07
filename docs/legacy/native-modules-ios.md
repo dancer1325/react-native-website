@@ -3,8 +3,6 @@ id: native-modules-ios
 title: iOS Native Modules
 ---
 
-import NativeDeprecated from '../the-new-architecture/\_markdown_native_deprecation.mdx'
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 <NativeDeprecated />
 
@@ -141,7 +139,6 @@ At this point you have set up the basic scaffolding for your native module in iO
 Find a place in your application where you would like to add a call to the native module’s `createCalendarEvent()` method. Below is an example of a component, `NewModuleButton` you can add in your app. You can invoke the native module inside `NewModuleButton`'s `onPress()` function.
 
 ```tsx
-import {Button} from 'react-native';
 
 const NewModuleButton = () => {
   const onPress = () => {
@@ -163,7 +160,6 @@ export default NewModuleButton;
 In order to access your native module from JavaScript you need to first import `NativeModules` from React Native:
 
 ```tsx
-import {NativeModules} from 'react-native';
 ```
 
 You can then access the `CalendarModule` native module off of `NativeModules`.
@@ -230,7 +226,6 @@ To save consumers of your native module from needing to do that each time they w
 * 1. String name: A string representing the name of the event
 * 2. String location: A string representing the location of the event
 */
-import {NativeModules} from 'react-native';
 const {CalendarModule} = NativeModules;
 export default CalendarModule;
 ```
@@ -245,7 +240,6 @@ This JavaScript file also becomes a good location for you to add any JavaScript 
  * 1. String name: A string representing the name of the event
  * 2. String location: A string representing the location of the event
  */
-import {NativeModules} from 'react-native';
 const {CalendarModule} = NativeModules;
 interface CalendarInterface {
   createCalendarEvent(name: string, location: string): void;
@@ -256,7 +250,6 @@ export default CalendarModule as CalendarInterface;
 In your other JavaScript files you can access the native module and invoke its method like this:
 
 ```tsx
-import NativeCalendarModule from './NativeCalendarModule';
 NativeCalendarModule.createCalendarEvent('foo', 'bar');
 ```
 

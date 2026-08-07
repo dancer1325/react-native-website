@@ -3,7 +3,6 @@ id: releases
 title: Releases Overview
 ---
 
-import ReleasesTable from '@site/src/components/releases/ReleasesTable';
 
 New React Native releases are shipped **every two months**, usually resulting in six (6) new minors per year.
 

@@ -3,7 +3,6 @@ id: troubleshooting
 title: Troubleshooting
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 These are some common issues you may run into while setting up React Native. If you encounter something that is not listed here, try [searching for the issue in GitHub](https://github.com/facebook/react-native/issues/).
 
@@ -91,7 +90,6 @@ To revert the `User Search Header Paths` and `Header Search Paths` build setting
 React Native implements a polyfill for WebSockets. These [polyfills](https://github.com/facebook/react-native/blob/main/packages/react-native/Libraries/Core/InitializeCore.js) are initialized as part of the react-native module that you include in your application through `import React from 'react'`. If you load another module that requires WebSockets, such as [Firebase](https://github.com/facebook/react-native/issues/3645), be sure to load/require it after react-native:
 
 ```
-import Firebase from 'firebase';
 ```
 
 ## Shell Command Unresponsive Exception

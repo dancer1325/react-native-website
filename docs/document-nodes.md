@@ -6,8 +6,6 @@ title: Document nodes
 Document nodes represent a complete native view tree. Apps using native navigation would provide a separate document node for each screen. Apps not using native navigation would generally provide a single document for the whole app (similar to single-page apps on Web).
 
 ```SnackPlayer ext=js&name=Document%20instance%20example
-import {useEffect, useRef} from 'react';
-import {Text, TextInput, View} from 'react-native';
 
 function MyComponent(props) {
   return (

@@ -3,7 +3,6 @@ id: publishing-to-app-store
 title: Publishing to Apple App Store
 ---
 
-import ThemedImage from '@theme/ThemedImage';
 
 The publishing process is the same as any other native iOS app, with some additional considerations to take into account.
 

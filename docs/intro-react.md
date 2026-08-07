@@ -316,8 +316,6 @@ To feed the cats, press their buttons—which will update their state.
 <TabItem value="javascript">
 
 ```SnackPlayer name=State&ext=js
-import {useState} from 'react';
-import {Button, Text, View} from 'react-native';
 
 const Cat = props => {
   const [isHungry, setIsHungry] = useState(true);
@@ -354,8 +352,6 @@ export default Cafe;
 <TabItem value="typescript">
 
 ```SnackPlayer name=State&ext=tsx
-import {useState} from 'react';
-import {Button, Text, View} from 'react-native';
 
 type CatProps = {
   name: string;
@@ -398,7 +394,6 @@ export default Cafe;
 First, you will want to import `useState` from React like so:
 
 ```tsx
-import {useState} from 'react';
 ```
 
 Then you declare the component’s state by calling `useState` inside its function.

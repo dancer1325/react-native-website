@@ -3,7 +3,6 @@ id: network
 title: Networking
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 Many mobile apps need to load resources from a remote URL. You may want to make a POST request to a REST API, or you may need to fetch a chunk of static content from another server.
 
@@ -78,8 +77,6 @@ Don't forget to catch any errors that may be thrown by `fetch`, otherwise they w
 <TabItem value="javascript">
 
 ```SnackPlayer name=Fetch%20Example&ext=js
-import {useEffect, useState} from 'react';
-import {ActivityIndicator, FlatList, Text, View} from 'react-native';
 
 const App = () => {
   const [isLoading, setLoading] = useState(true);
@@ -127,8 +124,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Fetch%20Example&ext=tsx
-import {useEffect, useState} from 'react';
-import {ActivityIndicator, FlatList, Text, View} from 'react-native';
 
 type Movie = {
   id: string;

@@ -3,14 +3,12 @@ id: props
 title: Props
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 Most components can be customized when they are created, with different parameters. These created parameters are called `props`, short for properties.
 
 For example, one basic React Native component is the `Image`. When you create an image, you can use a prop named `source` to control what image it shows.
 
 ```SnackPlayer name=Props
-import {Image} from 'react-native';
 
 const Bananas = () => {
   let pic = {
@@ -32,7 +30,6 @@ Your own components can also use `props`. This lets you make a single component 
 <TabItem value="javascript">
 
 ```SnackPlayer name=Props&ext=js
-import {Text, View} from 'react-native';
 
 const Greeting = props => {
   return (
@@ -59,7 +56,6 @@ export default LotsOfGreetings;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Props&ext=tsx
-import {Text, View} from 'react-native';
 
 type GreetingProps = {
   name: string;

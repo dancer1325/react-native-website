@@ -8,7 +8,6 @@ Vibrates the device.
 ## Example
 
 ```SnackPlayer name=Vibration%20Example&supportedPlatforms=ios,android
-import {
   Button,
   Platform,
   Text,
@@ -16,7 +15,6 @@ import {
   View,
   StyleSheet,
 } from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const Separator = () => {
   return <View style={Platform.OS === 'android' ? styles.separator : null} />;

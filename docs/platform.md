@@ -6,8 +6,6 @@ title: Platform
 ## Example
 
 ```SnackPlayer name=Platform%20API%20Example&supportedPlatforms=ios,android
-import {Platform, StyleSheet, Text, ScrollView} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   return (
@@ -201,7 +199,6 @@ The `config` parameter is an object with the following keys:
 **Example usage:**
 
 ```tsx
-import {Platform, StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {

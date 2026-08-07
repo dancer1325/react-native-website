@@ -3,7 +3,6 @@ id: state
 title: State
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 There are two types of data that control a component: `props` and `state`. `props` are set by the parent and they are fixed throughout the lifetime of a component. For data that is going to change, we have to use `state`.
 
@@ -15,8 +14,6 @@ For example, let's say we want to make text that blinks all the time. The text i
 <TabItem value="javascript">
 
 ```SnackPlayer name=State&ext=js
-import {useState, useEffect} from 'react';
-import {Text, View} from 'react-native';
 
 const Blink = props => {
   const [isShowingText, setIsShowingText] = useState(true);
@@ -54,8 +51,6 @@ export default BlinkApp;
 <TabItem value="typescript">
 
 ```SnackPlayer name=State&ext=tsx
-import {useState, useEffect} from 'react';
-import {Text, View} from 'react-native';
 
 type BlinkProps = {
   text: string;

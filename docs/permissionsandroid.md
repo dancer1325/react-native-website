@@ -17,14 +17,12 @@ If a user has previously turned off a permission that you prompt for, the OS wil
 ### Example
 
 ```SnackPlayer name=PermissionsAndroid%20Example&supportedPlatforms=android
-import {
   Button,
   PermissionsAndroid,
   StatusBar,
   StyleSheet,
   Text,
 } from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const requestCameraPermission = async () => {
   try {

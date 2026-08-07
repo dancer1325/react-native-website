@@ -8,7 +8,6 @@ title: Dimensions
 :::
 
 ```tsx
-import {Dimensions} from 'react-native';
 ```
 
 You can get the application window's width and height using the following code:
@@ -27,9 +26,6 @@ If you are targeting foldable devices or devices which can change the screen siz
 ## Example
 
 ```SnackPlayer name=Dimensions%20Example
-import {useState, useEffect} from 'react';
-import {StyleSheet, Text, Dimensions} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const windowDimensions = Dimensions.get('window');
 const screenDimensions = Dimensions.get('screen');

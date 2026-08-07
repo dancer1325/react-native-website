@@ -1,4 +1,3 @@
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 # Emitting Events in Native Modules
 
@@ -24,7 +23,6 @@ Open the `NativeLocalStorage.ts` file and update it as it follows:
 
 ```diff title="NativeLocalStorage.ts"
 +import type {TurboModule, CodegenTypes} from 'react-native';
-import {TurboModuleRegistry} from 'react-native';
 
 +export type KeyValuePair = {
 +  key: string,
@@ -54,7 +52,6 @@ Open the `NativeLocalStorage.js` file and update it as it follows:
 
 // @flow
 +import type {TurboModule, CodegenTypes} from 'react-native';
-import {TurboModule, TurboModuleRegistry} from 'react-native';
 
 +export type KeyValuePair = {
 +  key: string,
@@ -134,7 +131,6 @@ Now, it's time to update the code of the App to handle the new event.
 Open the `App.tsx` file and modify it as it follows:
 
 ```diff title="App.tsx"
-import {
 + Alert,
 + EventSubscription,
   SafeAreaView,
@@ -144,7 +140,6 @@ import {
   Button,
 } from 'react-native';
 
-import NativeLocalStorage from './specs/NativeLocalStorage';
 
 const EMPTY = '<empty>';
 
@@ -274,11 +269,7 @@ To do so, you have to:
 ```diff title="NativeLocalStorage"
 package com.nativelocalstorage
 
-import android.content.Context
-import android.content.SharedPreferences
-import com.nativelocalstorage.NativeLocalStorageSpec
 +import com.facebook.react.bridge.Arguments
-import com.facebook.react.bridge.ReactApplicationContext
 +import com.facebook.react.bridge.WritableMap
 
 class NativeLocalStorageModule(reactContext: ReactApplicationContext) : NativeLocalStorageSpec(reactContext) {

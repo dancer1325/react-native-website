@@ -3,7 +3,6 @@ id: dynamiccolorios
 title: DynamicColorIOS
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 The `DynamicColorIOS` function is a platform color type specific to iOS.
 
@@ -43,7 +42,6 @@ The `DynamicColorIOS` function is similar to the iOS native methods [`UIColor co
 ## Example
 
 ```tsx
-import {DynamicColorIOS} from 'react-native';
 
 const customDynamicTextColor = DynamicColorIOS({
   dark: 'lightskyblue',

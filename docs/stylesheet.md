@@ -77,8 +77,6 @@ A very common pattern is to create overlays with position absolute and zero posi
 * If you want, absoluteFill can be used to create a customized entry in a StyleSheet, e.g.:
 
 ```SnackPlayer name=absoluteFill
-import {StyleSheet, Text, View} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => (
   <SafeAreaProvider>
@@ -139,7 +137,6 @@ This is defined as the width of a thin line on the platform
 * Example:
 
 ```SnackPlayer name=hairlineWidth
-import {StyleSheet, Text, View} from 'react-native';
 
 const App = () => (
   <View style={styles.container}>

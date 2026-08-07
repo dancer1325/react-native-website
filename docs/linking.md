@@ -3,7 +3,6 @@ id: linking
 title: Linking
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 `Linking` gives you a general interface to interact with both incoming and outgoing app links.
 
@@ -137,8 +136,6 @@ You can handle these events with `Linking.getInitialURL()` - it returns a Promis
 <TabItem value="javascript">
 
 ```SnackPlayer name=Linking%20Example&supportedPlatforms=ios,android&ext=js
-import {useCallback} from 'react';
-import {Alert, Button, Linking, StyleSheet, View} from 'react-native';
 
 const supportedURL = 'https://google.com';
 
@@ -185,8 +182,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Linking%20Example&supportedPlatforms=ios,android&ext=tsx
-import {useCallback} from 'react';
-import {Alert, Button, Linking, StyleSheet, View} from 'react-native';
 
 const supportedURL = 'https://google.com';
 
@@ -243,8 +238,6 @@ export default App;
 <TabItem value="javascript">
 
 ```SnackPlayer name=Linking%20Example&supportedPlatforms=ios,android&ext=js
-import {useCallback} from 'react';
-import {Button, Linking, StyleSheet, View} from 'react-native';
 
 const OpenSettingsButton = ({children}) => {
   const handlePress = useCallback(async () => {
@@ -278,8 +271,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Linking%20Example&supportedPlatforms=ios,android&ext=tsx
-import {useCallback} from 'react';
-import {Button, Linking, StyleSheet, View} from 'react-native';
 
 type OpenSettingsButtonProps = {
   children: string;
@@ -322,8 +313,6 @@ export default App;
 <TabItem value="javascript">
 
 ```SnackPlayer name=Linking%20Example&supportedPlatforms=ios,android&ext=js
-import {useState, useEffect} from 'react';
-import {Linking, StyleSheet, Text, View} from 'react-native';
 
 const useInitialURL = () => {
   const [url, setUrl] = useState(null);
@@ -376,8 +365,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Linking%20Example&supportedPlatforms=ios,android&ext=tsx
-import {useState, useEffect} from 'react';
-import {Linking, StyleSheet, Text, View} from 'react-native';
 
 const useInitialURL = () => {
   const [url, setUrl] = useState<string | null>(null);
@@ -435,8 +422,6 @@ export default App;
 <TabItem value="javascript">
 
 ```SnackPlayer name=Linking%20Example&supportedPlatforms=android&ext=js
-import {useCallback} from 'react';
-import {Alert, Button, Linking, StyleSheet, View} from 'react-native';
 
 const SendIntentButton = ({action, extras, children}) => {
   const handlePress = useCallback(async () => {
@@ -485,8 +470,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Linking%20Example&ext=tsx
-import {useCallback} from 'react';
-import {Alert, Button, Linking, StyleSheet, View} from 'react-native';
 
 type SendIntentButtonProps = {
   action: string;

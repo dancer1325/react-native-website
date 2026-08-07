@@ -8,9 +8,6 @@ title: Settings
 ## Example
 
 ```SnackPlayer name=Settings%20Example&supportedPlatforms=ios
-import {useState} from 'react';
-import {Button, Settings, StyleSheet, Text} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   const [data, setData] = useState(() => Settings.get('data'));

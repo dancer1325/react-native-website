@@ -3,7 +3,6 @@ id: debugging-release-builds
 title: Debugging Release Builds
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 ## Symbolicating a stack trace
 

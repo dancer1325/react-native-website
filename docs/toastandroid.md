@@ -17,8 +17,6 @@ Starting with Android 11 (API level 30), setting the gravity has no effect on te
 :::
 
 ```SnackPlayer name=Toast%20Android%20API%20Example&supportedPlatforms=android
-import {StyleSheet, ToastAndroid, Button, StatusBar} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   const showToast = () => {

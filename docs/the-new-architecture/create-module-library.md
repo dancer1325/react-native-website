@@ -80,7 +80,6 @@ The rest of the guide assumes that you have a local Turbo Native Module in your 
 2. Update the `index.ts` file to properly export the Turbo Native Module spec so that it is accessible from the library. For example:
 
 ```ts
-import NativeSampleModule from './NativeSampleModule';
 
 export default NativeSampleModule;
 ```
@@ -127,7 +126,6 @@ You can use the library created with `create-react-native-library` also in this 
 3. Update the `App.tsx` code to import the code in your library. For example:
 
 ```tsx
-import NativeSampleModule from '../Library/src/index';
 ```
 
 If you run your app right now, Metro would not find the JS files that it needs to serve to the app. That's because metro will be running starting from the `App` folder and it would not have access to the JS files located in the `Library` folder. To fix this, let's update the `metro.config.js` file as it follows

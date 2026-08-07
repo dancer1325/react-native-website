@@ -3,7 +3,6 @@ id: direct-manipulation
 title: Direct Manipulation
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 It is sometimes necessary to make changes directly to a component without using state/props to trigger a re-render of the entire subtree. When using React in the browser for example, you sometimes need to directly modify a DOM node, and the same is true for views in mobile apps. `setNativeProps` is the React Native equivalent to setting properties directly on a DOM node.
 
@@ -67,7 +66,6 @@ Composite components are not backed by a native view, so you cannot call `setNat
 <TabItem value="javascript">
 
 ```SnackPlayer name=setNativeProps%20with%20Composite%20Components&ext=js
-import {Text, TouchableOpacity, View} from 'react-native';
 
 const MyButton = props => (
   <View style={{marginTop: 50}}>
@@ -88,7 +86,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=setNativeProps%20with%20Composite%20Components&ext=tsx
-import {Text, TouchableOpacity, View} from 'react-native';
 
 const MyButton = (props: {label: string}) => (
   <View style={{marginTop: 50}}>
@@ -118,8 +115,6 @@ Since the `setNativeProps` method exists on any ref to a `View` component, it is
 <TabItem value="javascript">
 
 ```SnackPlayer name=Forwarding%20setNativeProps&ext=js
-import {forwardRef} from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
 
 const MyButton = forwardRef((props, ref) => (
   <View {...props} ref={ref} style={{marginTop: 50}}>
@@ -140,8 +135,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Forwarding%20setNativeProps&ext=tsx
-import {forwardRef} from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
 
 const MyButton = forwardRef<View, {label: string}>((props, ref) => (
   <View {...props} ref={ref} style={{marginTop: 50}}>
@@ -173,8 +166,6 @@ Another very common use case of `setNativeProps` is to edit the value of the Tex
 <TabItem value="javascript">
 
 ```SnackPlayer name=Clear%20text&ext=js
-import {useCallback, useRef} from 'react';
-import {
   StyleSheet,
   TextInput,
   Text,
@@ -220,8 +211,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Clear%20text&ext=tsx
-import {useCallback, useRef} from 'react';
-import {
   StyleSheet,
   TextInput,
   Text,
@@ -316,8 +305,6 @@ This method can also be called with a `relativeToNativeNode` handler (instead of
 <TabItem value="javascript">
 
 ```SnackPlayer name=measureLayout%20example&supportedPlatforms=android,ios&ext=js
-import {useEffect, useRef, useState} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
 
 const App = () => {
   const textContainerRef = useRef(null);
@@ -369,8 +356,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=measureLayout%20example&ext=tsx
-import {useEffect, useRef, useState} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
 
 type Measurements = {
   left: number;

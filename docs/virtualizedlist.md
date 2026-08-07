@@ -3,7 +3,6 @@ id: virtualizedlist
 title: VirtualizedList
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 Base implementation for the more convenient [`<FlatList>`](flatlist.md) and [`<SectionList>`](sectionlist.md) components, which are also better documented. In general, this should only really be used if you need more flexibility than [`FlatList`](flatlist.md) provides, e.g. for use with immutable data instead of plain arrays.
 
@@ -15,8 +14,6 @@ Virtualization massively improves memory consumption and performance of large li
 <TabItem value="javascript">
 
 ```SnackPlayer name=VirtualizedListExample&ext=js
-import {View, VirtualizedList, StyleSheet, Text, StatusBar} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const getItem = (_data, index) => ({
   id: Math.random().toString(12).substring(0),
@@ -70,8 +67,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=VirtualizedListExample&ext=tsx
-import {View, VirtualizedList, StyleSheet, Text, StatusBar} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 type ItemData = {
   id: string;

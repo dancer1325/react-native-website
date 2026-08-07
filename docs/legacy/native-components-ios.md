@@ -3,7 +3,6 @@ id: native-components-ios
 title: iOS Native UI Components
 ---
 
-import NativeDeprecated from '../the-new-architecture/\_markdown_native_deprecation.mdx'
 
 <NativeDeprecated />
 
@@ -58,7 +57,6 @@ Apple frameworks use two-letter prefixes, and React Native uses `RCT` as a prefi
 Then you need a little bit of JavaScript to make this a usable React component:
 
 ```tsx {3} title="MapView.tsx"
-import {requireNativeComponent} from 'react-native';
 
 export default requireNativeComponent('RNTMap');
 ```
@@ -66,7 +64,6 @@ export default requireNativeComponent('RNTMap');
 The `requireNativeComponent` function automatically resolves `RNTMap` to `RNTMapManager` and exports our native view for use in JavaScript.
 
 ```tsx title="MyApp.tsx"
-import MapView from './MapView.tsx';
 
 export default function MyApp() {
   return <MapView style={{flex: 1}} />;
@@ -92,7 +89,6 @@ Note that we explicitly specify the type as `BOOL` - React Native uses `RCTConve
 Now to actually disable zooming, we set the property in JavaScript:
 
 ```tsx {4} title="MyApp.tsx"
-import MapView from './MapView.tsx';
 
 export default function MyApp() {
   return <MapView zoomEnabled={false} style={{flex: 1}} />;
@@ -102,7 +98,6 @@ export default function MyApp() {
 To document the properties (and which values they accept) of our MapView component we'll add a wrapper component and document the interface with TypeScript:
 
 ```tsx {6-9} title="MapView.tsx"
-import {requireNativeComponent} from 'react-native';
 
 const RNTMap = requireNativeComponent('RNTMap');
 
@@ -175,7 +170,6 @@ These conversion functions are designed to safely process any JSON that the JS m
 To finish up support for the `region` prop, we can document it with TypeScript:
 
 ```tsx {6-25} title="MapView.tsx"
-import {requireNativeComponent} from 'react-native';
 
 const RNTMap = requireNativeComponent('RNTMap');
 
@@ -212,7 +206,6 @@ export default function MapView(props: {
 We can now supply the `region` prop to `MapView`:
 
 ```tsx {4-9,12} title="MyApp.tsx"
-import MapView from './MapView.tsx';
 
 export default function MyApp() {
   const region = {
@@ -335,7 +328,6 @@ export default function MapView(props: {
 ```
 
 ```tsx {6-9,14} title="MyApp.tsx"
-import MapView from './MapView.tsx';
 
 export default function MyApp() {
   // ...
@@ -432,7 +424,6 @@ Here the `callNativeMethod` is defined in the `RNCMyNativeViewManager.m` file an
 Since all our native react views are subclasses of `UIView`, most style attributes will work like you would expect out of the box. Some components will want a default style, however, for example `UIDatePicker` which is a fixed size. This default style is important for the layout algorithm to work as expected, but we also want to be able to override the default style when using the component. `DatePickerIOS` does this by wrapping the native component in an extra view, which has flexible styling, and using a fixed style (which is generated with constants passed in from native) on the inner native component:
 
 ```tsx title="DatePickerIOS.ios.tsx"
-import {UIManager} from 'react-native';
 const RCTDatePickerIOSConsts = UIManager.RCTDatePicker.Constants;
 ...
   render: function() {

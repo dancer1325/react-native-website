@@ -16,9 +16,6 @@ Background drawable of native feedback touchable can be customized with `backgro
 ## Example
 
 ```SnackPlayer name=TouchableNativeFeedback%20Android%20Component%20Example&supportedPlatforms=android
-import {useState} from 'react';
-import {Text, View, StyleSheet, TouchableNativeFeedback} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   const [rippleColor, setRippleColor] = useState(randomHexColor());

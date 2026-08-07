@@ -3,7 +3,6 @@ id: debugging-native-code
 title: Debugging Native Code
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 <div className="banner-native-code-required">
   <h3>Projects with Native Code Only</h3>
@@ -33,7 +32,6 @@ If you are writing a Native Module and want to add custom logs to your module fo
 In your native module, use the `Log` class to add logs that can be viewed in Logcat:
 
 ```java
-import android.util.Log;
 
 private void log(String message) {
     Log.d("YourModuleName", message);

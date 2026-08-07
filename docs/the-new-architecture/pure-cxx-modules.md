@@ -1,10 +1,6 @@
-import {getCoreBranchNameForCurrentVersion} from '@site/src/getCoreBranchNameForCurrentVersion';
-import {getCurrentVersion} from '@site/src/getCurrentVersion';
-import CodeBlock from '@theme/CodeBlock';
 
 # Cross-Platform Native Modules (C++)
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 Writing a module in C++ is the best way to share platform-agnostic code between Android and iOS. With pure C++ modules, you can write your logic only once and reuse it right away from all the platforms, without the need of writing platform-specific code.
 
@@ -40,8 +36,6 @@ All Native Turbo Module spec files must have the prefix `Native`, otherwise Code
 
 ```ts title="specs/NativeSampleModule.ts"
 // @flow
-import type {TurboModule} from 'react-native'
-import { TurboModuleRegistry } from "react-native";
 
 export interface Spec extends TurboModule {
   +reverseString: (input: string) => string;
@@ -56,7 +50,6 @@ export default (TurboModuleRegistry.getEnforcing<Spec>(
 <TabItem value="typescript">
 
 ```ts title="specs/NativeSampleModule.ts"
-import {TurboModule, TurboModuleRegistry} from 'react-native';
 
 export interface Spec extends TurboModule {
   readonly reverseString: (input: string) => string;
@@ -423,8 +416,6 @@ It's now time to access our C++ Turbo Native Module from JS. To do so, we have t
 2. Replace the content of the template with the following code:
 
 ```tsx title="App.tsx"
-import {type JSX, useState} from 'react';
-import {
   Button,
   SafeAreaView,
   StyleSheet,
@@ -432,7 +423,6 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import SampleTurboModule from './specs/NativeSampleModule';
 
 function App(): JSX.Element {
   const [value, setValue] = useState('');

@@ -33,9 +33,6 @@ function MyComponent(props: MyComponentProps) {
 ## Example
 
 ```SnackPlayer name=TouchableHighlight%20Example
-import {useState} from 'react';
-import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const TouchableHighlightExample = () => {
   const [count, setCount] = useState(0);

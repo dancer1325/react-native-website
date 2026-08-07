@@ -12,7 +12,6 @@ Android-only React component used to indicate that the app is loading or there i
 ### Example
 
 ```SnackPlayer name=ProgressBarAndroid&supportedPlatforms=android
-import {View, StyleSheet, ProgressBarAndroid, Text} from 'react-native';
 
 const App = () => {
   return (

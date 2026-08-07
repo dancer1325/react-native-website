@@ -3,7 +3,6 @@ id: local-library-setup
 title: Local libraries setup
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 A local library is a library containing views or modules that's local to your app and not published to a registry. This is different from the traditional setup for view and modules in the sense that a local library is decoupled from your app's native code.
 
@@ -90,5 +89,4 @@ yarn install
 To use the module inside your app, you can import it by its name:
 
 ```js
-import {multiply} from 'awesome-module';
 ```

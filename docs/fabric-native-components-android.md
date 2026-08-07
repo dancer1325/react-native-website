@@ -3,7 +3,6 @@ id: fabric-native-components-android
 title: 'Fabric Native Modules: Android'
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 Now it's time to write some Android platform code to be able to render the web view. The steps you need to follow are:
 
@@ -36,16 +35,7 @@ Create a `ReactWebView.java` or a `ReactWebView.kt` file in the `android/src/mai
 ```java title="Demo/android/src/main/java/com/webview/ReactWebView.java"
 package com.webview;
 
-import android.content.Context;
-import android.util.AttributeSet;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
-import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.uimanager.UIManagerHelper;
-import com.facebook.react.uimanager.events.Event;
 
 public class ReactWebView extends WebView {
   public ReactWebView(Context context) {
@@ -118,15 +108,6 @@ public class ReactWebView extends WebView {
 ```kotlin title="Demo/android/src/main/java/com/webview/ReactWebView.kt"
 package com.webview
 
-import android.content.Context
-import android.util.AttributeSet
-import android.webkit.WebView
-import android.webkit.WebViewClient
-import com.facebook.react.bridge.Arguments
-import com.facebook.react.bridge.WritableMap
-import com.facebook.react.bridge.ReactContext
-import com.facebook.react.uimanager.UIManagerHelper
-import com.facebook.react.uimanager.events.Event
 
 class ReactWebView: WebView {
   constructor(context: Context) : super(context) {
@@ -215,17 +196,7 @@ This is the code of the `ReactWebViewManager`.
 ```java title="Demo/android/src/main/java/com/webview/ReactWebViewManager.java"
 package com.webview;
 
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.module.annotations.ReactModule;
-import com.facebook.react.uimanager.SimpleViewManager;
-import com.facebook.react.uimanager.ThemedReactContext;
-import com.facebook.react.uimanager.ViewManagerDelegate;
-import com.facebook.react.uimanager.annotations.ReactProp;
-import com.facebook.react.viewmanagers.CustomWebViewManagerInterface;
-import com.facebook.react.viewmanagers.CustomWebViewManagerDelegate;
 
-import java.util.HashMap;
-import java.util.Map;
 
 @ReactModule(name = ReactWebViewManager.REACT_CLASS)
 class ReactWebViewManager extends SimpleViewManager<ReactWebView> implements CustomWebViewManagerInterface<ReactWebView> {
@@ -279,14 +250,6 @@ class ReactWebViewManager extends SimpleViewManager<ReactWebView> implements Cus
 ```kotlin title="Demo/android/src/main/java/com/webview/ReactWebViewManager.kt"
 package com.webview
 
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.module.annotations.ReactModule;
-import com.facebook.react.uimanager.SimpleViewManager;
-import com.facebook.react.uimanager.ThemedReactContext;
-import com.facebook.react.uimanager.ViewManagerDelegate;
-import com.facebook.react.uimanager.annotations.ReactProp;
-import com.facebook.react.viewmanagers.CustomWebViewManagerInterface;
-import com.facebook.react.viewmanagers.CustomWebViewManagerDelegate;
 
 @ReactModule(name = ReactWebViewManager.REACT_CLASS)
 class ReactWebViewManager(context: ReactApplicationContext) : SimpleViewManager<ReactWebView>(), CustomWebViewManagerInterface<ReactWebView> {
@@ -351,17 +314,7 @@ This is the code for the `ReactWebViewPackage`:
 ```java title="Demo/android/src/main/java/com/webview/ReactWebViewPackage.java"
 package com.webview;
 
-import com.facebook.react.BaseReactPackage;
-import com.facebook.react.bridge.NativeModule;
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.module.model.ReactModuleInfo;
-import com.facebook.react.module.model.ReactModuleInfoProvider;
-import com.facebook.react.uimanager.ViewManager;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class ReactWebViewPackage extends BaseReactPackage {
   @Override
@@ -404,12 +357,6 @@ public class ReactWebViewPackage extends BaseReactPackage {
 ```kotlin title="Demo/android/src/main/java/com/webview/ReactWebViewPackage.kt"
 package com.webview
 
-import com.facebook.react.BaseReactPackage
-import com.facebook.react.bridge.NativeModule
-import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.module.model.ReactModuleInfo
-import com.facebook.react.module.model.ReactModuleInfoProvider
-import com.facebook.react.uimanager.ViewManager
 
 class ReactWebViewPackage : BaseReactPackage() {
   override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
@@ -453,19 +400,7 @@ Finally, you need to register the `ReactWebViewPackage` in the application. We d
 ```kotlin title="Demo/app/src/main/java/com/demo/MainApplication.kt"
 package com.demo
 
-import android.app.Application
-import com.facebook.react.PackageList
-import com.facebook.react.ReactApplication
-import com.facebook.react.ReactHost
-import com.facebook.react.ReactNativeHost
-import com.facebook.react.ReactPackage
-import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.load
-import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
-import com.facebook.react.defaults.DefaultReactNativeHost
-import com.facebook.react.soloader.OpenSourceMergedSoMapping
-import com.facebook.soloader.SoLoader
 // highlight-next-line
-import com.webview.ReactWebViewPackage
 
 class MainApplication : Application(), ReactApplication {
 

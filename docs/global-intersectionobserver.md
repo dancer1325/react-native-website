@@ -3,7 +3,6 @@ id: global-intersectionobserver
 title: IntersectionObserver 🧪
 ---
 
-import CanaryAPIWarning from './\_canary-channel-api-warning.mdx';
 
 <CanaryAPIWarning />
 

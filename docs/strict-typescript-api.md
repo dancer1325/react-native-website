@@ -3,7 +3,6 @@ id: strict-typescript-api
 title: Strict TypeScript API (opt in)
 ---
 
-import RNRepoLink from '@site/core/RNRepoLink';
 
 The Strict TypeScript API is a preview of our future, stable JavaScript API for React Native.
 
@@ -59,8 +58,6 @@ Namespaced `CodegenTypes` as well as `codegenNativeCommands` and `codegenNativeC
 **Before**
 
 ```ts title=""
-import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
-import type {
   Int32,
   WithDefault,
 } from 'react-native/Libraries/Types/CodegenTypes';
@@ -78,7 +75,6 @@ export default codegenNativeComponent<NativeProps>(
 **After**
 
 ```ts title=""
-import {CodegenTypes, codegenNativeComponent} from 'react-native';
 
 interface NativeProps extends ViewProps {
   enabled?: CodegenTypes.WithDefault<boolean, true>;
@@ -95,7 +91,6 @@ export default codegenNativeComponent<NativeProps>(
 **Before**
 
 ```tsx title=""
-import {Linking, LinkingStatic} from 'react-native';
 
 function foo(linking: LinkingStatic) {}
 foo(Linking);
@@ -104,7 +99,6 @@ foo(Linking);
 **After**
 
 ```tsx title=""
-import {Linking} from 'react-native';
 
 function foo(linking: Linking) {}
 foo(Linking);

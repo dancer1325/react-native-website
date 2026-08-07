@@ -14,9 +14,6 @@ Opacity is controlled by wrapping the children in an `Animated.View`, which is a
 ## Example
 
 ```SnackPlayer name=TouchableOpacity%20Example
-import {useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   const [count, setCount] = useState(0);

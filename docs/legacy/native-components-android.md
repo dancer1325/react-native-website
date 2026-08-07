@@ -3,8 +3,6 @@ id: native-components-android
 title: Android Native UI Components
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
-import NativeDeprecated from '../the-new-architecture/\_markdown_native_deprecation.mdx'
 
 <NativeDeprecated />
 
@@ -187,7 +185,6 @@ The final step is to register the ViewManager to the application, this happens i
 The very final step is to create the JavaScript module that defines the interface layer between Java/Kotlin and JavaScript for the users of your new view. It is recommended for you to document the component interface in this module (e.g. using TypeScript, Flow, or plain old comments).
 
 ```tsx title="ImageView.tsx"
-import {requireNativeComponent} from 'react-native';
 
 /**
  * Composes `View`.
@@ -287,8 +284,6 @@ public class ReactImageManager extends SimpleViewManager<MyCustomView> {
 This callback is invoked with the raw event, which we typically process in the wrapper component to make a simpler API:
 
 ```tsx {8-11,13-17} title="MyCustomView.tsx"
-import {useCallback} from 'react';
-import {requireNativeComponent} from 'react-native';
 
 const RCTMyCustomView = requireNativeComponent('RCTMyCustomView');
 
@@ -325,10 +320,6 @@ First, let's create a `CustomView` class which extends `FrameLayout` (the conten
 // replace with your package
 package com.mypackage
 
-import android.content.Context
-import android.graphics.Color
-import android.widget.FrameLayout
-import android.widget.TextView
 
 class CustomView(context: Context) : FrameLayout(context) {
   init {
@@ -351,13 +342,7 @@ class CustomView(context: Context) : FrameLayout(context) {
 // replace with your package
 package com.mypackage;
 
-import android.content.Context;
-import android.graphics.Color;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 
 public class CustomView extends FrameLayout {
   public CustomView(@NonNull Context context) {
@@ -386,14 +371,8 @@ public class CustomView extends FrameLayout {
 // replace with your package
 package com.mypackage
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 
 // replace with your view's import
-import com.mypackage.CustomView
 
 class MyFragment : Fragment() {
   private lateinit var customView: CustomView
@@ -437,14 +416,8 @@ class MyFragment : Fragment() {
 // replace with your package
 package com.mypackage;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import androidx.fragment.app.Fragment;
 
 // replace with your view's import
-import com.mypackage.CustomView;
 
 public class MyFragment extends Fragment {
     CustomView customView;
@@ -498,16 +471,6 @@ public class MyFragment extends Fragment {
 // replace with your package
 package com.mypackage
 
-import android.view.Choreographer
-import android.view.View
-import android.view.ViewGroup
-import android.widget.FrameLayout
-import androidx.fragment.app.FragmentActivity
-import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReadableArray
-import com.facebook.react.uimanager.ThemedReactContext
-import com.facebook.react.uimanager.ViewGroupManager
-import com.facebook.react.uimanager.annotations.ReactPropGroup
 
 class MyViewManager(
     private val reactContext: ReactApplicationContext
@@ -604,24 +567,9 @@ class MyViewManager(
 // replace with your package
 package com.mypackage;
 
-import android.view.Choreographer;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReadableArray;
-import com.facebook.react.common.MapBuilder;
-import com.facebook.react.uimanager.annotations.ReactProp;
-import com.facebook.react.uimanager.annotations.ReactPropGroup;
-import com.facebook.react.uimanager.ViewGroupManager;
-import com.facebook.react.uimanager.ThemedReactContext;
 
-import java.util.Map;
 
 public class MyViewManager extends ViewGroupManager<FrameLayout> {
 
@@ -745,9 +693,6 @@ public class MyViewManager extends ViewGroupManager<FrameLayout> {
 // replace with your package
 package com.mypackage
 
-import com.facebook.react.ReactPackage
-import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.uimanager.ViewManager
 
 class MyPackage : ReactPackage {
   ...
@@ -764,12 +709,7 @@ class MyPackage : ReactPackage {
 // replace with your package
 package com.mypackage;
 
-import com.facebook.react.ReactPackage;
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.uimanager.ViewManager;
 
-import java.util.Arrays;
-import java.util.List;
 
 public class MyPackage implements ReactPackage {
 
@@ -822,7 +762,6 @@ protected List<ReactPackage> getPackages() {
 I. Start with custom View manager:
 
 ```tsx title="MyViewManager.tsx"
-import {requireNativeComponent} from 'react-native';
 
 export const MyViewManager =
   requireNativeComponent('MyViewManager');
@@ -831,14 +770,11 @@ export const MyViewManager =
 II. Then implement custom View calling the `create` method:
 
 ```tsx title="MyView.tsx"
-import {useEffect, useRef} from 'react';
-import {
   PixelRatio,
   UIManager,
   findNodeHandle,
 } from 'react-native';
 
-import {MyViewManager} from './my-view-manager';
 
 const createFragment = viewId =>
   UIManager.dispatchViewManagerCommand(

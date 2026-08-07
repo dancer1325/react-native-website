@@ -12,8 +12,6 @@ Note that you must specify some width and height style attributes.
 ## Example
 
 ```SnackPlayer name=ImageBackground
-import {ImageBackground, StyleSheet, Text} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const image = {uri: 'https://legacy.reactjs.org/logo-og.png'};
 

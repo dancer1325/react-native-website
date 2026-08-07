@@ -3,16 +3,11 @@ id: shadow-props
 title: Shadow Props
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 <Tabs groupId="language" queryString defaultValue={constants.defaultSnackLanguage} values={constants.snackLanguages}>
 <TabItem value="javascript">
 
 ```SnackPlayer name=Shadow%20Props&supportedPlatforms=ios&ext=js&dependencies=@react-native-community/slider
-import {useState} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
-import Slider from '@react-native-community/slider';
 
 const ShadowPropSlider = ({label, value, ...props}) => {
   return (
@@ -110,10 +105,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=Shadow%20Props&supportedPlatforms=ios&ext=tsx&dependencies=@react-native-community/slider
-import {useState} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
-import Slider, {SliderProps} from '@react-native-community/slider';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 type ShadowPropSliderProps = SliderProps & {
   label: string;

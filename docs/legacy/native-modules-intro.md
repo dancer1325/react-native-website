@@ -3,7 +3,6 @@ id: native-modules-intro
 title: Native Modules Intro
 ---
 
-import NativeDeprecated from '../the-new-architecture/\_markdown_native_deprecation.mdx'
 
 <NativeDeprecated />
 

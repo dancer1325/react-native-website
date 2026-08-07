@@ -3,7 +3,6 @@ id: platformcolor
 title: PlatformColor
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 ```js
 PlatformColor(color1, [color2, ...colorN]);
@@ -46,8 +45,6 @@ If you’re familiar with design systems, another way of thinking about this is 
 ## Example
 
 ```SnackPlayer name=PlatformColor%20Example&supportedPlatforms=android,ios
-import {Platform, PlatformColor, StyleSheet, Text} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => (
   <SafeAreaProvider>

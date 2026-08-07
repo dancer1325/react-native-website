@@ -3,10 +3,6 @@ id: fabric-native-components-introduction
 title: Fabric Native Components Introduction
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import constants from '@site/core/TabsConstants';
-import {FabricNativeComponentsAndroid,FabricNativeComponentsIOS} from './\_fabric-native-components';
 
 # Native Components
 
@@ -60,12 +56,10 @@ Use this specification for our WebView Component:
 <TabItem value="typescript">
 
 ```typescript title="Demo/specs/WebViewNativeComponent.ts"
-import type {
   CodegenTypes,
   HostComponent,
   ViewProps,
 } from 'react-native';
-import {codegenNativeComponent} from 'react-native';
 
 type WebViewScriptLoadedEvent = {
   result: 'success' | 'error';
@@ -87,8 +81,6 @@ export default codegenNativeComponent<NativeProps>(
 ```ts title="Demo/RCTWebView/js/RCTWebViewNativeComponent.js":
 // @flow strict-local
 
-import type {CodegenTypes, HostComponent, ViewProps} from 'react-native';
-import {codegenNativeComponent} from 'react-native';
 
 type WebViewScriptLoadedEvent = $ReadOnly<{|
   result: "success" | "error",
@@ -172,8 +164,6 @@ This guide shows you how to create a Native Component that only works with the N
 Finally, you can use the new component in your app. Update your generated `App.tsx` to:
 
 ```javascript title="Demo/App.tsx"
-import {Alert, StyleSheet, View} from 'react-native';
-import WebView from './specs/WebViewNativeComponent';
 
 function App(): React.JSX.Element {
   return (

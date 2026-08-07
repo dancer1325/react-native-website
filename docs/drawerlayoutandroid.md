@@ -3,7 +3,6 @@ id: drawerlayoutandroid
 title: DrawerLayoutAndroid
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 React component that wraps the platform `DrawerLayout` (Android only). The Drawer (typically used for navigation) is rendered with `renderNavigationView` and direct children are the main view (where your content goes). The navigation view is initially not visible on the screen, but can be pulled in from the side of the window specified by the `drawerPosition` prop and its width can be set by the `drawerWidth` prop.
 
@@ -13,9 +12,6 @@ React component that wraps the platform `DrawerLayout` (Android only). The Drawe
 <TabItem value="javascript">
 
 ```SnackPlayer name=DrawerLayoutAndroid%20Component%20Example&supportedPlatforms=android&ext=js
-import {useRef, useState} from 'react';
-import {Button, DrawerLayoutAndroid, Text, StyleSheet} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   const drawer = useRef(null);
@@ -86,8 +82,6 @@ export default App;
 <TabItem value="typescript">
 
 ```SnackPlayer name=DrawerLayoutAndroid%20Component%20Example&supportedPlatforms=android&ext=tsx
-import {useRef, useState} from 'react';
-import {
   Button,
   DrawerLayoutAndroid,
   Text,

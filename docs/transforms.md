@@ -8,8 +8,6 @@ Transforms are style properties that will help you modify the appearance and pos
 ## Example
 
 ```SnackPlayer name=Transforms%20Example
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => (
   <SafeAreaProvider>
@@ -278,9 +276,6 @@ The `transformOrigin` property sets the origin for a view's transformations. The
 # Example
 
 ```SnackPlayer name=TransformOrigin%20Example
-import {useEffect, useRef} from 'react';
-import {Animated, View, StyleSheet, Easing} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   const rotateAnim = useRef(new Animated.Value(0)).current;

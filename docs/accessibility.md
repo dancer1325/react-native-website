@@ -4,7 +4,6 @@ title: Accessibility
 description: Create mobile apps accessible to assistive technology with React Native's suite of APIs designed to work with Android and iOS.
 ---
 
-import ExperimentalAPIWarning from './\_experimental-api-warning.mdx';
 
 Both Android and iOS provide APIs for integrating apps with assistive technologies like the bundled screen readers VoiceOver (iOS) and TalkBack (Android). React Native has complementary APIs that let your app accommodate all users.
 
@@ -564,7 +563,6 @@ The `AccessibilityInfo` API allows you to determine whether or not a screen read
 Sometimes it is useful to trigger an accessibility event on a UI component (i.e. when a custom view appears on a screen or set accessibility focus to a view). Native UIManager module exposes a method ‘sendAccessibilityEvent’ for this purpose. It takes two arguments: a view tag and a type of event. The supported event types are `typeWindowStateChanged`, `typeViewFocused`, and `typeViewClicked`.
 
 ```tsx
-import {Platform, UIManager, findNodeHandle} from 'react-native';
 
 if (Platform.OS === 'android') {
   UIManager.sendAccessibilityEvent(

@@ -3,7 +3,6 @@ id: animations
 title: Animations
 ---
 
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 Animations are very important to create a great user experience. Stationary objects must overcome inertia as they start moving. Objects in motion have momentum and rarely come to a stop immediately. Animations allow you to convey physically believable motion in your interface.
 
@@ -21,8 +20,6 @@ For example, a container view that fades in when it is mounted may look like thi
 <TabItem value="javascript">
 
 ```SnackPlayer ext=js
-import {useEffect, useRef} from 'react';
-import {Animated, Text, View} from 'react-native';
 
 const FadeInView = props => {
   const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
@@ -74,8 +71,6 @@ export default () => {
 <TabItem value="typescript">
 
 ```SnackPlayer ext=tsx
-import {useEffect, useRef, type PropsWithChildren, type FC} from 'react';
-import {Animated, Text, View, type ViewStyle} from 'react-native';
 
 type FadeInViewProps = PropsWithChildren<{style: ViewStyle}>;
 
@@ -309,7 +304,6 @@ The following example implements a horizontal scrolling carousel where the scrol
 #### ScrollView with Animated Event Example
 
 ```SnackPlayer name=Animated&supportedPlatforms=ios,android
-import {
   ScrollView,
   Text,
   StyleSheet,
@@ -319,7 +313,6 @@ import {
   useWindowDimensions,
   useAnimatedValue,
 } from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const images = new Array(6).fill(
   'https://images.unsplash.com/photo-1556740749-887f6717d7e4',
@@ -451,8 +444,6 @@ onPanResponderMove={Animated.event(
 #### PanResponder with Animated Event Example
 
 ```SnackPlayer name=Animated
-import {useRef} from 'react';
-import {Animated, View, StyleSheet, PanResponder, Text} from 'react-native';
 
 const App = () => {
   const pan = useRef(new Animated.ValueXY()).current;
@@ -592,8 +583,6 @@ UIManager.setLayoutAnimationEnabledExperimental(true);
 ```
 
 ```SnackPlayer name=LayoutAnimations
-import {useState} from 'react';
-import {
   NativeModules,
   LayoutAnimation,
   Text,

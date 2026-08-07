@@ -1,10 +1,3 @@
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import ThemedImage from '@theme/ThemedImage';
-import constants from '@site/core/TabsConstants';
-import CodeBlock from '@theme/CodeBlock';
-import RNTemplateRepoLink from '@site/core/RNTemplateRepoLink';
-import {getTemplateBranchNameForCurrentVersion} from '@site/src/getTemplateBranchNameForCurrentVersion';
 
 ## Key Concepts
 
@@ -155,8 +148,6 @@ First, create an empty `index.js` file in the root of your React Native project.
 Our `index.js` should look as follows (here the <RNTemplateRepoLink href="template/index.js">Community template file as reference</RNTemplateRepoLink>):
 
 ```js
-import {AppRegistry} from 'react-native';
-import App from './App';
 
 AppRegistry.registerComponent('HelloWorld', () => App);
 ```
@@ -166,8 +157,6 @@ AppRegistry.registerComponent('HelloWorld', () => App);
 Let's create an `App.tsx` file. This is a [TypeScript](https://www.typescriptlang.org/) file that can have [JSX](<https://en.wikipedia.org/wiki/JSX_(JavaScript)>) expressions. It contains the root React Native component that we will integrate into our iOS application (<RNTemplateRepoLink href="template/App.tsx">link</RNTemplateRepoLink>):
 
 ```tsx
-import {type JSX} from 'react';
-import {
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -177,7 +166,6 @@ import {
   View,
 } from 'react-native';
 
-import {
   Colors,
   DebugInstructions,
   Header,
@@ -321,7 +309,6 @@ Now open the `ReactViewController.m` file and apply the following changes
 Now open the `ReactViewController.swift` file and apply the following changes
 
 ```diff title="ReactViewController.swift"
-import UIKit
 +import React
 +import React_RCTAppDelegate
 +import ReactAppDependencyProvider
@@ -415,7 +402,6 @@ We already have the initial `ViewController`, and we can make it present the `Re
 <TabItem value="swift">
 
 ```diff title="ViewController.swift"
-import UIKit
 
 class ViewController: UIViewController {
 
@@ -539,7 +525,6 @@ This is possible by using the `initialProperties` parameter of the `view(withMod
 Open the `App.tsx` file and add the following code:
 
 ```diff title="App.tsx"
-import {
   Colors,
   DebugInstructions,
   Header,

@@ -1,4 +1,3 @@
-import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import constants from '@site/core/TabsConstants';
 
 # Invoking native functions on your native component
 
@@ -20,9 +19,6 @@ The first step is to update the component spec to declare the `NativeCommand`.
 Update the `WebViewNativeComponent.ts` as it follows:
 
 ```diff title="Demo/specs/WebViewNativeComponent.ts"
-import type {HostComponent, ViewProps} from 'react-native';
-import type {BubblingEventHandler} from 'react-native/Libraries/Types/CodegenTypes';
-import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
 +import codegenNativeCommands from 'react-native/Libraries/Utilities/codegenNativeCommands';
 
 type WebViewScriptLoadedEvent = {
@@ -55,9 +51,6 @@ Update the `WebViewNativeComponent.js` as it follows:
 ```diff title="Demo/specs/WebViewNativeComponent.js"
 // @flow strict-local
 
-import type {HostComponent, ViewProps} from 'react-native';
-import type {BubblingEventHandler} from 'react-native/Libraries/Types/CodegenTypes';
-import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
 +import codegenNativeCommands from 'react-native/Libraries/Utilities/codegenNativeCommands';
 
 type WebViewScriptLoadedEvent = $ReadOnly<{|

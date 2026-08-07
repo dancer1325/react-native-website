@@ -3,14 +3,10 @@ id: view-style-props
 title: View Style Props
 ---
 
-import ExperimentalAPIWarning from './\_experimental-api-warning.mdx';
-import {getCoreBranchNameForCurrentVersion} from '@site/src/getCoreBranchNameForCurrentVersion';
 
 ### Example
 
 ```SnackPlayer name=ViewStyleProps
-import {View, StyleSheet} from 'react-native';
-import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => (
   <SafeAreaProvider>
